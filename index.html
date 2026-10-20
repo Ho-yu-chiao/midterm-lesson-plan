@@ -3,78 +3,78 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>投石戰車 STEAM 科技探索館 | 互動模擬小遊戲與教案中心</title>
-  <meta name="description" content="國小六年級科技資訊教育《投石戰車》專題網站：內建互動式投石機拋射模擬小遊戲、物理彈道實驗紀錄、完整五節教案與學習單下載。">
-  <!-- Fonts -->
+  <title>投石戰車 STEAM 科技探索館 | 互動式教案與數位實驗室</title>
+  <meta name="description" content="國小六年級科技資訊教育《投石戰車》跨領域專題網站：互動式槓桿翹翹板、投石車彈道物理模擬器、數位設計圖畫布、統計折線圖分析與完整互動學習單。">
+  <!-- Google Web Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
-  <!-- Markdown & Diagram Libraries -->
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #f97316; /* Energetic Orange */
+      --primary: #f97316;
       --primary-dark: #ea580c;
-      --secondary: #0284c7; /* Sky Blue */
+      --primary-light: #ffedd5;
+      --secondary: #0284c7;
+      --secondary-dark: #0369a1;
+      --secondary-light: #e0f2fe;
       --accent-yellow: #facc15;
       --accent-green: #22c55e;
       --accent-purple: #8b5cf6;
+      --accent-pink: #ec4899;
       --bg-base: #f0f9ff;
       --bg-card: #ffffff;
+      --bg-subtle: #f8fafc;
       --text-main: #1e293b;
       --text-muted: #64748b;
-      --border-color: #e0f2fe;
+      --border-color: #e2e8f0;
       --border-fun: #bae6fd;
       --radius-lg: 20px;
-      --radius-md: 14px;
+      --radius-md: 12px;
       --shadow-fun: 0 10px 25px -5px rgba(2, 132, 199, 0.12), 0 8px 10px -6px rgba(2, 132, 199, 0.08);
-      --shadow-pop: 0 6px 0px #0369a1;
-      --shadow-pop-orange: 0 6px 0px #c2410c;
+      --shadow-pop: 0 5px 0px #0369a1;
+      --shadow-pop-orange: 0 5px 0px #c2410c;
     }
 
     [data-theme="dark"] {
-      --bg-base: #0c1524;
-      --bg-card: #182234;
+      --bg-base: #0b1329;
+      --bg-card: #152238;
+      --bg-subtle: #1c2b45;
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
-      --border-color: #27354a;
-      --border-fun: #334155;
-      --shadow-fun: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
-      --shadow-pop: 0 6px 0px #0f172a;
-      --shadow-pop-orange: 0 6px 0px #7c2d12;
+      --border-color: #263852;
+      --border-fun: #334e68;
+      --shadow-fun: 0 10px 25px -5px rgba(0, 0, 0, 0.6);
+      --shadow-pop: 0 5px 0px #081d33;
+      --shadow-pop-orange: 0 5px 0px #7c2d12;
+      --secondary-light: #1e293b;
+      --primary-light: #431407;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: 'Noto Sans TC', -apple-system, sans-serif;
+      font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--bg-base);
       color: var(--text-main);
-      line-height: 1.65;
+      line-height: 1.6;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      overflow-x: hidden;
     }
 
-    /* Lively playful header */
+    /* Top Navigation Header */
     header {
-      background: linear-gradient(135deg, #0284c7 0%, #0369a1 50%, #1e40af 100%);
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 60%, #1e40af 100%);
       color: white;
-      padding: 1rem 2rem;
+      padding: 0.85rem 1.75rem;
       position: sticky;
       top: 0;
-      z-index: 100;
-      box-shadow: 0 4px 20px rgba(2, 132, 199, 0.25);
+      z-index: 1000;
+      box-shadow: 0 4px 20px rgba(2, 132, 199, 0.28);
     }
 
     .header-inner {
-      max-width: 1300px;
+      max-width: 1400px;
       margin: 0 auto;
       display: flex;
       align-items: center;
@@ -86,27 +86,27 @@
     .brand-wrap {
       display: flex;
       align-items: center;
-      gap: 0.85rem;
+      gap: 0.75rem;
       text-decoration: none;
       color: white;
+      cursor: pointer;
     }
 
     .brand-icon {
       font-size: 2.2rem;
-      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
-      animation: bounce 2s infinite ease-in-out;
+      animation: bounce 2.4s infinite ease-in-out;
     }
 
     @keyframes bounce {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-6px); }
+      50% { transform: translateY(-5px); }
     }
 
     .brand-title {
       font-family: 'Fredoka', 'Noto Sans TC', sans-serif;
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       font-weight: 700;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.3px;
       display: flex;
       align-items: center;
       gap: 0.5rem;
@@ -117,28 +117,29 @@
       color: #78350f;
       font-size: 0.75rem;
       font-weight: 900;
-      padding: 0.2rem 0.6rem;
+      padding: 0.15rem 0.6rem;
       border-radius: 999px;
       box-shadow: 0 2px 4px rgba(0,0,0,0.15);
     }
 
     .nav-tabs {
       display: flex;
-      gap: 0.5rem;
-      background: rgba(255, 255, 255, 0.15);
-      padding: 0.35rem;
+      gap: 0.35rem;
+      background: rgba(255, 255, 255, 0.16);
+      padding: 0.3rem;
       border-radius: 999px;
       backdrop-filter: blur(8px);
+      flex-wrap: wrap;
     }
 
     .tab-btn {
       background: transparent;
       border: none;
       color: white;
-      padding: 0.55rem 1.15rem;
+      padding: 0.5rem 1.1rem;
       border-radius: 999px;
       font-weight: 700;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -152,22 +153,22 @@
 
     .tab-btn.active {
       background: #facc15;
-      color: #854d0e;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-      transform: scale(1.04);
+      color: #78350f;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      transform: scale(1.03);
     }
 
     .top-actions {
       display: flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: 0.5rem;
     }
 
     .pill-btn {
       background: rgba(255, 255, 255, 0.2);
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.35);
       color: white;
-      padding: 0.45rem 0.85rem;
+      padding: 0.4rem 0.85rem;
       border-radius: 999px;
       font-size: 0.85rem;
       font-weight: 600;
@@ -187,13 +188,12 @@
     /* Main Container */
     main {
       flex: 1;
-      max-width: 1300px;
+      max-width: 1400px;
       width: 100%;
       margin: 1.5rem auto;
-      padding: 0 1.25rem;
+      padding: 0 1.25rem 3rem;
     }
 
-    /* Section Visibility */
     .view-section {
       display: none;
       animation: fadeIn 0.3s ease-out;
@@ -204,27 +204,74 @@
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
+      from { opacity: 0; transform: translateY(8px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
+    /* Common Card Styles */
+    .card {
+      background: var(--bg-card);
+      border: 2px solid var(--border-fun);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-fun);
+      margin-bottom: 1.5rem;
+    }
+
+    .card-title {
+      font-size: 1.35rem;
+      color: var(--secondary-dark);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-bottom: 2px dashed var(--border-fun);
+      padding-bottom: 0.75rem;
+    }
+
+    /* Sub-tabs inside view */
+    .sub-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.25rem;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .sub-tab-btn {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 0.45rem 1rem;
+      border-radius: var(--radius-md);
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .sub-tab-btn.active {
+      background: var(--secondary);
+      border-color: var(--secondary);
+      color: white;
+    }
+
     /* ============================================================
-       GAME / SIMULATION STYLES
+       MODULE 1: INTERACTIVE EXPERIMENTAL LABS
        ============================================================ */
-    .game-grid {
+    .lab-layout {
       display: grid;
-      grid-template-columns: 1fr 360px;
+      grid-template-columns: 1fr 370px;
       gap: 1.5rem;
       align-items: start;
     }
 
-    @media (max-width: 1024px) {
-      .game-grid {
-        grid-template-columns: 1fr;
-      }
+    @media (max-width: 1080px) {
+      .lab-layout { grid-template-columns: 1fr; }
     }
 
-    .canvas-container {
+    .canvas-wrap {
       background: var(--bg-card);
       border: 3px solid var(--border-fun);
       border-radius: var(--radius-lg);
@@ -233,134 +280,72 @@
       position: relative;
     }
 
-    .canvas-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.75rem;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .canvas-header h2 {
-      font-size: 1.35rem;
-      color: var(--secondary);
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .score-banner {
-      background: #fef08a;
-      color: #854d0e;
-      padding: 0.3rem 0.8rem;
-      border-radius: 999px;
-      font-weight: 700;
-      font-size: 0.9rem;
-      border: 1px solid #fde047;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    #simCanvas {
-      width: 100%;
-      height: 420px;
-      background: linear-gradient(to bottom, #7dd3fc 0%, #bae6fd 60%, #86efac 60%, #4ade80 75%, #a16207 100%);
-      border-radius: 12px;
-      display: block;
-      border: 2px solid #38bdf8;
-      box-shadow: inset 0 2px 8px rgba(0,0,0,0.1);
-      cursor: crosshair;
-    }
-
-    /* Simulation HUD */
-    .sim-hud {
+    .hud-bar {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 0.75rem;
+      gap: 0.6rem;
       margin-top: 1rem;
     }
 
-    @media (max-width: 640px) {
-      .sim-hud {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    .hud-card {
-      background: var(--bg-base);
-      border: 2px solid var(--border-color);
-      padding: 0.75rem;
-      border-radius: 12px;
+    .hud-box {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      padding: 0.6rem;
+      border-radius: var(--radius-md);
       text-align: center;
     }
 
     .hud-label {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
+      font-weight: 700;
       color: var(--text-muted);
-      font-weight: 600;
+      text-transform: uppercase;
     }
 
-    .hud-value {
-      font-size: 1.3rem;
-      font-weight: 800;
-      color: var(--primary);
-      font-family: 'Fredoka', sans-serif;
+    .hud-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--secondary);
     }
 
     /* Control Panel */
-    .control-panel {
-      background: var(--bg-card);
-      border: 3px solid var(--border-fun);
-      border-radius: var(--radius-lg);
-      padding: 1.5rem;
-      box-shadow: var(--shadow-fun);
+    .panel-wrap {
       display: flex;
       flex-direction: column;
       gap: 1.25rem;
     }
 
-    .panel-title {
-      font-size: 1.25rem;
-      font-weight: 800;
-      color: var(--primary);
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      border-bottom: 2px dashed var(--border-color);
-      padding-bottom: 0.5rem;
+    .control-box {
+      background: var(--bg-card);
+      border: 2px solid var(--border-fun);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      box-shadow: var(--shadow-fun);
     }
 
     .control-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
+      margin-bottom: 1.1rem;
     }
 
-    .control-group label {
-      font-size: 0.9rem;
-      font-weight: 700;
+    .control-label {
       display: flex;
       justify-content: space-between;
+      font-size: 0.92rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
     }
 
-    .control-group label span {
-      color: var(--secondary);
-      font-family: 'Fredoka', sans-serif;
-      font-size: 1rem;
-    }
-
-    .slider {
-      -webkit-appearance: none;
+    .control-slider {
       width: 100%;
-      height: 10px;
-      border-radius: 5px;
+      height: 8px;
+      border-radius: 999px;
       background: #e2e8f0;
       outline: none;
+      -webkit-appearance: none;
     }
 
-    .slider::-webkit-slider-thumb {
+    .control-slider::-webkit-slider-thumb {
       -webkit-appearance: none;
       width: 22px;
       height: 22px;
@@ -369,1133 +354,2623 @@
       cursor: pointer;
       box-shadow: 0 2px 6px rgba(0,0,0,0.2);
       border: 2px solid white;
+      transition: transform 0.1s;
     }
 
-    /* Quick Preset Buttons for Rubber Band */
-    .preset-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.5rem;
+    .control-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.18);
     }
 
-    .preset-btn {
-      background: var(--bg-base);
-      border: 2px solid var(--border-color);
-      padding: 0.55rem 0.5rem;
-      border-radius: 10px;
-      font-size: 0.82rem;
-      font-weight: 700;
-      cursor: pointer;
-      text-align: center;
-      transition: all 0.15s;
-    }
-
-    .preset-btn:hover {
-      border-color: var(--secondary);
-      background: #e0f2fe;
-    }
-
-    .preset-btn.active {
-      border-color: var(--secondary);
-      background: #0284c7;
-      color: white;
-    }
-
-    /* Launch Big Button */
-    .btn-launch {
-      background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
-      color: white;
-      border: none;
-      padding: 1rem;
-      font-size: 1.25rem;
-      font-weight: 900;
-      border-radius: 14px;
-      box-shadow: var(--shadow-pop-orange);
-      cursor: pointer;
-      display: flex;
+    .btn-action {
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
-      transition: all 0.1s ease;
-      letter-spacing: 1px;
-    }
-
-    .btn-launch:active {
-      transform: translateY(4px);
-      box-shadow: 0 2px 0px #c2410c;
-    }
-
-    .btn-action-row {
-      display: flex;
-      gap: 0.5rem;
-    }
-
-    .btn-sub {
-      flex: 1;
-      padding: 0.6rem;
-      border-radius: 10px;
-      border: 2px solid var(--border-color);
-      background: var(--bg-base);
+      gap: 0.4rem;
+      width: 100%;
+      padding: 0.85rem;
+      border-radius: var(--radius-md);
+      border: none;
+      font-size: 1.05rem;
       font-weight: 700;
-      font-size: 0.85rem;
       cursor: pointer;
       transition: all 0.15s;
-      color: var(--text-main);
     }
 
-    .btn-sub:hover {
-      background: var(--border-color);
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      box-shadow: var(--shadow-pop-orange);
     }
 
-    /* Interactive Data Table & Mini Chart */
-    .record-section {
-      margin-top: 1.5rem;
-      background: var(--bg-card);
-      border: 3px solid var(--border-fun);
-      border-radius: var(--radius-lg);
-      padding: 1.5rem;
-      box-shadow: var(--shadow-fun);
+    .btn-primary:active {
+      transform: translateY(4px);
+      box-shadow: 0 1px 0px #c2410c;
     }
 
-    .record-header {
+    .btn-secondary {
+      background: var(--secondary);
+      color: white;
+      box-shadow: var(--shadow-pop);
+    }
+
+    .btn-secondary:active {
+      transform: translateY(4px);
+      box-shadow: 0 1px 0px #0369a1;
+    }
+
+    /* Lever & Seesaw Simulator Specifics */
+    .seesaw-controls {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    /* Presets Chips */
+    .preset-chips {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
+      gap: 0.4rem;
       flex-wrap: wrap;
-      gap: 0.5rem;
+      margin-top: 0.4rem;
     }
 
-    .record-table {
+    .chip-btn {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      border-radius: 999px;
+      padding: 0.3rem 0.7rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      color: var(--text-main);
+      transition: all 0.15s;
+    }
+
+    .chip-btn.active, .chip-btn:hover {
+      background: var(--secondary);
+      border-color: var(--secondary);
+      color: white;
+    }
+
+    /* Data Recording Table & Chart */
+    .data-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.92rem;
-      margin-bottom: 1rem;
+      margin-top: 0.75rem;
+      font-size: 0.88rem;
     }
 
-    .record-table th, .record-table td {
+    .data-table th, .data-table td {
       border: 1px solid var(--border-color);
-      padding: 0.65rem 0.85rem;
+      padding: 0.6rem 0.5rem;
       text-align: center;
     }
 
-    .record-table th {
-      background: #e0f2fe;
-      color: #0369a1;
-      font-weight: 800;
+    .data-table th {
+      background: var(--secondary-light);
+      color: var(--secondary-dark);
+      font-weight: 700;
     }
 
-    [data-theme="dark"] .record-table th {
-      background: #1e293b;
-      color: #38bdf8;
-    }
-
-    /* Mini SVG Line Chart */
-    .chart-container {
-      background: var(--bg-base);
-      border: 2px dashed var(--border-fun);
-      border-radius: 12px;
-      padding: 1rem;
-      height: 180px;
+    .chart-box {
+      width: 100%;
+      height: 220px;
+      background: var(--bg-subtle);
+      border-radius: var(--radius-md);
+      border: 1px dashed var(--border-color);
+      margin-top: 0.75rem;
       position: relative;
     }
 
     /* ============================================================
-       LESSON PLAN & WORKSHEET STYLES
+       MODULE 2: LESSON PLAN VIEWER (TEACHER & STUDENT VIEW)
        ============================================================ */
-    .doc-card {
+    .matrix-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+    }
+
+    .matrix-table th, .matrix-table td {
+      border: 1px solid var(--border-color);
+      padding: 0.75rem;
+      vertical-align: top;
+    }
+
+    .matrix-table th {
+      background: var(--secondary-light);
+      color: var(--secondary-dark);
+    }
+
+    .badge-code {
+      display: inline-block;
+      background: #e0f2fe;
+      color: #0369a1;
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    /* Step Timeline Accordion */
+    .step-card {
       background: var(--bg-card);
-      border: 3px solid var(--border-fun);
+      border: 2px solid var(--border-fun);
       border-radius: var(--radius-lg);
-      padding: 2.5rem 3rem;
-      box-shadow: var(--shadow-fun);
+      margin-bottom: 1.25rem;
+      overflow: hidden;
+      transition: all 0.2s;
     }
 
-    @media (max-width: 768px) {
-      .doc-card {
-        padding: 1.5rem 1rem;
-      }
+    .step-header {
+      padding: 1.1rem 1.4rem;
+      background: var(--bg-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
     }
 
-    /* Markdown styling inside doc card */
-    .markdown-body {
-      color: var(--text-main);
-      font-size: 1.05rem;
-      line-height: 1.85;
+    .step-header:hover {
+      background: var(--secondary-light);
     }
 
-    .markdown-body h1 {
-      font-size: 2.1rem;
+    .step-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .step-number {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--secondary);
+      color: white;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .step-body {
+      padding: 1.25rem 1.5rem;
+      border-top: 1px solid var(--border-color);
+      display: block;
+    }
+
+    .step-body.collapsed {
+      display: none;
+    }
+
+    .time-badge {
+      background: #fef3c7;
+      color: #92400e;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+    }
+
+    /* STEAM cards grid */
+    .steam-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .steam-item {
+      background: var(--bg-subtle);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      border-left: 5px solid var(--secondary);
+    }
+
+    .steam-letter {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
       color: var(--secondary);
-      border-bottom: 3px solid #bae6fd;
-      padding-bottom: 0.5rem;
+      margin-bottom: 0.25rem;
+    }
+
+    /* Callout Boxes */
+    .alert-box {
+      padding: 1rem 1.25rem;
+      border-radius: var(--radius-md);
+      margin: 1rem 0;
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+    }
+
+    .alert-caution { background: #fef2f2; border-left: 4px solid #ef4444; color: #991b1b; }
+    .alert-important { background: #eff6ff; border-left: 4px solid #3b82f6; color: #1e40af; }
+    .alert-tip { background: #f0fdf4; border-left: 4px solid #22c55e; color: #166534; }
+
+    /* ============================================================
+       MODULE 3: ONLINE DESIGN CANVAS (STUDIO)
+       ============================================================ */
+    .drawing-toolbar {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      background: var(--bg-subtle);
+      padding: 0.6rem 1rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .tool-group {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .color-dot {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid white;
+      box-shadow: 0 0 0 1px #cbd5e1;
+      transition: transform 0.15s;
+    }
+
+    .color-dot.active {
+      transform: scale(1.25);
+      box-shadow: 0 0 0 2px var(--secondary);
+    }
+
+    .stamp-btn {
+      background: white;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 0.3rem 0.6rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .stamp-btn:hover {
+      background: var(--secondary-light);
+      color: var(--secondary-dark);
+    }
+
+    /* ============================================================
+       MODULE 4: INTERACTIVE WORKSHEETS & RUBRICS
+       ============================================================ */
+    .worksheet-paper {
+      background: white;
+      color: #1e293b;
+      border: 2px solid #bae6fd;
+      border-radius: 16px;
+      padding: 2.2rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .worksheet-header {
+      text-align: center;
+      border-bottom: 3px double #0284c7;
+      padding-bottom: 1.25rem;
       margin-bottom: 1.5rem;
     }
 
-    .markdown-body h2 {
-      font-size: 1.55rem;
-      color: #ea580c;
-      border-bottom: 2px dashed var(--border-color);
-      padding-bottom: 0.4rem;
-      margin-top: 2rem;
-      margin-bottom: 1rem;
-    }
-
-    .markdown-body h3 {
-      font-size: 1.3rem;
+    .worksheet-header h3 {
+      font-size: 1.6rem;
       color: #0369a1;
-      margin-top: 1.5rem;
-      margin-bottom: 0.75rem;
+      letter-spacing: 0.5px;
     }
 
-    .markdown-body table {
+    .student-meta-bar {
+      display: flex;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+      background: #f0f9ff;
+      padding: 0.75rem 1.25rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+      align-items: center;
+    }
+
+    .input-line {
+      border: none;
+      border-bottom: 1.5px solid #0284c7;
+      background: transparent;
+      padding: 0.2rem 0.5rem;
+      font-size: 0.95rem;
+      font-family: inherit;
+      color: #0f172a;
+      outline: none;
+      font-weight: 700;
+    }
+
+    .input-line:focus {
+      border-bottom-color: #f97316;
+      background: #fffbeb;
+    }
+
+    .ws-table {
       width: 100%;
       border-collapse: collapse;
-      margin: 1.5rem 0;
-      border-radius: 10px;
-      overflow: hidden;
-      display: block;
-      overflow-x: auto;
+      margin: 1.25rem 0;
     }
 
-    .markdown-body th, .markdown-body td {
-      border: 1px solid var(--border-color);
-      padding: 0.75rem 1rem;
+    .ws-table th, .ws-table td {
+      border: 1.5px solid #94a3b8;
+      padding: 0.65rem 0.6rem;
+      text-align: center;
     }
 
-    .markdown-body th {
+    .ws-table th {
       background: #e0f2fe;
       color: #0369a1;
       font-weight: 700;
     }
 
-    [data-theme="dark"] .markdown-body th {
+    .cell-input {
+      width: 100%;
+      border: none;
+      background: transparent;
+      text-align: center;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #0369a1;
+      outline: none;
+    }
+
+    .cell-input:focus {
+      background: #fffbeb;
+    }
+
+    /* Star rating widget */
+    .star-group {
+      display: inline-flex;
+      gap: 0.25rem;
+      cursor: pointer;
+    }
+
+    .star-item {
+      font-size: 1.4rem;
+      color: #cbd5e1;
+      transition: color 0.15s, transform 0.1s;
+    }
+
+    .star-item.active {
+      color: #f59e0b;
+      transform: scale(1.1);
+    }
+
+    /* Floating Timer Pill */
+    .timer-float {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
       background: #1e293b;
-      color: #38bdf8;
-    }
-
-    .markdown-body blockquote {
-      border-left: 5px solid #f97316;
-      background: #fff7ed;
-      padding: 0.85rem 1.25rem;
-      margin: 1.5rem 0;
-      border-radius: 0 12px 12px 0;
-      color: #9a3412;
-    }
-
-    [data-theme="dark"] .markdown-body blockquote {
-      background: #2a1b14;
-      color: #fdba74;
-    }
-
-    .markdown-body pre {
-      background: #0f172a;
-      color: #f8fafc;
-      padding: 1.25rem;
-      border-radius: 12px;
-      overflow-x: auto;
-      margin: 1.5rem 0;
-      font-size: 0.9rem;
-    }
-
-    .mermaid {
-      background: white;
-      padding: 1.5rem;
-      border-radius: 14px;
-      margin: 1.5rem 0;
-      border: 2px solid #bae6fd;
+      color: white;
+      padding: 0.6rem 1.1rem;
+      border-radius: 999px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
       display: flex;
-      justify-content: center;
+      align-items: center;
+      gap: 0.6rem;
+      z-index: 999;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      border: 2px solid #38bdf8;
     }
 
-    /* Print settings */
+    .timer-btn {
+      background: #0284c7;
+      color: white;
+      border: none;
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.75rem;
+    }
+
+    /* Print View Adjustments */
     @media print {
-      header, .nav-tabs, .top-actions, .control-panel, .btn, .game-grid {
+      header, .top-actions, .timer-float, .sub-tabs, .drawing-toolbar, .no-print {
         display: none !important;
       }
-      body, main, .doc-card {
+      body {
         background: white !important;
         color: black !important;
-        padding: 0 !important;
+      }
+      .worksheet-paper {
         border: none !important;
         box-shadow: none !important;
+        padding: 0 !important;
+        page-break-after: always;
       }
-      .view-section {
-        display: block !important;
-      }
-      #gameSection {
-        display: none !important;
-      }
-    }
-
-    /* Footer */
-    footer {
-      background: #0f172a;
-      color: #94a3b8;
-      text-align: center;
-      padding: 2rem 1rem;
-      margin-top: 3rem;
-      font-size: 0.9rem;
-    }
-
-    footer a {
-      color: #38bdf8;
-      text-decoration: none;
     }
   </style>
 </head>
 <body>
 
-  <!-- Dynamic Playful Header -->
+  <!-- ============================================================
+       TOP HEADER & NAVIGATION BAR
+       ============================================================ -->
   <header>
     <div class="header-inner">
-      <a href="#" class="brand-wrap">
+      <div class="brand-wrap" onclick="switchMainTab('labs')">
         <span class="brand-icon">🏰</span>
         <div>
           <div class="brand-title">
-            投石戰車 STEAM 探索館
-            <span class="brand-badge">國小六年級</span>
+            投石戰車 STEAM 科技探索館
+            <span class="brand-badge">國小六年級科技資訊教案</span>
           </div>
         </div>
-      </a>
+      </div>
 
       <!-- Navigation Tabs -->
       <nav class="nav-tabs">
-        <button class="tab-btn active" onclick="switchTab('game')">
-          🎮 投石車模擬實驗
+        <button class="tab-btn active" onclick="switchMainTab('labs')">
+          🎮 互動實驗室
         </button>
-        <button class="tab-btn" onclick="switchTab('lesson')">
-          📖 完整期中教案
+        <button class="tab-btn" onclick="switchMainTab('plan')">
+          📖 教案全景導覽
         </button>
-        <button class="tab-btn" onclick="switchTab('worksheets')">
-          📝 學生學習單附錄
+        <button class="tab-btn" onclick="switchMainTab('studio')">
+          📐 設計圖繪圖板
+        </button>
+        <button class="tab-btn" onclick="switchMainTab('worksheets')">
+          📝 互動學習單
         </button>
       </nav>
 
-      <!-- Action Buttons -->
+      <!-- Top Tools & Actions -->
       <div class="top-actions">
-        <button class="pill-btn" onclick="toggleTheme()" title="切換深淺模式">
-          🌓 主題
-        </button>
         <button class="pill-btn" onclick="window.print()" title="列印或匯出 PDF">
-          🖨️ 列印教案
+          🖨️ 列印學習單
         </button>
-        <a href="https://github.com/Ho-yu-chiao/midterm-lesson-plan" target="_blank" class="pill-btn">
-          ⭐ GitHub 儲存庫
+        <button class="pill-btn" onclick="toggleTheme()" title="切換深淺模式">
+          🌓
+        </button>
+        <a class="pill-btn" href="https://github.com/Ho-yu-chiao/midterm-lesson-plan" target="_blank" title="GitHub 原始碼儲存庫">
+          📦 GitHub
         </a>
       </div>
     </div>
   </header>
 
-  <!-- Main Viewports -->
   <main>
 
     <!-- ========================================================
-         VIEW 1: INTERACTIVE CATAPULT GAME & SIMULATION
+         VIEW 1: INTERACTIVE EXPERIMENTAL LABS
          ======================================================== -->
-    <section id="gameSection" class="view-section active">
-      <div class="game-grid">
-        <!-- Canvas Screen & HUD -->
-        <div class="canvas-container">
-          <div class="canvas-header">
-            <h2>🎯 投石戰車彈道物理實驗模擬器</h2>
-            <div class="score-banner">
-              <span>🏆 目標城堡距離：<strong id="targetDistanceText">35.0 m</strong></span>
-              <span id="hitBadge" style="display:none; background:#22c55e; color:white; padding:0.1rem 0.5rem; border-radius:999px; margin-left:0.4rem;">🎯 命中！</span>
+    <section id="labsSection" class="view-section active">
+      
+      <!-- Sub Tabs for 3 Core Experiments -->
+      <div class="sub-tabs">
+        <button class="sub-tab-btn active" onclick="switchLabTab('catapult')">
+          🎯 活動二：投石機彈道模擬與城堡挑戰
+        </button>
+        <button class="sub-tab-btn" onclick="switchLabTab('seesaw')">
+          ⚖️ 活動一：槓桿原理與翹翹板平衡模擬
+        </button>
+        <button class="sub-tab-btn" onclick="switchLabTab('chart')">
+          📊 活動四：數據統計折線圖分析
+        </button>
+      </div>
+
+      <!-- ====================================================
+           LAB 1: CATAPULT TRAJECTORY SIMULATION
+           ==================================================== -->
+      <div id="catapultLab" class="lab-content active">
+        <div class="lab-layout">
+          <!-- Canvas Area -->
+          <div class="canvas-wrap">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+              <h3 style="color:var(--secondary); font-size:1.25rem; display:flex; align-items:center; gap:0.4rem;">
+                🏰 投石戰車數位發射場
+              </h3>
+              <div style="display:flex; gap:0.5rem; align-items:center;">
+                <span style="font-size:0.9rem; font-weight:700;">🎯 目標城堡：<strong id="targetDistText" style="color:var(--primary); font-size:1.1rem;">35.0 m</strong></span>
+                <button class="chip-btn" onclick="randomTarget()">🎲 重設距離</button>
+                <span id="hitNotice" style="display:none; background:#22c55e; color:white; padding:0.2rem 0.6rem; border-radius:999px; font-weight:900; font-size:0.85rem; animation:bounce 0.5s;">🎉 命中城堡！</span>
+              </div>
+            </div>
+
+            <!-- HTML5 Physics Canvas -->
+            <canvas id="catapultCanvas" width="820" height="420" style="width:100%; height:auto; background:linear-gradient(to bottom, #dbeafe 0%, #eff6ff 70%, #86efac 70%, #4ade80 100%); border-radius:var(--radius-md); border:1px solid #93c5fd; cursor:crosshair;"></canvas>
+
+            <!-- Heads-Up Display (HUD) -->
+            <div class="hud-bar">
+              <div class="hud-box">
+                <div class="hud-label">發射初速度 (v₀)</div>
+                <div class="hud-val" id="hudSpeed">15.0 <small style="font-size:0.75rem">m/s</small></div>
+              </div>
+              <div class="hud-box">
+                <div class="hud-label">投射仰角 (θ)</div>
+                <div class="hud-val" id="hudAngle">45°</div>
+              </div>
+              <div class="hud-box">
+                <div class="hud-label">即時落點距離 (X)</div>
+                <div class="hud-val" id="hudDistance">0.0 <small style="font-size:0.75rem">m</small></div>
+              </div>
+              <div class="hud-box">
+                <div class="hud-label">最高飛行高度 (H)</div>
+                <div class="hud-val" id="hudHeight">0.0 <small style="font-size:0.75rem">m</small></div>
+              </div>
             </div>
           </div>
 
-          <canvas id="simCanvas" width="800" height="420"></canvas>
+          <!-- Controls Panel -->
+          <div class="panel-wrap">
+            <div class="control-box">
+              <h4 style="color:var(--secondary-dark); margin-bottom:1rem; font-size:1.1rem; display:flex; align-items:center; gap:0.4rem;">
+                ⚙️ 拋射變因調節面板
+              </h4>
 
-          <!-- HUD Realtime Readouts -->
-          <div class="sim-hud">
-            <div class="hud-card">
-              <div class="hud-label">發射初速度 (v₀)</div>
-              <div class="hud-value" id="hudSpeed">15.0 <small style="font-size:0.8rem">m/s</small></div>
+              <!-- Initial Speed / Rubber Band Strength -->
+              <div class="control-group">
+                <div class="control-label">
+                  <span>橡皮筋彈性強度 (初速度)</span>
+                  <span id="speedValText" style="color:var(--secondary); font-family:'JetBrains Mono';">15 m/s (雙條細)</span>
+                </div>
+                <input type="range" id="speedSlider" class="control-slider" min="8" max="28" value="15" step="1" oninput="onSpeedChange(this.value)">
+                <div class="preset-chips">
+                  <button class="chip-btn" onclick="setSpeedPreset(10, '單條細 (弱)')">單條細 10m/s</button>
+                  <button class="chip-btn active" onclick="setSpeedPreset(15, '雙條細 (中)')">雙條細 15m/s</button>
+                  <button class="chip-btn" onclick="setSpeedPreset(20, '單條粗 (強)')">單條粗 20m/s</button>
+                  <button class="chip-btn" onclick="setSpeedPreset(25, '雙條粗 (特強)')">雙條粗 25m/s</button>
+                </div>
+              </div>
+
+              <!-- Launch Angle Slider -->
+              <div class="control-group">
+                <div class="control-label">
+                  <span>投射仰角 (θ)</span>
+                  <span id="angleValText" style="color:var(--secondary); font-family:'JetBrains Mono';">45° (理論最佳角)</span>
+                </div>
+                <input type="range" id="angleSlider" class="control-slider" min="15" max="80" value="45" step="1" oninput="onAngleChange(this.value)">
+                <div class="preset-chips">
+                  <button class="chip-btn" onclick="setAnglePreset(30)">平射 30°</button>
+                  <button class="chip-btn active" onclick="setAnglePreset(45)">最佳 45°</button>
+                  <button class="chip-btn" onclick="setAnglePreset(60)">高射 60°</button>
+                </div>
+              </div>
+
+              <!-- Projectile Material -->
+              <div class="control-group">
+                <div class="control-label"><span>投擲物材質 (重量)</span></div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.5rem;">
+                  <button class="chip-btn active" id="btnWood" onclick="setAmmo('wood')">🪵 輕木球 (抗風阻)</button>
+                  <button class="chip-btn" id="btnStone" onclick="setAmmo('stone')">🪨 重石塊 (破壞力大)</button>
+                </div>
+              </div>
+
+              <!-- Launch Buttons -->
+              <button class="btn-action btn-primary" id="launchBtn" onclick="fireCatapult()">
+                🚀 立即發射投石！
+              </button>
+
+              <div style="display:grid; grid-template-columns: 1fr 1fr; gap:0.5rem; margin-top:0.6rem;">
+                <button class="btn-action btn-secondary" style="font-size:0.85rem;" onclick="addRecordFromSim()">
+                  ➕ 帶入下方紀錄表
+                </button>
+                <button class="btn-action" style="background:var(--bg-subtle); color:var(--text-muted); font-size:0.85rem; border:1px solid var(--border-color);" onclick="clearTrails()">
+                  🧹 清除軌跡線
+                </button>
+              </div>
             </div>
-            <div class="hud-card">
-              <div class="hud-label">投射仰角 (θ)</div>
-              <div class="hud-value" id="hudAngle">45 <small style="font-size:0.8rem">°</small></div>
-            </div>
-            <div class="hud-card">
-              <div class="hud-label">拋射落點距離 (X)</div>
-              <div class="hud-value" id="hudDistance">0.0 <small style="font-size:0.8rem">m</small></div>
-            </div>
-            <div class="hud-card">
-              <div class="hud-label">最大飛行高度 (H)</div>
-              <div class="hud-value" id="hudHeight">0.0 <small style="font-size:0.8rem">m</small></div>
+
+            <!-- Physics Science Tip -->
+            <div class="alert-box alert-tip" style="margin:0;">
+              <div>💡</div>
+              <div style="font-size:0.85rem;">
+                <strong>物理小概念</strong>：在固定角度下，橡皮筋彈性強度越強，儲存的<strong>彈性位能</strong>越多，轉換成的<strong>動能初速</strong>越大，物體拋射得越遠！
+              </div>
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- Controls Side Panel -->
-        <div class="control-panel">
-          <div class="panel-title">
-            ⚙️ 發射參數設定台
-          </div>
+      <!-- ====================================================
+           LAB 2: LEVER & SEESAW LAB (ACTIVITY 1)
+           ==================================================== -->
+      <div id="seesawLab" class="lab-content" style="display:none;">
+        <div class="lab-layout">
+          <div class="canvas-wrap">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+              <h3 style="color:var(--secondary); font-size:1.25rem;">
+                ⚖️ 槓桿翹翹板平衡模擬器
+              </h3>
+              <span id="seesawStateBadge" style="background:#0284c7; color:white; padding:0.2rem 0.6rem; border-radius:999px; font-weight:700; font-size:0.85rem;">目前狀態：完美平衡！</span>
+            </div>
 
-          <!-- Rubber Band Strength (Initial Velocity) -->
-          <div class="control-group">
-            <label>
-              橡皮筋彈力等級 (初速度):
-              <span id="speedDisplay">15 m/s (雙條細)</span>
-            </label>
-            <input type="range" id="speedInput" class="slider" min="8" max="30" value="15" step="1" oninput="updateSpeed(this.value)">
-            
-            <div class="preset-grid" style="margin-top:0.4rem;">
-              <button class="preset-btn" onclick="setPreset('弱 (單條細)', 10)">單條細 (10m/s)</button>
-              <button class="preset-btn active" onclick="setPreset('中 (雙條細)', 15)">雙條細 (15m/s)</button>
-              <button class="preset-btn" onclick="setPreset('強 (單條粗)', 20)">單條粗 (20m/s)</button>
-              <button class="preset-btn" onclick="setPreset('特強 (雙條粗)', 25)">雙條粗 (25m/s)</button>
+            <!-- Seesaw Canvas -->
+            <canvas id="seesawCanvas" width="820" height="380" style="width:100%; height:auto; background:linear-gradient(to bottom, #f0fdf4 0%, #e0f2fe 100%); border-radius:var(--radius-md); border:1px solid #bae6fd;"></canvas>
+
+            <div class="hud-bar">
+              <div class="hud-box">
+                <div class="hud-label">左側力矩 (F₁ × d₁)</div>
+                <div class="hud-val" id="hudLeftTorque">30.0 <small style="font-size:0.75rem">N·m</small></div>
+              </div>
+              <div class="hud-box">
+                <div class="hud-label">支點位置比例</div>
+                <div class="hud-val" id="hudFulcrumPos">50% (正中)</div>
+              </div>
+              <div class="hud-box">
+                <div class="hud-label">右側力矩 (F₂ × d₂)</div>
+                <div class="hud-val" id="hudRightTorque">30.0 <small style="font-size:0.75rem">N·m</small></div>
+              </div>
+              <div class="hud-box">
+                <div class="hud-label">槓桿狀態</div>
+                <div class="hud-val" id="hudBalanceTxt" style="color:#22c55e;">平衡中</div>
+              </div>
             </div>
           </div>
 
-          <!-- Launch Angle -->
-          <div class="control-group">
-            <label>
-              投石臂發射仰角:
-              <span id="angleDisplay">45° (最佳投擲角)</span>
-            </label>
-            <input type="range" id="angleInput" class="slider" min="15" max="80" value="45" step="1" oninput="updateAngle(this.value)">
-          </div>
+          <!-- Controls for Seesaw -->
+          <div class="panel-wrap">
+            <div class="control-box">
+              <h4 style="color:var(--secondary-dark); margin-bottom:1rem; font-size:1.1rem;">
+                🛠️ 槓桿三要素調控
+              </h4>
 
-          <!-- Projectile Mass Selection -->
-          <div class="control-group">
-            <label>
-              投擲物材質:
-              <span id="ammoDisplay">木球 (輕量)</span>
-            </label>
-            <div class="preset-grid">
-              <button class="preset-btn active" id="ammoWood" onclick="setAmmo('wood')">🪵 輕木球</button>
-              <button class="preset-btn" id="ammoStone" onclick="setAmmo('stone')">🪨 重石塊</button>
+              <!-- Fulcrum Position Slider -->
+              <div class="control-group">
+                <div class="control-label">
+                  <span>支點位置 (Fulcrum)</span>
+                  <span id="fulcrumRatioText" style="color:var(--secondary);">正中 (1 : 1)</span>
+                </div>
+                <input type="range" id="fulcrumSlider" class="control-slider" min="20" max="80" value="50" step="5" oninput="onFulcrumChange(this.value)">
+                <div class="preset-chips">
+                  <button class="chip-btn" onclick="setFulcrumPreset(30, '偏左 (力臂短/省力)')">偏左 (3:7)</button>
+                  <button class="chip-btn active" onclick="setFulcrumPreset(50, '正中 (平衡)')">正中 (1:1)</button>
+                  <button class="chip-btn" onclick="setFulcrumPreset(70, '偏右 (力臂長/速度快)')">偏右 (7:3)</button>
+                </div>
+              </div>
+
+              <!-- Left Weight & Position -->
+              <div class="control-group">
+                <div class="control-label">
+                  <span>左側重量 (施力物 F₁)</span>
+                  <span id="leftWeightText" style="color:var(--primary);">3.0 kg</span>
+                </div>
+                <input type="range" id="leftWeightSlider" class="control-slider" min="1" max="10" value="3" step="0.5" oninput="onLeftWeightChange(this.value)">
+              </div>
+
+              <!-- Right Weight & Position -->
+              <div class="control-group">
+                <div class="control-label">
+                  <span>右側重量 (抗力物 F₂)</span>
+                  <span id="rightWeightText" style="color:var(--accent-purple);">3.0 kg</span>
+                </div>
+                <input type="range" id="rightWeightSlider" class="control-slider" min="1" max="10" value="3" step="0.5" oninput="onRightWeightChange(this.value)">
+              </div>
+
+              <div class="alert-box alert-important" style="margin-top:1rem; font-size:0.85rem;">
+                <div>💡</div>
+                <div>
+                  <strong>投石機結構連結</strong>：當投石機的支點<strong>偏後</strong>時，投射臂末端長度增加（力臂長），雖然拉動需要更大的力氣（需更強橡皮筋），但末端的<strong>揮動線速度最高</strong>，能將砲彈射得極遠！
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ====================================================
+           LAB 3: DATA VISUALIZATION CHART (ACTIVITY 4)
+           ==================================================== -->
+      <div id="chartLab" class="lab-content" style="display:none;">
+        <div class="card">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+            <div>
+              <h3 style="color:var(--secondary); font-size:1.3rem;">📊 彈力強度與拋射距離折線圖</h3>
+              <p style="font-size:0.88rem; color:var(--text-muted);">
+                對應活動四教學目標：將模擬或實測數據整理成統計折線圖，以視覺化方式歸納最佳發射條件。
+              </p>
+            </div>
+            <div style="display:flex; gap:0.5rem;">
+              <button class="chip-btn" onclick="loadDefaultExperimentData()">📥 載入課堂實測範例數據</button>
+              <button class="chip-btn" onclick="clearChartData()">🧹 清除圖表數據</button>
             </div>
           </div>
 
-          <!-- Action Buttons -->
-          <button class="btn-launch" id="launchBtn" onclick="launchCatapult()">
-            🚀 發射投石戰車！
+          <!-- Chart Canvas Container -->
+          <div class="chart-box" style="height:320px; margin:1.25rem 0;">
+            <canvas id="lineChartCanvas" width="1100" height="320" style="width:100%; height:100%;"></canvas>
+          </div>
+
+          <!-- Analysis Insight Card -->
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:1rem;">
+            <div class="hud-box" style="text-align:left;">
+              <div class="hud-label">📈 數據趨勢發現</div>
+              <div style="font-size:0.95rem; font-weight:700; color:var(--text-main); margin-top:0.3rem;" id="chartInsight1">
+                初速度越快，拋物線落點越遠（呈正相關遞增曲線）。
+              </div>
+            </div>
+            <div class="hud-box" style="text-align:left;">
+              <div class="hud-label">🏆 最遠射程條件</div>
+              <div style="font-size:0.95rem; font-weight:700; color:var(--primary); margin-top:0.3rem;" id="chartInsight2">
+                雙條粗橡皮筋（25 m/s）在 45° 仰角達到最佳射程約 63.8 公尺。
+              </div>
+            </div>
+            <div class="hud-box" style="text-align:left;">
+              <div class="hud-label">🤖 運算思維歸納</div>
+              <div style="font-size:0.95rem; font-weight:700; color:var(--secondary-dark); margin-top:0.3rem;" id="chartInsight3">
+                操縱變因：橡皮筋彈性；應變變因：飛行距離；控制變因：角度與物體重。
+              </div>
+            </div>
+          </div>
+
+          <!-- Experiment Table Preview -->
+          <table class="data-table" id="chartDataTable" style="margin-top:1.25rem;">
+            <thead>
+              <tr>
+                <th>測試代號</th>
+                <th>橡皮筋強度 / 規格</th>
+                <th>出速度 (m/s)</th>
+                <th>投擲仰角</th>
+                <th>平均飛行距離 (m)</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody id="chartTableBody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================================================
+         VIEW 2: FULL CURRICULUM & LESSON PLAN (STEPPER & MATRIX)
+         ======================================================== -->
+    <section id="planSection" class="view-section">
+
+      <!-- Course Header Profile Card -->
+      <div class="card" style="background:linear-gradient(135deg, #eff6ff 0%, #ffffff 100%);">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:1rem;">
+          <div>
+            <h2 style="font-size:1.8rem; color:#0369a1; margin-bottom:0.4rem;">
+              國小科技資訊教育教案：投石戰車
+            </h2>
+            <p style="font-size:0.95rem; color:var(--text-muted);">
+              👩‍🏫 <strong>教學設計團隊</strong>：周昱芊、陳新宜、何羽喬、許睿芯 ｜ 
+              🎒 <strong>實施對象</strong>：國小六年級 ｜ 
+              ⏱️ <strong>教學節數</strong>：自然科學領域（1 節）＋ 資訊科技領域（4 節），合計 5 節（200 分鐘）
+            </p>
+          </div>
+          <button class="pill-btn" style="background:var(--primary); color:white;" onclick="switchMainTab('worksheets')">
+            📝 前往學生學習單
           </button>
+        </div>
 
-          <div class="btn-action-row">
-            <button class="btn-sub" onclick="recordCurrentData()">
-              ➕ 記錄到實驗表
-            </button>
-            <button class="btn-sub" onclick="randomTarget()">
-              🎲 變換城堡距離
-            </button>
-            <button class="btn-sub" onclick="clearTrails()">
-              🧹 清除軌跡
-            </button>
+        <!-- STEAM Cards -->
+        <div class="steam-grid">
+          <div class="steam-item">
+            <div class="steam-letter">S</div>
+            <strong>科學 Science</strong>
+            <p style="font-size:0.83rem; color:var(--text-muted); margin-top:0.25rem;">彈性位能與動能轉換、槓桿原理（支點、施力點、抗力點）。</p>
+          </div>
+          <div class="steam-item">
+            <div class="steam-letter">T</div>
+            <strong>技術 Technology</strong>
+            <p style="font-size:0.83rem; color:var(--text-muted); margin-top:0.25rem;">運用 Tinkercad 繪製 3D 設計圖、電腦模擬軟體測試拋物線。</p>
+          </div>
+          <div class="steam-item">
+            <div class="steam-letter">E</div>
+            <strong>工程 Engineering</strong>
+            <p style="font-size:0.83rem; color:var(--text-muted); margin-top:0.25rem;">手作組裝投石機結構、材質測試、結構加固與功能微調。</p>
+          </div>
+          <div class="steam-item">
+            <div class="steam-letter">A</div>
+            <strong>藝術 Art</strong>
+            <p style="font-size:0.83rem; color:var(--text-muted); margin-top:0.25rem;">投石機外觀造型美編與結構手繪圖稿呈現構想。</p>
+          </div>
+          <div class="steam-item">
+            <div class="steam-letter">M</div>
+            <strong>數學 Math</strong>
+            <p style="font-size:0.83rem; color:var(--text-muted); margin-top:0.25rem;">測量橡皮筋伸長量、多組試射距離平均值計算與折線圖繪製。</p>
           </div>
         </div>
       </div>
 
-      <!-- Record Table matching Worksheet 1 -->
-      <div class="record-section">
-        <div class="record-header">
-          <h3 style="color:var(--secondary); font-size:1.25rem;">📊 課堂實驗數據紀錄表（對應附錄一：電腦模擬）</h3>
-          <button class="pill-btn" style="background:#0284c7; color:white;" onclick="clearRecordTable()">清空表格</button>
+      <!-- Section 1: Two-way Matrix Table (雙向細目表) -->
+      <div class="card">
+        <h3 class="card-title">
+          <span>📊 1. 雙向細目表</span>
+          <span style="font-size:0.8rem; font-weight:normal; color:var(--text-muted);">（點選項目可查看對應活動與目標）</span>
+        </h3>
+        <div style="overflow-x:auto;">
+          <table class="matrix-table">
+            <thead>
+              <tr>
+                <th style="width:28%;">學習內容 \ 學習表現</th>
+                <th>科議 k-Ⅲ-1<br><small>說明常見科技產品用途與運作方式</small></th>
+                <th>資議 t-Ⅲ-1 / 科議 s-Ⅲ-1<br><small>運用資訊系統 / 製作圖稿呈現構想</small></th>
+                <th>科議 c-Ⅲ-1 / 科議 s-Ⅲ-2<br><small>依設計實作 / 使用常見手工具與材料</small></th>
+                <th>資議 t-Ⅲ-3 / 科議 c-Ⅲ-3<br><small>運用運算思維 / 展現合作解決問題</small></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <span class="badge-code">科議 N-Ⅲ-1</span> 科技的基本特性<br>
+                  <span class="badge-code">自 INb-Ⅲ-4</span> 力可藉由簡單機械傳遞
+                </td>
+                <td style="background:#fefce8; font-weight:700; color:#854d0e;">
+                  理解槓桿的基本概念，並應用在投石器上。
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><span class="badge-code">科議 P-Ⅲ-1</span> 基本的造形與設計</td>
+                <td></td>
+                <td style="background:#fefce8; font-weight:700; color:#854d0e;">
+                  利用 Tinkercad 繪製投石器。
+                </td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><span class="badge-code">科議 P-Ⅲ-2</span> 工具與材料的使用方法</td>
+                <td></td>
+                <td></td>
+                <td style="background:#fefce8; font-weight:700; color:#854d0e;">
+                  能依據設計圖完成投石機的組裝，並測試功能。
+                </td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><span class="badge-code">資議 D-Ⅲ-2</span> 系統化資料管理方法</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td style="background:#fefce8; font-weight:700; color:#854d0e;">
+                  能根據測試數據進行分析，並使用表格呈現不同彈力與速度的關係。
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Section 5: Step-by-Step Lesson Timeline (4 大教學活動展開) -->
+      <div class="card">
+        <h3 class="card-title">
+          <span>🎯 5. 教學活動步驟（4 大活動，共 5 節 200 分鐘）</span>
+        </h3>
+
+        <!-- Activity 1 -->
+        <div class="step-card">
+          <div class="step-header" onclick="toggleStep('step1')">
+            <div class="step-title-wrap">
+              <div class="step-number">1</div>
+              <div>
+                <strong style="font-size:1.15rem; color:#0369a1;">活動一：能量的魔法</strong>
+                <div style="font-size:0.85rem; color:var(--text-muted);">
+                  探索槓桿與彈性位能 ｜ 槓桿翹翹板 ｜ 生活中的工具
+                </div>
+              </div>
+            </div>
+            <div style="display:flex; align-items:center; gap:0.5rem;">
+              <span class="time-badge">共 1 節，40 分鐘</span>
+              <button class="chip-btn" onclick="event.stopPropagation(); switchMainTab('labs'); switchLabTab('seesaw');">⚖️ 開啟翹翹板教具</button>
+            </div>
+          </div>
+          <div id="step1" class="step-body">
+            <p><strong>活動簡述</strong>：學生能藉由彈性物品的操作，理解彈性位能的儲存與釋放過程；並運用翹翹板認識槓桿的基本原理，進一步思考並探究投石機的設計構想。</p>
+            <table class="data-table" style="margin-top:0.75rem;">
+              <thead>
+                <tr>
+                  <th style="width:25%;">教學活動名稱</th>
+                  <th style="width:45%;">活動內容（含時間分配）</th>
+                  <th style="width:30%;">評量方式與規準</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>探索槓桿與彈性位能</strong></td>
+                  <td>
+                    1. 使用生活中彈性物品（橡皮筋、彈簧）展示能量儲存與釋放（5 mins）<br>
+                    2. 利用不同橡皮筋測量同物體伸長量，觀察能量釋放投射物體（8 mins）
+                  </td>
+                  <td><strong>引導式問答、學習單</strong><br>能舉出彈性物品並說明拉長儲存、放開釋放；計算伸長量與投射距離關聯。</td>
+                </tr>
+                <tr>
+                  <td><strong>槓桿翹翹板</strong></td>
+                  <td>
+                    1. 介紹槓桿三要素（支點、施力點、抗力點），用翹翹板為例（12 mins）<br>
+                    2. 運用線上互動遊戲，觀察支點位置改變時的平衡與施力大小（10 mins）
+                  </td>
+                  <td><strong>口頭報告、引導式問答</strong><br>清楚解釋投石機功能運作原理，並聯繫生活中的槓桿實例。</td>
+                </tr>
+                <tr>
+                  <td><strong>生活中的工具</strong></td>
+                  <td>
+                    讓學生列舉生活中運用槓桿的工具（剪刀、老虎鉗），並想像如何應用在投石機設計上（5 mins）
+                  </td>
+                  <td>能指出工具之支點、施力點與抗力點；說明投石機支點與槓桿臂長短之影響。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
 
-        <table class="record-table" id="dataTable">
-          <thead>
-            <tr>
-              <th>實驗次序</th>
-              <th>橡皮筋彈性等級 (初速度)</th>
-              <th>發射角度</th>
-              <th>投擲物材質</th>
-              <th>落點飛行距離 (m)</th>
-              <th>最高高度 (m)</th>
-              <th>目標判定</th>
-            </tr>
-          </thead>
-          <tbody id="tableBody">
-            <!-- Dynamically populated -->
-          </tbody>
-        </table>
+        <!-- Activity 2 -->
+        <div class="step-card">
+          <div class="step-header" onclick="toggleStep('step2')">
+            <div class="step-title-wrap">
+              <div class="step-number">2</div>
+              <div>
+                <strong style="font-size:1.15rem; color:#0369a1;">活動二：彈力模擬與投石機設計</strong>
+                <div style="font-size:0.85rem; color:var(--text-muted);">
+                  彈道視界數位模擬 ｜ 速度變因實測 ｜ 藍圖誕生繪製設計圖
+                </div>
+              </div>
+            </div>
+            <div style="display:flex; align-items:center; gap:0.5rem;">
+              <span class="time-badge">共 1 節，40 分鐘</span>
+              <button class="chip-btn" onclick="event.stopPropagation(); switchMainTab('labs'); switchLabTab('catapult');">🎯 開啟彈道模擬器</button>
+            </div>
+          </div>
+          <div id="step2" class="step-body">
+            <p><strong>活動簡述</strong>：透過電腦模擬軟體測試不同力道（模擬橡皮筋彈性大小）對拋射距離的影響，並記錄數據進行分析，進而繪製出利用彈性驅動的投石機設計圖稿。</p>
+            <table class="data-table" style="margin-top:0.75rem;">
+              <thead>
+                <tr>
+                  <th style="width:25%;">教學活動名稱</th>
+                  <th style="width:45%;">活動內容（含時間分配）</th>
+                  <th style="width:30%;">評量方式與規準</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>彈道視界–數位模擬初探</strong></td>
+                  <td>
+                    1. 教師示範操作模擬軟體，引導學生觀察固定角度下初速度對落點遠近的影響。<br>
+                    2. 結合日常經驗引發「彈力大小如何決定拋射距離」探究動機（8 mins）
+                  </td>
+                  <td><strong>口頭評量</strong><br>學生能口頭說明彈力大小、初速度與拋射距離之間的因果關係。</td>
+                </tr>
+                <tr>
+                  <td><strong>彈力解密–速度變因實測</strong></td>
+                  <td>
+                    1. 學生分組操作模擬系統，固定方向調整初速度，記錄飛行距離（6 mins）<br>
+                    2. 進行多組測試，系統化驗證速度越快距離越遠（6 mins）
+                  </td>
+                  <td><strong>紀錄表（學習單一）</strong><br>檢視《實驗紀錄表-電腦模擬》，確認如實記錄初速度與拋射距離。</td>
+                </tr>
+                <tr>
+                  <td><strong>藍圖誕生–構想與繪圖</strong></td>
+                  <td>
+                    1. 數據統整討論：得出初速越快效果越佳結論（10 mins）<br>
+                    2. 各組討論橡皮筋固定方式，繪製投石機結構草圖（10 mins）
+                  </td>
+                  <td><strong>設計圖（學習單二）</strong><br>檢視是否清楚標示支點、橡皮筋固定處、投射臂與盛彈處。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
 
-        <!-- Live Visual Chart of Speed vs Distance -->
-        <div style="margin-top:1rem;">
-          <h4 style="font-size:0.95rem; margin-bottom:0.4rem; color:var(--text-muted);">📈 即時彈力強度與拋射距離折線關係圖：</h4>
-          <div class="chart-container" id="chartBox">
-            <canvas id="chartCanvas" style="width:100%; height:100%;"></canvas>
+        <!-- Activity 3 -->
+        <div class="step-card">
+          <div class="step-header" onclick="toggleStep('step3')">
+            <div class="step-title-wrap">
+              <div class="step-number">3</div>
+              <div>
+                <strong style="font-size:1.15rem; color:#0369a1;">活動三：動手造投石機</strong>
+                <div style="font-size:0.85rem; color:var(--text-muted);">
+                  動手組裝投石機 ｜ 小零件大影響 ｜ 測試與微調
+                </div>
+              </div>
+            </div>
+            <div style="display:flex; align-items:center; gap:0.5rem;">
+              <span class="time-badge">共 2 節，80 分鐘</span>
+              <button class="chip-btn" onclick="event.stopPropagation(); switchMainTab('studio');">📐 開啟設計圖畫板</button>
+            </div>
+          </div>
+          <div id="step3" class="step-body">
+            <p><strong>活動簡述</strong>：學生根據設計圖組裝投石機並進行測試與微調，探討不同橡皮筋強度對投影距離的影響。</p>
+            <table class="data-table" style="margin-top:0.75rem;">
+              <thead>
+                <tr>
+                  <th style="width:25%;">教學活動名稱</th>
+                  <th style="width:45%;">活動內容（含時間分配）</th>
+                  <th style="width:30%;">評量方式與規準</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>我來做看看</strong></td>
+                  <td>學生根據設計圖組裝投石機，正確使用材料與手工具。（30 mins）</td>
+                  <td><strong>教師觀察</strong><br>確認能安全且正確組裝，符合操作規範。</td>
+                </tr>
+                <tr>
+                  <td><strong>小零件大影響</strong></td>
+                  <td>1. 測試裝備是否能正常運行與調整（10 mins）<br>2. 測試不同橡皮筋強度對投影距離之影響（10 mins）</td>
+                  <td><strong>教師觀察</strong><br>能正確測試不同橡皮筋強度並觀察其對投射距離之影響。</td>
+                </tr>
+                <tr>
+                  <td><strong>測試與調整</strong></td>
+                  <td>學生測試不同橡皮筋強度對投射距離的影響並微調結構。（30 mins）</td>
+                  <td><strong>作品檢查、實驗記錄表（學習單三）</strong><br>檢查作品能正常運作並如實填寫數據。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Activity 4 -->
+        <div class="step-card">
+          <div class="step-header" onclick="toggleStep('step4')">
+            <div class="step-title-wrap">
+              <div class="step-number">4</div>
+              <div>
+                <strong style="font-size:1.15rem; color:#0369a1;">活動四：實驗數據分析與成果分享</strong>
+                <div style="font-size:0.85rem; color:var(--text-muted);">
+                  數據整理 ｜ 繪製折線圖 ｜ 分析與討論 ｜ 成果分享與反思
+                </div>
+              </div>
+            </div>
+            <div style="display:flex; align-items:center; gap:0.5rem;">
+              <span class="time-badge">共 1 節，40 分鐘</span>
+              <button class="chip-btn" onclick="event.stopPropagation(); switchMainTab('labs'); switchLabTab('chart');">📊 開啟折線圖分析</button>
+            </div>
+          </div>
+          <div id="step4" class="step-body">
+            <p><strong>活動簡述</strong>：學生整理投石機實驗數據，製作折線圖，分析不同拉伸長度與彈性對投射距離的影響，並透過分組報告分享實驗成果與心得。</p>
+            <table class="data-table" style="margin-top:0.75rem;">
+              <thead>
+                <tr>
+                  <th style="width:25%;">教學活動名稱</th>
+                  <th style="width:45%;">活動內容（含時間分配）</th>
+                  <th style="width:30%;">評量方式與規準</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>一、實驗數據整理</strong></td>
+                  <td>教師引導回顧上一節測試結果，各組整理不同條件所測得之數據記錄於學習單。（8 mins）</td>
+                  <td><strong>實作評量</strong><br>能正確整理並記錄實驗數據。</td>
+                </tr>
+                <tr>
+                  <td><strong>二、繪製折線圖</strong></td>
+                  <td>示範如何轉換成折線圖，學生以拉伸長度為橫軸、投射距離為縱軸繪製。（12 mins）</td>
+                  <td><strong>實作評量</strong><br>能正確繪製折線圖並清楚標示座標軸與單位。</td>
+                </tr>
+                <tr>
+                  <td><strong>三、分析與討論</strong></td>
+                  <td>各組觀察數據，討論哪個長度與彈性射得最遠，思考其他影響因素。（10 mins）</td>
+                  <td><strong>口語評量</strong><br>能根據實驗數據提出合理解釋，參與討論。</td>
+                </tr>
+                <tr>
+                  <td><strong>四、成果分享與反思</strong></td>
+                  <td>各組分享最佳條件、遇上的困難與解決方式；完成小組同儕互評。（10 mins）</td>
+                  <td><strong>互評表（學習單四）</strong><br>能清楚表達成果，完成四面向互評打分。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Section 6: Teaching Feedback & Strategies (教師錦囊) -->
+      <div class="card">
+        <h3 class="card-title">💡 6. 教學回饋與應對策略錦囊</h3>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1rem;">
+          <div class="hud-box" style="text-align:left;">
+            <strong>🛠️ 1. 學生操作手工具困難</strong>
+            <p style="font-size:0.83rem; color:var(--text-muted); margin-top:0.3rem;">
+              提供較多的步驟示範與逐步指引，並安排操作熟練的小幫手同學就近巡視協助。
+            </p>
+          </div>
+          <div class="hud-box" style="text-align:left;">
+            <strong>📊 2. 數據紀錄及分析不完善</strong>
+            <p style="font-size:0.83rem; color:var(--text-muted); margin-top:0.3rem;">
+              事先準備圖表範本（或使用本網頁之自動折線圖產生器），讓學生先填入套用，無痛銜接後續討論。
+            </p>
+          </div>
+          <div class="hud-box" style="text-align:left;">
+            <strong>⚖️ 3. 槓桿概念難以理解連結</strong>
+            <p style="font-size:0.83rem; color:var(--text-muted); margin-top:0.3rem;">
+              先以生活中的翹翹板、剪刀舉例，搭配本站「翹翹板模擬器」動態調整支點，再標註投石機三點。
+            </p>
+          </div>
+          <div class="hud-box" style="text-align:left;">
+            <strong>📐 4. 繪圖與 3D 建模困難</strong>
+            <p style="font-size:0.83rem; color:var(--text-muted); margin-top:0.3rem;">
+              提供預設基本零件模板檔（如側板、投擲臂），學生僅需修改長度或孔位數值即可製作。
+            </p>
+          </div>
+          <div class="hud-box" style="text-align:left;">
+            <strong>⏱️ 5. 時間管理與小組分工</strong>
+            <p style="font-size:0.83rem; color:var(--text-muted); margin-top:0.3rem;">
+              明確分配組員角色（記錄員、操作員、測量員、報告員），並備好半成品投石機供進度落後組使用。
+            </p>
           </div>
         </div>
       </div>
+
     </section>
 
     <!-- ========================================================
-         VIEW 2: FULL LESSON PLAN
+         VIEW 3: ONLINE DESIGN CANVAS STUDIO (APPENDIX 2)
          ======================================================== -->
-    <section id="lessonSection" class="view-section">
-      <div class="doc-card">
-        <div id="planContent" class="markdown-body">
-          <p style="text-align:center; padding:2rem;">正在載入投石戰車教案本文...</p>
+    <section id="studioSection" class="view-section">
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; margin-bottom:1rem;">
+          <div>
+            <h2 style="color:var(--secondary); font-size:1.5rem;">📐 投石戰車設計圖線上繪圖板</h2>
+            <p style="font-size:0.9rem; color:var(--text-muted);">
+              對應學習單二：請畫出你們小組的投石機側視或立體結構圖，並標註四要素：① 支點 ② 橡皮筋固定處 ③ 投射臂 ④ 盛彈處。
+            </p>
+          </div>
+          <div style="display:flex; gap:0.5rem;">
+            <button class="pill-btn" style="background:var(--primary); color:white;" onclick="downloadDrawing()">
+              💾 儲存繪圖圖片 (PNG)
+            </button>
+            <button class="pill-btn" style="background:var(--secondary); color:white;" onclick="copyDrawingToWorksheet()">
+              📋 一鍵貼入學習單二
+            </button>
+          </div>
+        </div>
+
+        <!-- Drawing Toolbar -->
+        <div class="drawing-toolbar">
+          <div class="tool-group">
+            <span style="font-size:0.85rem; font-weight:700;">筆刷顏色：</span>
+            <div class="color-dot active" style="background:#0284c7;" onclick="setDrawColor('#0284c7', this)"></div>
+            <div class="color-dot" style="background:#f97316;" onclick="setDrawColor('#f97316', this)"></div>
+            <div class="color-dot" style="background:#22c55e;" onclick="setDrawColor('#22c55e', this)"></div>
+            <div class="color-dot" style="background:#8b5cf6;" onclick="setDrawColor('#8b5cf6', this)"></div>
+            <div class="color-dot" style="background:#0f172a;" onclick="setDrawColor('#0f172a', this)"></div>
+          </div>
+
+          <div class="tool-group" style="margin-left:1rem;">
+            <span style="font-size:0.85rem; font-weight:700;">粗細：</span>
+            <button class="stamp-btn active" onclick="setDrawLineWidth(2, this)">細 (2px)</button>
+            <button class="stamp-btn" onclick="setDrawLineWidth(5, this)">中 (5px)</button>
+            <button class="stamp-btn" onclick="setDrawLineWidth(10, this)">粗 (10px)</button>
+          </div>
+
+          <div class="tool-group" style="margin-left:1rem;">
+            <span style="font-size:0.85rem; font-weight:700;">標記印章：</span>
+            <button class="stamp-btn" onclick="setStamp('① 支點')">① 支點</button>
+            <button class="stamp-btn" onclick="setStamp('② 橡皮筋固定處')">② 橡皮筋</button>
+            <button class="stamp-btn" onclick="setStamp('③ 投射臂')">③ 投射臂</button>
+            <button class="stamp-btn" onclick="setStamp('④ 盛彈處')">④ 盛彈處</button>
+          </div>
+
+          <div class="tool-group" style="margin-left:auto;">
+            <button class="stamp-btn" onclick="setEraser()" id="eraserBtn">🧽 橡皮擦</button>
+            <button class="stamp-btn" style="color:#ef4444;" onclick="clearDrawCanvas()">🗑️ 清空畫布</button>
+          </div>
+        </div>
+
+        <!-- HTML5 Drawing Canvas -->
+        <div style="background:white; border:2px dashed #93c5fd; border-radius:var(--radius-md); position:relative; overflow:hidden;">
+          <canvas id="designCanvas" width="1000" height="520" style="width:100%; height:auto; display:block; cursor:crosshair;"></canvas>
+          <div style="position:absolute; bottom:12px; right:15px; color:#94a3b8; font-size:0.8rem; pointer-events:none;">
+            投石戰車 結構設計畫布 ｜ 點選上方標記印章可直接點擊蓋印
+          </div>
         </div>
       </div>
     </section>
 
     <!-- ========================================================
-         VIEW 3: WORKSHEETS & RUBRICS
+         VIEW 4: INTERACTIVE DIGITAL WORKSHEETS (APPENDIX 1 ~ 4)
          ======================================================== -->
     <section id="worksheetsSection" class="view-section">
-      <div class="doc-card">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; border-bottom:2px solid var(--border-fun); padding-bottom:1rem;">
-          <h2 style="color:var(--primary); font-size:1.6rem;">📝 課堂專屬學習單與評量工具</h2>
-          <button class="pill-btn" style="background:var(--primary); color:white;" onclick="window.print()">
-            🖨️ 列印所有學習單
-          </button>
-        </div>
-        <div id="worksheetsContent" class="markdown-body">
-          <!-- Populated from Appendix of lesson plan -->
+
+      <!-- Worksheet Navigation Tabs -->
+      <div class="sub-tabs no-print">
+        <button class="sub-tab-btn active" onclick="switchWsTab('ws1')">
+          📄 附錄一：電腦模擬實驗紀錄表
+        </button>
+        <button class="sub-tab-btn" onclick="switchWsTab('ws2')">
+          🎨 附錄二：我們的設計圖！！！
+        </button>
+        <button class="sub-tab-btn" onclick="switchWsTab('ws3')">
+          🔬 附錄三：投石機實測紀錄表
+        </button>
+        <button class="sub-tab-btn" onclick="switchWsTab('ws4')">
+          ⭐ 附錄四：實驗結果自評與互評表
+        </button>
+        <div style="margin-left:auto; display:flex; gap:0.5rem;">
+          <button class="chip-btn" onclick="fillExampleAnswers()">✨ 填入範例作答</button>
+          <button class="chip-btn" style="background:#22c55e; color:white;" onclick="saveWorksheetData()">💾 儲存作答進度</button>
+          <button class="chip-btn" style="background:var(--primary); color:white;" onclick="window.print()">🖨️ A4 格式列印</button>
         </div>
       </div>
+
+      <!-- ====================================================
+           WORKSHEET 1: COMPUTER SIMULATION RECORD
+           ==================================================== -->
+      <div id="ws1" class="ws-content active">
+        <div class="worksheet-paper">
+          <div class="worksheet-header">
+            <h3>實驗紀錄表 - 電腦模擬</h3>
+            <p style="font-size:0.85rem; color:#64748b; margin-top:0.25rem;">
+              國小六年級科技資訊教育 投石戰車 STEAM 跨域探究教案 附錄一
+            </p>
+          </div>
+
+          <div class="student-meta-bar">
+            <div>六年 <input type="text" class="input-line" style="width:45px;" id="ws1_class" placeholder="1"> 班</div>
+            <div>第 <input type="text" class="input-line" style="width:45px;" id="ws1_group" placeholder="3"> 組</div>
+            <div>組長：<input type="text" class="input-line" style="width:110px;" id="ws1_leader" placeholder="王小華"></div>
+            <div>組員：<input type="text" class="input-line" style="width:260px;" id="ws1_members" placeholder="李小明、張小美、陳小新"></div>
+          </div>
+
+          <div class="alert-box alert-important" style="font-size:0.9rem;">
+            <div>🎯</div>
+            <div>
+              <strong>模擬任務說明</strong>：<br>
+              1. 在數位模擬軟體中維持「<strong>固定發射方向（45°）</strong>」，分別測試不同出速度（模擬橡皮筋不同彈力強度）。<br>
+              2. 每次設定進行 3 次模擬發射，並計算平均拋射距離（公尺）。填入各次數值後，系統會自動幫您計算平均值！
+            </div>
+          </div>
+
+          <table class="ws-table">
+            <thead>
+              <tr>
+                <th style="width:14%;">模擬次序</th>
+                <th style="width:26%;">模擬出速度 (m/s)</th>
+                <th style="width:15%;">第 1 次距離</th>
+                <th style="width:15%;">第 2 次距離</th>
+                <th style="width:15%;">第 3 次距離</th>
+                <th style="width:15%; background:#bae6fd;">平均距離</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>測試 A</strong></td>
+                <td>弱（例如 10 m/s）</td>
+                <td><input type="number" step="0.1" class="cell-input" id="ws1_r1_1" oninput="calcWs1Avg(1)" placeholder="10.2"></td>
+                <td><input type="number" step="0.1" class="cell-input" id="ws1_r1_2" oninput="calcWs1Avg(1)" placeholder="10.1"></td>
+                <td><input type="number" step="0.1" class="cell-input" id="ws1_r1_3" oninput="calcWs1Avg(1)" placeholder="10.3"></td>
+                <td id="ws1_avg_1" style="font-weight:700; color:#0369a1;">-- m</td>
+              </tr>
+              <tr>
+                <td><strong>測試 B</strong></td>
+                <td>中（例如 15 m/s）</td>
+                <td><input type="number" step="0.1" class="cell-input" id="ws1_r2_1" oninput="calcWs1Avg(2)" placeholder="22.9"></td>
+                <td><input type="number" step="0.1" class="cell-input" id="ws1_r2_2" oninput="calcWs1Avg(2)" placeholder="23.0"></td>
+                <td><input type="number" step="0.1" class="cell-input" id="ws1_r2_3" oninput="calcWs1Avg(2)" placeholder="22.8"></td>
+                <td id="ws1_avg_2" style="font-weight:700; color:#0369a1;">-- m</td>
+              </tr>
+              <tr>
+                <td><strong>測試 C</strong></td>
+                <td>強（例如 20 m/s）</td>
+                <td><input type="number" step="0.1" class="cell-input" id="ws1_r3_1" oninput="calcWs1Avg(3)" placeholder="40.8"></td>
+                <td><input type="number" step="0.1" class="cell-input" id="ws1_r3_2" oninput="calcWs1Avg(3)" placeholder="40.7"></td>
+                <td><input type="number" step="0.1" class="cell-input" id="ws1_r3_3" oninput="calcWs1Avg(3)" placeholder="40.9"></td>
+                <td id="ws1_avg_3" style="font-weight:700; color:#0369a1;">-- m</td>
+              </tr>
+              <tr>
+                <td><strong>測試 D</strong></td>
+                <td>特強（自訂 25 m/s）</td>
+                <td><input type="number" step="0.1" class="cell-input" id="ws1_r4_1" oninput="calcWs1Avg(4)" placeholder="63.7"></td>
+                <td><input type="number" step="0.1" class="cell-input" id="ws1_r4_2" oninput="calcWs1Avg(4)" placeholder="63.8"></td>
+                <td><input type="number" step="0.1" class="cell-input" id="ws1_r4_3" oninput="calcWs1Avg(4)" placeholder="63.6"></td>
+                <td id="ws1_avg_4" style="font-weight:700; color:#0369a1;">-- m</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div style="margin-top:1.5rem; line-height:2;">
+            <h4 style="color:#0369a1; margin-bottom:0.6rem;">💡 數據發現與思考：</h4>
+            <div style="margin-bottom:0.75rem;">
+              <strong>1. 觀察上方表格，當發射出速度越快時，物體的飛行距離有什麼變化？</strong><br>
+              答：出速度越快，拋射的距離越
+              <label><input type="radio" name="ws1_q1_dist" value="far" checked> 遠</label>
+              <label><input type="radio" name="ws1_q1_dist" value="near"> 近</label>，
+              這代表物體獲得的動能越
+              <label><input type="radio" name="ws1_q1_energy" value="big" checked> 大</label>
+              <label><input type="radio" name="ws1_q1_energy" value="small"> 小</label>。
+            </div>
+
+            <div style="margin-bottom:0.75rem;">
+              <strong>2. 如果要把模擬實驗中的「出速度」應用到真實投石機上，我們可以如何增加發射力道？</strong><br>
+              <textarea id="ws1_q2_ans" style="width:100%; height:60px; padding:0.5rem; border:1.5px solid #94a3b8; border-radius:6px; font-family:inherit;"></textarea>
+            </div>
+
+            <div>
+              <strong>3. 小組結論：我們預計在下一節實作中，使用什麼樣的橡皮筋搭配？</strong><br>
+              <input type="text" id="ws1_q3_ans" class="input-line" style="width:100%;" placeholder="範例：使用雙條粗橡皮筋並聯拉緊，以提供最強彈性位能。">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ====================================================
+           WORKSHEET 2: OUR DESIGN BLUEPRINT
+           ==================================================== -->
+      <div id="ws2" class="ws-content" style="display:none;">
+        <div class="worksheet-paper">
+          <div class="worksheet-header">
+            <h3>我們的設計圖！！！</h3>
+            <p style="font-size:0.85rem; color:#64748b; margin-top:0.25rem;">
+              國小六年級科技資訊教育 投石戰車 STEAM 跨域探究教案 附錄二
+            </p>
+          </div>
+
+          <div class="student-meta-bar">
+            <div>六年 <input type="text" class="input-line" style="width:45px;" id="ws2_class"> 班</div>
+            <div>第 <input type="text" class="input-line" style="width:45px;" id="ws2_group"> 組</div>
+            <div>作品名稱：<input type="text" class="input-line" style="width:180px;" id="ws2_title" placeholder="雷霆破城投石車"></div>
+            <div>繪圖者：<input type="text" class="input-line" style="width:110px;" id="ws2_author"></div>
+          </div>
+
+          <div style="margin-bottom:1rem;">
+            <strong>📐 投石機結構草圖</strong>（請標示：① 支點 ② 橡皮筋固定處 ③ 投射臂 ④ 盛彈處）
+          </div>
+
+          <!-- Embedded Drawing Canvas Preview -->
+          <div id="wsDrawingBox" style="width:100%; min-height:360px; border:2px dashed #0284c7; border-radius:12px; display:flex; flex-direction:column; align-items:center; justify-content:center; background:#f8fafc; padding:1rem; position:relative;">
+            <img id="wsCanvasImg" src="" style="max-width:100%; height:auto; display:none; border-radius:8px;">
+            <div id="wsCanvasPlaceholder" style="text-align:center; color:#64748b;">
+              <p style="font-size:1.1rem; font-weight:700; margin-bottom:0.5rem;">🎨 尚未匯入設計圖</p>
+              <p style="font-size:0.85rem;">您可以前往上方「📐 設計圖繪圖板」完成手繪後，點選「一鍵貼入學習單二」！</p>
+              <button class="chip-btn" style="margin-top:0.75rem; background:var(--secondary); color:white;" onclick="switchMainTab('studio')">前往繪圖板手繪</button>
+            </div>
+          </div>
+
+          <div style="margin-top:1.5rem; line-height:2.2;">
+            <h4 style="color:#0369a1; margin-bottom:0.6rem;">🛠️ 機構特點與變因規劃：</h4>
+            <div>
+              <strong>1. 彈力來源規劃（橡皮筋安裝方式）：</strong><br>
+              預計使用【
+              <label><input type="checkbox" id="ws2_band_thin"> 細橡皮筋</label>
+              <label><input type="checkbox" id="ws2_band_thick" checked> 粗橡皮筋</label>
+              <label><input type="checkbox" id="ws2_band_multi" checked> 多條併用</label>
+              】，固定在裝置的什麼位置？<br>
+              答：<input type="text" id="ws2_band_pos" class="input-line" style="width:85%;" placeholder="固定於底座前端支架與投射臂中段孔位">
+            </div>
+
+            <div style="margin-top:0.75rem;">
+              <strong>2. 槓桿結構設計（支點與力臂）：</strong><br>
+              支點設置在投射臂的【
+              <label><input type="radio" name="ws2_fulcrum_pos" value="mid"> 中間</label>
+              <label><input type="radio" name="ws2_fulcrum_pos" value="front"> 偏前</label>
+              <label><input type="radio" name="ws2_fulcrum_pos" value="back" checked> 偏後</label>
+              】，這樣設計的優點是？<br>
+              答：<input type="text" id="ws2_fulcrum_reason" class="input-line" style="width:85%;" placeholder="抗力臂增長，甩動時末端速度最快，能把投射物拋射得最遠！">
+            </div>
+
+            <div style="margin-top:0.75rem;">
+              <strong>3. 小組創意與結構加固巧思：</strong><br>
+              答：<input type="text" id="ws2_reinforce" class="input-line" style="width:90%;" placeholder="在底座兩側增加三角斜撐加固樑，發射時不會因反作用力翹起震盪。">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ====================================================
+           WORKSHEET 3: REAL EXPERIMENT RECORD
+           ==================================================== -->
+      <div id="ws3" class="ws-content" style="display:none;">
+        <div class="worksheet-paper">
+          <div class="worksheet-header">
+            <h3>實驗紀錄表 - 投石機實測</h3>
+            <p style="font-size:0.85rem; color:#64748b; margin-top:0.25rem;">
+              國小六年級科技資訊教育 投石戰車 STEAM 跨域探究教案 附錄三
+            </p>
+          </div>
+
+          <div class="student-meta-bar">
+            <div>六年 <input type="text" class="input-line" style="width:45px;" id="ws3_class"> 班</div>
+            <div>第 <input type="text" class="input-line" style="width:45px;" id="ws3_group"> 組</div>
+            <div>紀錄人員：<input type="text" class="input-line" style="width:120px;" id="ws3_recorder"></div>
+            <div>發射手：<input type="text" class="input-line" style="width:120px;" id="ws3_shooter"></div>
+          </div>
+
+          <div class="alert-box alert-tip" style="font-size:0.88rem;">
+            <div>🔬</div>
+            <div>
+              <strong>實驗變因控制原則</strong>：<br>
+              • 【<strong>控制變因</strong>】：維持相同的拉伸位置、投擲物重量，投石機底座保持穩固不滑動。<br>
+              • 【<strong>操縱變因</strong>】：更換「不同彈性強度」的橡皮筋（如單條細、雙條細、單條粗、雙條粗）。
+            </div>
+          </div>
+
+          <table class="ws-table">
+            <thead>
+              <tr>
+                <th style="width:14%;">組別次序</th>
+                <th style="width:26%;">橡皮筋材質 / 規格</th>
+                <th style="width:15%;">第 1 次 (cm)</th>
+                <th style="width:15%;">第 2 次 (cm)</th>
+                <th style="width:15%;">第 3 次 (cm)</th>
+                <th style="width:15%; background:#bae6fd;">平均距離 (cm)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>條件 1</strong></td>
+                <td>單條細橡皮筋（弱）</td>
+                <td><input type="number" class="cell-input" id="ws3_r1_1" oninput="calcWs3Avg(1)" placeholder="185"></td>
+                <td><input type="number" class="cell-input" id="ws3_r1_2" oninput="calcWs3Avg(1)" placeholder="192"></td>
+                <td><input type="number" class="cell-input" id="ws3_r1_3" oninput="calcWs3Avg(1)" placeholder="188"></td>
+                <td id="ws3_avg_1" style="font-weight:700; color:#0369a1;">-- cm</td>
+              </tr>
+              <tr>
+                <td><strong>條件 2</strong></td>
+                <td>雙條細橡皮筋（中）</td>
+                <td><input type="number" class="cell-input" id="ws3_r2_1" oninput="calcWs3Avg(2)" placeholder="320"></td>
+                <td><input type="number" class="cell-input" id="ws3_r2_2" oninput="calcWs3Avg(2)" placeholder="315"></td>
+                <td><input type="number" class="cell-input" id="ws3_r2_3" oninput="calcWs3Avg(2)" placeholder="325"></td>
+                <td id="ws3_avg_2" style="font-weight:700; color:#0369a1;">-- cm</td>
+              </tr>
+              <tr>
+                <td><strong>條件 3</strong></td>
+                <td>單條粗橡皮筋（強）</td>
+                <td><input type="number" class="cell-input" id="ws3_r3_1" oninput="calcWs3Avg(3)" placeholder="450"></td>
+                <td><input type="number" class="cell-input" id="ws3_r3_2" oninput="calcWs3Avg(3)" placeholder="462"></td>
+                <td><input type="number" class="cell-input" id="ws3_r3_3" oninput="calcWs3Avg(3)" placeholder="456"></td>
+                <td id="ws3_avg_3" style="font-weight:700; color:#0369a1;">-- cm</td>
+              </tr>
+              <tr>
+                <td><strong>條件 4</strong></td>
+                <td>雙條粗橡皮筋（特強）</td>
+                <td><input type="number" class="cell-input" id="ws3_r4_1" oninput="calcWs3Avg(4)" placeholder="580"></td>
+                <td><input type="number" class="cell-input" id="ws3_r4_2" oninput="calcWs3Avg(4)" placeholder="595"></td>
+                <td><input type="number" class="cell-input" id="ws3_r4_3" oninput="calcWs3Avg(4)" placeholder="585"></td>
+                <td id="ws3_avg_4" style="font-weight:700; color:#0369a1;">-- cm</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div style="margin-top:1.5rem; line-height:2.2;">
+            <h4 style="color:#0369a1; margin-bottom:0.6rem;">🔍 實測觀察與結構調整：</h4>
+            <div>
+              <strong>1. 實測結果符合電腦模擬的預期嗎？哪一種橡皮筋組合讓投石機射得最遠？</strong><br>
+              答：射得最遠的材料組合是【 <input type="text" id="ws3_best_mat" class="input-line" style="width:160px;" placeholder="雙條粗橡皮筋"> 】，平均距離為【 <input type="text" id="ws3_best_dist" class="input-line" style="width:80px;" placeholder="586.7"> 】公分。
+            </div>
+
+            <div style="margin-top:0.75rem;">
+              <strong>2. 在更換更強彈性的橡皮筋時，投石機結構是否出現晃動或不穩的狀況？你們如何加固？</strong><br>
+              答：<input type="text" id="ws3_shake_fix" class="input-line" style="width:88%;" placeholder="發射瞬間支架底部有滑動，組員在底盤貼上防滑墊並加厚立柱卡榫。">
+            </div>
+
+            <div style="margin-top:0.75rem;">
+              <strong>3. 根據這次的實測數據，下一節課我們要在圖表上呈現的關鍵結論是：</strong><br>
+              答：<input type="text" id="ws3_chart_concl" class="input-line" style="width:88%;" placeholder="橡皮筋彈性強度與投擲距離成正比，彈性越強、初速度越快、距離越遠。">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ====================================================
+           WORKSHEET 4: RUBRIC & PEER EVALUATION
+           ==================================================== -->
+      <div id="ws4" class="ws-content" style="display:none;">
+        <div class="worksheet-paper">
+          <div class="worksheet-header">
+            <h3>實驗結果評估表（自評與互評）</h3>
+            <p style="font-size:0.85rem; color:#64748b; margin-top:0.25rem;">
+              國小六年級科技資訊教育 投石戰車 STEAM 跨域探究教案 附錄四
+            </p>
+          </div>
+
+          <div class="student-meta-bar">
+            <div>評分组別：第 <input type="text" class="input-line" style="width:40px;" id="ws4_rater_group"> 組</div>
+            <div>受評組別：第 <input type="text" class="input-line" style="width:40px;" id="ws4_target_group"> 組</div>
+            <div>評審學生：<input type="text" class="input-line" style="width:120px;" id="ws4_judge"></div>
+          </div>
+
+          <div style="background:#fefce8; border:1px solid #fde047; padding:0.6rem 1rem; border-radius:8px; margin-bottom:1rem; font-size:0.9rem; color:#854d0e;">
+            ⭐ <strong>評分標準</strong>：⭐⭐⭐⭐⭐ 表現優異（5分） ｜ ⭐⭐⭐ 良好（3分） ｜ ⭐ 需加強（1分）
+          </div>
+
+          <table class="ws-table">
+            <thead>
+              <tr>
+                <th style="width:16%;">面向</th>
+                <th style="width:54%;">評量指標與表現說明</th>
+                <th style="width:30%;">自評 / 互評給分 (點擊星星)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>科學概念</strong></td>
+                <td style="text-align:left;">
+                  <strong>彈性位能與槓桿原理理解</strong><br>
+                  <small style="color:#64748b;">能清楚說明橡皮筋彈性強弱對拋射動能與飛行遠近的影響。</small>
+                </td>
+                <td>
+                  <div class="star-group" data-aspect="1" onclick="rateStar(1, event)">
+                    <span class="star-item active" data-v="1">★</span>
+                    <span class="star-item active" data-v="2">★</span>
+                    <span class="star-item active" data-v="3">★</span>
+                    <span class="star-item active" data-v="4">★</span>
+                    <span class="star-item active" data-v="5">★</span>
+                  </div>
+                  <div style="font-weight:700; color:#0369a1; font-size:0.85rem; margin-top:0.2rem;"><span id="scoreText1">5</span> / 5 分</div>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>工程實作</strong></td>
+                <td style="text-align:left;">
+                  <strong>投石機結構組裝與穩固性</strong><br>
+                  <small style="color:#64748b;">能根據設計圖完成組裝，且發射時支架穩固，發射臂運動順暢。</small>
+                </td>
+                <td>
+                  <div class="star-group" data-aspect="2" onclick="rateStar(2, event)">
+                    <span class="star-item active" data-v="1">★</span>
+                    <span class="star-item active" data-v="2">★</span>
+                    <span class="star-item active" data-v="3">★</span>
+                    <span class="star-item active" data-v="4">★</span>
+                    <span class="star-item" data-v="5">★</span>
+                  </div>
+                  <div style="font-weight:700; color:#0369a1; font-size:0.85rem; margin-top:0.2rem;"><span id="scoreText2">4</span> / 5 分</div>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>數據分析</strong></td>
+                <td style="text-align:left;">
+                  <strong>圖表記錄與結果詮釋</strong><br>
+                  <small style="color:#64748b;">能將不同彈性數據正確繪製成折線圖，並精準解讀數據趨勢。</small>
+                </td>
+                <td>
+                  <div class="star-group" data-aspect="3" onclick="rateStar(3, event)">
+                    <span class="star-item active" data-v="1">★</span>
+                    <span class="star-item active" data-v="2">★</span>
+                    <span class="star-item active" data-v="3">★</span>
+                    <span class="star-item active" data-v="4">★</span>
+                    <span class="star-item active" data-v="5">★</span>
+                  </div>
+                  <div style="font-weight:700; color:#0369a1; font-size:0.85rem; margin-top:0.2rem;"><span id="scoreText3">5</span> / 5 分</div>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>團隊合作</strong></td>
+                <td style="text-align:left;">
+                  <strong>分工溝通與解決問題</strong><br>
+                  <small style="color:#64748b;">小組分工明確，在實作遇故障或誤差時能共同討論修復。</small>
+                </td>
+                <td>
+                  <div class="star-group" data-aspect="4" onclick="rateStar(4, event)">
+                    <span class="star-item active" data-v="1">★</span>
+                    <span class="star-item active" data-v="2">★</span>
+                    <span class="star-item active" data-v="3">★</span>
+                    <span class="star-item active" data-v="4">★</span>
+                    <span class="star-item" data-v="5">★</span>
+                  </div>
+                  <div style="font-weight:700; color:#0369a1; font-size:0.85rem; margin-top:0.2rem;"><span id="scoreText4">4</span> / 5 分</div>
+                </td>
+              </tr>
+              <tr style="background:#f0f9ff;">
+                <td colspan="2" style="text-align:right; font-weight:700; font-size:1.1rem; color:#0369a1;">
+                  總得分合計（滿分 20 分）：
+                </td>
+                <td>
+                  <span id="totalRubricScore" style="font-size:1.5rem; font-weight:900; color:#ea580c;">18</span> / 20 分
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div style="margin-top:1.5rem;">
+            <h4 style="color:#0369a1; margin-bottom:0.5rem;">💬 最欣賞這組的地方 / 建議改進方向：</h4>
+            <textarea id="ws4_comments" style="width:100%; height:80px; padding:0.6rem; border:1.5px solid #94a3b8; border-radius:8px; font-family:inherit;" placeholder="最欣賞他們的支架設計非常牢固，發射粗橡皮筋時完全不晃動；建議盛彈杓可以做得再稍微深一點，木球不容易滑落。"></textarea>
+          </div>
+
+          <div class="alert-box alert-tip" style="margin-top:1.25rem;">
+            <div>🔔</div>
+            <div>
+              <strong>檢查提醒</strong>：請確認上方每一項評估面向都有打上星星評分，寫下欣賞與建議回饋後，就可以點選「儲存作答進度」或「A4 格式列印」繳交給老師囉！
+            </div>
+          </div>
+        </div>
+      </div>
+
     </section>
 
   </main>
 
-  <!-- Cheerful Footer -->
-  <footer>
-    <div style="max-width:1100px; margin:0 auto; display:flex; flex-direction:column; gap:0.5rem; align-items:center;">
-      <p style="font-weight:700; color:#e2e8f0; font-size:1.05rem;">
-        🏰 國小科技資訊教育教案：投石戰車 STEAM 跨域探究課程
-      </p>
-      <p style="font-size:0.85rem;">
-        教學設計團隊：周昱芊、陳新宜、何羽喬、許睿芯 ｜ 國小六年級自然與資訊科技跨領域整合
-      </p>
-      <p style="font-size:0.8rem; color:#64748b;">
-        授權條款：<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-tw" target="_blank">創用 CC 姓名標示-非商業性-相同方式分享 4.0 國際 (CC BY-NC-SA 4.0)</a>
-      </p>
-    </div>
+  <!-- ============================================================
+       FLOATING CLASSROOM COUNTDOWN TIMER
+       ============================================================ -->
+  <div class="timer-float no-print">
+    <span>⏱️ 課堂計時</span>
+    <span id="timerDisplay" style="color:#38bdf8; font-size:1.15rem;">08:00</span>
+    <button class="timer-btn" onclick="toggleTimer()" id="timerControlBtn">開始</button>
+    <button class="timer-btn" onclick="resetTimer(8)">8分</button>
+    <button class="timer-btn" onclick="resetTimer(10)">10分</button>
+    <button class="timer-btn" onclick="resetTimer(30)">30分</button>
+  </div>
+
+  <!-- Footer -->
+  <footer class="no-print" style="background:#1e293b; color:#94a3b8; padding:2rem 1.5rem; text-align:center; font-size:0.85rem; border-top:1px solid #334155;">
+    <p style="font-weight:700; color:#f8fafc; font-size:1rem; margin-bottom:0.4rem;">
+      🏰 國小科技資訊教育教案：投石戰車 STEAM 跨域探究課程
+    </p>
+    <p style="margin-bottom:0.4rem;">
+      教學設計團隊：周昱芊、陳新宜、何羽喬、許睿芯 ｜ 國小六年級自然與資訊科技跨領域整合
+    </p>
+    <p style="font-size:0.8rem; color:#64748b;">
+      授權條款：<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-tw" target="_blank" style="color:#38bdf8; text-decoration:none;">創用 CC 姓名標示-非商業性-相同方式分享 4.0 國際 (CC BY-NC-SA 4.0)</a>
+    </p>
   </footer>
 
   <!-- ============================================================
-       CANVAS SIMULATION PHYSICS & GAME LOGIC
+       INTERACTIVE JAVASCRIPT LOGIC
        ============================================================ -->
   <script>
-    // Audio synthesis using Web Audio API (No external files required!)
-    const AudioContext = window.AudioContext || window.webkitAudioContext;
-    let audioCtx = null;
-
-    function initAudio() {
-      if (!audioCtx) audioCtx = new AudioContext();
+    // Audio synthesis using Web Audio API
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    let audio = null;
+    function playTone(freq, type, duration) {
+      try {
+        if (!audio) audio = new AudioCtx();
+        const osc = audio.createOscillator();
+        const gain = audio.createGain();
+        osc.connect(gain);
+        gain.connect(audio.destination);
+        osc.type = type || 'sine';
+        osc.frequency.setValueAtTime(freq, audio.currentTime);
+        gain.gain.setValueAtTime(0.2, audio.currentTime);
+        gain.gain.linearRampToValueAtTime(0.01, audio.currentTime + duration);
+        osc.start();
+        osc.stop(audio.currentTime + duration);
+      } catch (e) {}
     }
 
-    function playSound(type) {
-      try {
-        initAudio();
-        const now = audioCtx.currentTime;
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
+    // 1. MAIN TAB SWITCHER
+    function switchMainTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active'));
 
-        if (type === 'launch') {
-          // Whoosh launch sound
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(200, now);
-          osc.frequency.exponentialRampToValueAtTime(700, now + 0.15);
-          gain.gain.setValueAtTime(0.3, now);
-          gain.gain.linearRampToValueAtTime(0.01, now + 0.2);
-          osc.start(now);
-          osc.stop(now + 0.2);
-        } else if (type === 'hit') {
-          // Target hit cheer sound
-          osc.type = 'triangle';
-          osc.frequency.setValueAtTime(440, now);
-          osc.frequency.setValueAtTime(554.37, now + 0.1);
-          osc.frequency.setValueAtTime(659.25, now + 0.2);
-          gain.gain.setValueAtTime(0.4, now);
-          gain.gain.linearRampToValueAtTime(0.01, now + 0.4);
-          osc.start(now);
-          osc.stop(now + 0.4);
-        } else if (type === 'land') {
-          // Thud on ground
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(120, now);
-          osc.frequency.linearRampToValueAtTime(40, now + 0.1);
-          gain.gain.setValueAtTime(0.2, now);
-          gain.gain.linearRampToValueAtTime(0.01, now + 0.1);
-          osc.start(now);
-          osc.stop(now + 0.1);
-        }
-      } catch (e) {
-        // Audio might be blocked before first user click
+      if (tabId === 'labs') {
+        document.querySelectorAll('.tab-btn')[0].classList.add('active');
+        document.getElementById('labsSection').classList.add('active');
+        drawCatapult();
+      } else if (tabId === 'plan') {
+        document.querySelectorAll('.tab-btn')[1].classList.add('active');
+        document.getElementById('planSection').classList.add('active');
+      } else if (tabId === 'studio') {
+        document.querySelectorAll('.tab-btn')[2].classList.add('active');
+        document.getElementById('studioSection').classList.add('active');
+        initDesignCanvas();
+      } else if (tabId === 'worksheets') {
+        document.querySelectorAll('.tab-btn')[3].classList.add('active');
+        document.getElementById('worksheetsSection').classList.add('active');
       }
     }
 
-    // Canvas Physics Engine
-    const canvas = document.getElementById("simCanvas");
-    const ctx = canvas.getContext("2d");
+    // 2. LAB SUB-TAB SWITCHER
+    function switchLabTab(labKey) {
+      document.querySelectorAll('#labsSection .sub-tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.lab-content').forEach(c => c.style.display = 'none');
 
-    // Game & World Variables
-    const g = 9.8; // Gravity (m/s^2)
-    let meterScale = 14; // pixels per meter
-    const groundY = 360;
-    const catapultX = 60;
-    const catapultY = groundY - 15;
-
-    let targetX = 35.0; // Target in meters (default 35m)
-    let currentSpeed = 15;
-    let currentAngle = 45;
-    let ammoType = 'wood'; // 'wood' or 'stone'
-
-    let isFlying = false;
-    let ball = { x: 0, y: 0, vx: 0, vy: 0, radius: 8 };
-    let flightTime = 0;
-    let maxFlightHeight = 0;
-    let currentDistance = 0;
-
-    let trails = []; // recorded flight trajectories
-    let currentTrail = [];
-    let particles = [];
-    let recordCounter = 0;
-    let records = [];
-
-    function resizeCanvas() {
-      const rect = canvas.getBoundingClientRect();
-      canvas.width = rect.width * window.devicePixelRatio;
-      canvas.height = rect.height * window.devicePixelRatio;
-      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
-      meterScale = (canvas.width / window.devicePixelRatio - 120) / 50; // fit up to 50 meters
-    }
-    window.addEventListener('resize', () => {
-      resizeCanvas();
-      drawScene();
-    });
-
-    // Control Handlers
-    function updateSpeed(val) {
-      currentSpeed = parseFloat(val);
-      document.getElementById("hudSpeed").innerHTML = `${currentSpeed.toFixed(1)} <small style="font-size:0.8rem">m/s</small>`;
-      let label = "自訂強度";
-      if (currentSpeed <= 11) label = "弱 (單條細)";
-      else if (currentSpeed <= 17) label = "中 (雙條細)";
-      else if (currentSpeed <= 22) label = "強 (單條粗)";
-      else label = "特強 (雙條粗)";
-      document.getElementById("speedDisplay").innerText = `${currentSpeed} m/s (${label})`;
-      drawScene();
+      if (labKey === 'catapult') {
+        document.querySelectorAll('#labsSection .sub-tab-btn')[0].classList.add('active');
+        document.getElementById('catapultLab').style.display = 'block';
+        drawCatapult();
+      } else if (labKey === 'seesaw') {
+        document.querySelectorAll('#labsSection .sub-tab-btn')[1].classList.add('active');
+        document.getElementById('seesawLab').style.display = 'block';
+        drawSeesaw();
+      } else if (labKey === 'chart') {
+        document.querySelectorAll('#labsSection .sub-tab-btn')[2].classList.add('active');
+        document.getElementById('chartLab').style.display = 'block';
+        renderChart();
+      }
     }
 
-    function setPreset(name, speed) {
-      document.getElementById("speedInput").value = speed;
-      updateSpeed(speed);
-      document.querySelectorAll('.preset-grid .preset-btn').forEach(b => b.classList.remove('active'));
+    // 3. STEP ACCORDION TOGGLE
+    function toggleStep(stepId) {
+      const el = document.getElementById(stepId);
+      if (el) el.classList.toggle('collapsed');
+    }
+
+    // 4. WORKSHEET SUB-TABS
+    function switchWsTab(wsId) {
+      document.querySelectorAll('#worksheetsSection .sub-tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.ws-content').forEach(w => w.style.display = 'none');
+
+      const mapping = { 'ws1': 0, 'ws2': 1, 'ws3': 2, 'ws4': 3 };
+      if (mapping[wsId] !== undefined) {
+        document.querySelectorAll('#worksheetsSection .sub-tab-btn')[mapping[wsId]].classList.add('active');
+      }
+      const target = document.getElementById(wsId);
+      if (target) target.style.display = 'block';
+    }
+
+    // ============================================================
+    // PHYSICS SIMULATION 1: CATAPULT LAUNCH
+    // ============================================================
+    const cCanvas = document.getElementById("catapultCanvas");
+    const cCtx = cCanvas.getContext("2d");
+
+    let simSpeed = 15;
+    let simAngle = 45;
+    let targetDist = 35.0; // meters
+    let simAmmo = 'wood';
+    let isFiring = false;
+    let ballPos = { x: 70, y: 350, vx: 0, vy: 0 };
+    let flightT = 0;
+    let peakH = 0;
+    let totalD = 0;
+    let ballTrails = [];
+    let curTrail = [];
+
+    const groundBaseY = 360;
+    const catOriginX = 70;
+    const catOriginY = 350;
+    const pxPerMeter = 11.5;
+
+    function drawCatapult() {
+      cCtx.clearRect(0, 0, cCanvas.width, cCanvas.height);
+
+      // Sky & ground
+      cCtx.fillStyle = '#16a34a';
+      cCtx.fillRect(0, groundBaseY, cCanvas.width, cCanvas.height - groundBaseY);
+      cCtx.fillStyle = '#86efac';
+      cCtx.fillRect(0, groundBaseY, cCanvas.width, 5);
+
+      // Ground distance ticks
+      cCtx.fillStyle = '#ffffff';
+      cCtx.font = '10px sans-serif';
+      cCtx.textAlign = 'center';
+      for (let m = 0; m <= 70; m += 10) {
+        const tx = catOriginX + m * pxPerMeter;
+        if (tx < cCanvas.width - 20) {
+          cCtx.fillRect(tx, groundBaseY, 1.5, 6);
+          cCtx.fillText(`${m}m`, tx, groundBaseY + 16);
+        }
+      }
+
+      // Draw Target Castle
+      const targPx = catOriginX + targetDist * pxPerMeter;
+      cCtx.fillStyle = '#64748b';
+      cCtx.fillRect(targPx - 14, groundBaseY - 38, 28, 38);
+      // Castle battlements
+      cCtx.fillRect(targPx - 16, groundBaseY - 48, 8, 10);
+      cCtx.fillRect(targPx - 4, groundBaseY - 48, 8, 10);
+      cCtx.fillRect(targPx + 8, groundBaseY - 48, 8, 10);
+      // Castle Door
+      cCtx.fillStyle = '#334155';
+      cCtx.beginPath();
+      cCtx.arc(targPx, groundBaseY - 14, 7, Math.PI, 0);
+      cCtx.fill();
+      cCtx.fillRect(targPx - 7, groundBaseY - 14, 14, 14);
+
+      // Flag
+      cCtx.fillStyle = '#dc2626';
+      cCtx.beginPath();
+      cCtx.moveTo(targPx + 12, groundBaseY - 48);
+      cCtx.lineTo(targPx + 24, groundBaseY - 54);
+      cCtx.lineTo(targPx + 12, groundBaseY - 60);
+      cCtx.fill();
+
+      // Draw Past Trails
+      ballTrails.forEach(tr => {
+        cCtx.strokeStyle = 'rgba(2, 132, 199, 0.35)';
+        cCtx.lineWidth = 2;
+        cCtx.setLineDash([4, 4]);
+        cCtx.beginPath();
+        tr.forEach((pt, i) => {
+          if (i === 0) cCtx.moveTo(pt.x, pt.y);
+          else cCtx.lineTo(pt.x, pt.y);
+        });
+        cCtx.stroke();
+        cCtx.setLineDash([]);
+      });
+
+      // Draw Current Flight Trail
+      if (curTrail.length > 1) {
+        cCtx.strokeStyle = '#f97316';
+        cCtx.lineWidth = 3;
+        cCtx.beginPath();
+        curTrail.forEach((pt, i) => {
+          if (i === 0) cCtx.moveTo(pt.x, pt.y);
+          else cCtx.lineTo(pt.x, pt.y);
+        });
+        cCtx.stroke();
+      }
+
+      // Draw Wooden Catapult Base
+      cCtx.fillStyle = '#78350f';
+      cCtx.fillRect(catOriginX - 28, groundBaseY - 18, 56, 12);
+      cCtx.fillStyle = '#451a03';
+      cCtx.beginPath();
+      cCtx.arc(catOriginX - 18, groundBaseY - 6, 8, 0, Math.PI * 2);
+      cCtx.arc(catOriginX + 18, groundBaseY - 6, 8, 0, Math.PI * 2);
+      cCtx.fill();
+
+      // Catapult Arm
+      const armRad = (simAngle * Math.PI) / 180;
+      const armLen = 38;
+      const armEndX = catOriginX + Math.cos(armRad) * armLen;
+      const armEndY = (groundBaseY - 16) - Math.sin(armRad) * armLen;
+
+      cCtx.strokeStyle = '#b45309';
+      cCtx.lineWidth = 6;
+      cCtx.lineCap = 'round';
+      cCtx.beginPath();
+      cCtx.moveTo(catOriginX - 6, groundBaseY - 16);
+      cCtx.lineTo(armEndX, armEndY);
+      cCtx.stroke();
+
+      // Rubber band string
+      cCtx.strokeStyle = '#dc2626';
+      cCtx.lineWidth = 2;
+      cCtx.beginPath();
+      cCtx.moveTo(catOriginX - 22, groundBaseY - 16);
+      cCtx.lineTo(catOriginX + armLen * 0.4, groundBaseY - 16);
+      cCtx.stroke();
+
+      // Draw Ball
+      if (!isFiring) {
+        ballPos.x = armEndX;
+        ballPos.y = armEndY;
+      }
+      cCtx.fillStyle = simAmmo === 'wood' ? '#d97706' : '#475569';
+      cCtx.beginPath();
+      cCtx.arc(ballPos.x, ballPos.y, simAmmo === 'wood' ? 7 : 8, 0, Math.PI * 2);
+      cCtx.fill();
+    }
+
+    function fireCatapult() {
+      if (isFiring) return;
+      isFiring = true;
+      document.getElementById('hitNotice').style.display = 'none';
+
+      playTone(320, 'triangle', 0.2);
+
+      const rad = (simAngle * Math.PI) / 180;
+      const massFactor = simAmmo === 'wood' ? 1.0 : 0.92;
+      const effectiveV = simSpeed * massFactor;
+
+      ballPos.x = catOriginX + Math.cos(rad) * 38;
+      ballPos.y = (groundBaseY - 16) - Math.sin(rad) * 38;
+      ballPos.vx = effectiveV * Math.cos(rad);
+      ballPos.vy = -effectiveV * Math.sin(rad);
+
+      curTrail = [{ x: ballPos.x, y: ballPos.y }];
+      flightT = 0;
+      peakH = 0;
+
+      const g = 9.8;
+      const dt = 0.028;
+
+      const anim = setInterval(() => {
+        flightT += dt;
+        ballPos.x += ballPos.vx * pxPerMeter * dt;
+        ballPos.vy += g * dt;
+        ballPos.y += ballPos.vy * pxPerMeter * dt;
+
+        curTrail.push({ x: ballPos.x, y: ballPos.y });
+
+        const altM = Math.max(0, (groundBaseY - ballPos.y) / pxPerMeter);
+        if (altM > peakH) peakH = altM;
+        const curDistM = (ballPos.x - catOriginX) / pxPerMeter;
+
+        document.getElementById('hudHeight').innerHTML = `${peakH.toFixed(1)} <small style="font-size:0.75rem">m</small>`;
+        document.getElementById('hudDistance').innerHTML = `${Math.max(0, curDistM).toFixed(1)} <small style="font-size:0.75rem">m</small>`;
+
+        drawCatapult();
+
+        // Check if ball hits the ground or castle
+        if (ballPos.y >= groundBaseY - 4) {
+          clearInterval(anim);
+          isFiring = false;
+          ballPos.y = groundBaseY - 4;
+          totalD = curDistM;
+          ballTrails.push([...curTrail]);
+
+          // Check Castle Hit
+          if (Math.abs(totalD - targetDist) <= 2.2) {
+            document.getElementById('hitNotice').style.display = 'inline-block';
+            playTone(523.25, 'triangle', 0.15);
+            setTimeout(() => playTone(659.25, 'triangle', 0.25), 150);
+            setTimeout(() => playTone(783.99, 'triangle', 0.35), 300);
+          } else {
+            playTone(90, 'sine', 0.1);
+          }
+          drawCatapult();
+        }
+      }, 25);
+    }
+
+    function onSpeedChange(val) {
+      simSpeed = parseFloat(val);
+      let desc = '自訂強度';
+      if (simSpeed <= 11) desc = '單條細 (弱)';
+      else if (simSpeed <= 16) desc = '雙條細 (中)';
+      else if (simSpeed <= 21) desc = '單條粗 (強)';
+      else desc = '雙條粗 (特強)';
+
+      document.getElementById('speedValText').innerText = `${simSpeed} m/s (${desc})`;
+      document.getElementById('hudSpeed').innerHTML = `${simSpeed.toFixed(1)} <small style="font-size:0.75rem">m/s</small>`;
+    }
+
+    function setSpeedPreset(speed, desc) {
+      document.getElementById('speedSlider').value = speed;
+      onSpeedChange(speed);
+      document.querySelectorAll('#catapultLab .control-group:nth-child(2) .chip-btn').forEach(b => b.classList.remove('active'));
       event.target.classList.add('active');
     }
 
-    function updateAngle(val) {
-      currentAngle = parseFloat(val);
-      document.getElementById("hudAngle").innerHTML = `${currentAngle} <small style="font-size:0.8rem">°</small>`;
-      document.getElementById("angleDisplay").innerText = `${currentAngle}° ${currentAngle === 45 ? '(最佳投射角)' : ''}`;
-      drawScene();
+    function onAngleChange(val) {
+      simAngle = parseInt(val);
+      document.getElementById('angleValText').innerText = `${simAngle}° ${simAngle === 45 ? '(理論最佳角)' : ''}`;
+      document.getElementById('hudAngle').innerText = `${simAngle}°`;
+      drawCatapult();
+    }
+
+    function setAnglePreset(angle) {
+      document.getElementById('angleSlider').value = angle;
+      onAngleChange(angle);
+      document.querySelectorAll('#catapultLab .control-group:nth-child(3) .chip-btn').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
     }
 
     function setAmmo(type) {
-      ammoType = type;
-      document.getElementById("ammoWood").classList.toggle('active', type === 'wood');
-      document.getElementById("ammoStone").classList.toggle('active', type === 'stone');
-      document.getElementById("ammoDisplay").innerText = type === 'wood' ? '輕木球 (飛行順暢)' : '重石塊 (穩定耐衝擊)';
-      ball.radius = type === 'wood' ? 7 : 10;
-      drawScene();
+      simAmmo = type;
+      document.getElementById('btnWood').classList.toggle('active', type === 'wood');
+      document.getElementById('btnStone').classList.toggle('active', type === 'stone');
+      drawCatapult();
     }
 
     function randomTarget() {
-      targetX = Math.floor(Math.random() * 26 + 18); // 18m to 44m
-      document.getElementById("targetDistanceText").innerText = `${targetX.toFixed(1)} m`;
-      document.getElementById("hitBadge").style.display = "none";
-      drawScene();
+      targetDist = (20 + Math.random() * 42).toFixed(1);
+      targetDist = parseFloat(targetDist);
+      document.getElementById('targetDistText').innerText = `${targetDist.toFixed(1)} m`;
+      document.getElementById('hitNotice').style.display = 'none';
+      drawCatapult();
     }
 
     function clearTrails() {
-      trails = [];
-      particles = [];
-      drawScene();
+      ballTrails = [];
+      curTrail = [];
+      document.getElementById('hudDistance').innerHTML = `0.0 <small style="font-size:0.75rem">m</small>`;
+      document.getElementById('hudHeight').innerHTML = `0.0 <small style="font-size:0.75rem">m</small>`;
+      drawCatapult();
     }
 
-    // Launch Catapult
-    function launchCatapult() {
-      if (isFlying) return;
-      playSound('launch');
-      document.getElementById("hitBadge").style.display = "none";
+    // ============================================================
+    // PHYSICS SIMULATION 2: LEVER & SEESAW LAB
+    // ============================================================
+    const sCanvas = document.getElementById("seesawCanvas");
+    const sCtx = sCanvas.getContext("2d");
 
-      const rad = (currentAngle * Math.PI) / 180;
-      const speed = currentSpeed * (ammoType === 'wood' ? 1.0 : 0.88); // Stone has slightly more drag / weight
+    let fulcrumRatio = 0.5; // 0.2 ~ 0.8
+    let leftWeight = 3.0; // kg
+    let rightWeight = 3.0; // kg
 
-      ball.x = catapultX + 15 * Math.cos(rad);
-      ball.y = catapultY - 15 * Math.sin(rad);
-      ball.vx = speed * Math.cos(rad);
-      ball.vy = -speed * Math.sin(rad);
+    function drawSeesaw() {
+      sCtx.clearRect(0, 0, sCanvas.width, sCanvas.height);
 
-      flightTime = 0;
-      maxFlightHeight = 0;
-      currentTrail = [{ x: ball.x, y: ball.y }];
-      isFlying = true;
+      const baseCenterY = 270;
+      const boardLen = 540;
+      const fulcrumX = (sCanvas.width - boardLen) / 2 + boardLen * fulcrumRatio;
+      const fulcrumY = baseCenterY;
 
-      animateFlight();
-    }
+      // Calculate Torques
+      const leftDist = fulcrumX - ((sCanvas.width - boardLen) / 2 + 30);
+      const rightDist = ((sCanvas.width - boardLen) / 2 + boardLen - 30) - fulcrumX;
 
-    function animateFlight() {
-      if (!isFlying) return;
+      const torqueLeft = leftWeight * (leftDist / 10);
+      const torqueRight = rightWeight * (rightDist / 10);
 
-      const dt = 0.035; // simulation step in seconds
-      flightTime += dt;
+      document.getElementById('hudLeftTorque').innerHTML = `${torqueLeft.toFixed(1)} <small style="font-size:0.75rem">N·m</small>`;
+      document.getElementById('hudRightTorque').innerHTML = `${torqueRight.toFixed(1)} <small style="font-size:0.75rem">N·m</small>`;
 
-      // Update projectile position
-      ball.x += ball.vx * dt * meterScale;
-      ball.vy += g * dt;
-      ball.y += ball.vy * dt * meterScale;
-
-      currentTrail.push({ x: ball.x, y: ball.y });
-
-      // Track max height
-      const heightInMeters = (groundY - ball.y) / meterScale;
-      if (heightInMeters > maxFlightHeight) maxFlightHeight = heightInMeters;
-
-      document.getElementById("hudHeight").innerHTML = `${Math.max(0, maxFlightHeight).toFixed(1)} <small style="font-size:0.8rem">m</small>`;
-      const currentXDist = (ball.x - catapultX) / meterScale;
-      document.getElementById("hudDistance").innerHTML = `${Math.max(0, currentXDist).toFixed(1)} <small style="font-size:0.8rem">m</small>`;
-
-      // Ground or target collision
-      if (ball.y >= groundY) {
-        ball.y = groundY;
-        isFlying = false;
-        currentDistance = (ball.x - catapultX) / meterScale;
-        trails.push([...currentTrail]);
-
-        // Check if hit target castle (within 2.2 meters)
-        const hitDiff = Math.abs(currentDistance - targetX);
-        if (hitDiff <= 2.2) {
-          playSound('hit');
-          document.getElementById("hitBadge").style.display = "inline-block";
-          createExplosion(catapultX + targetX * meterScale, groundY - 30, '#facc15');
-        } else {
-          playSound('land');
-          createExplosion(ball.x, groundY, '#86efac');
-        }
+      let tiltDeg = 0;
+      const diff = torqueRight - torqueLeft;
+      if (Math.abs(diff) < 1.0) {
+        tiltDeg = 0;
+        document.getElementById('hudBalanceTxt').innerText = '完美平衡！';
+        document.getElementById('hudBalanceTxt').style.color = '#22c55e';
+        document.getElementById('seesawStateBadge').innerText = '狀態：兩端力矩平衡！';
+      } else if (diff > 0) {
+        tiltDeg = Math.min(15, diff * 0.8);
+        document.getElementById('hudBalanceTxt').innerText = '右傾 (抗力端下墜)';
+        document.getElementById('hudBalanceTxt').style.color = '#8b5cf6';
+        document.getElementById('seesawStateBadge').innerText = '狀態：右側力矩較大！';
+      } else {
+        tiltDeg = Math.max(-15, diff * 0.8);
+        document.getElementById('hudBalanceTxt').innerText = '左傾 (施力端下墜)';
+        document.getElementById('hudBalanceTxt').style.color = '#f97316';
+        document.getElementById('seesawStateBadge').innerText = '狀態：左側力矩較大！';
       }
 
-      drawScene();
+      // Draw Ground
+      sCtx.fillStyle = '#94a3b8';
+      sCtx.fillRect(80, baseCenterY + 45, sCanvas.width - 160, 6);
 
-      if (isFlying || particles.length > 0) {
-        requestAnimationFrame(animateFlight);
-      }
+      // Draw Fulcrum Triangle
+      sCtx.fillStyle = '#0284c7';
+      sCtx.beginPath();
+      sCtx.moveTo(fulcrumX, fulcrumY);
+      sCtx.lineTo(fulcrumX - 25, fulcrumY + 45);
+      sCtx.lineTo(fulcrumX + 25, fulcrumY + 45);
+      sCtx.closePath();
+      sCtx.fill();
+
+      // Fulcrum Label
+      sCtx.fillStyle = '#0369a1';
+      sCtx.font = 'bold 12px sans-serif';
+      sCtx.textAlign = 'center';
+      sCtx.fillText('① 支點 (Fulcrum)', fulcrumX, fulcrumY + 62);
+
+      // Transform Seesaw Plank with tilt
+      sCtx.save();
+      sCtx.translate(fulcrumX, fulcrumY);
+      sCtx.rotate((tiltDeg * Math.PI) / 180);
+
+      // Plank
+      const plankStartX = -boardLen * fulcrumRatio;
+      const plankEndX = boardLen * (1 - fulcrumRatio);
+
+      sCtx.fillStyle = '#d97706';
+      sCtx.fillRect(plankStartX, -8, boardLen, 16);
+      sCtx.strokeStyle = '#78350f';
+      sCtx.lineWidth = 2;
+      sCtx.strokeRect(plankStartX, -8, boardLen, 16);
+
+      // Left Load Box (Effort)
+      const lwPx = 18 + leftWeight * 4;
+      sCtx.fillStyle = '#f97316';
+      sCtx.fillRect(plankStartX + 15, -8 - lwPx, lwPx, lwPx);
+      sCtx.fillStyle = '#ffffff';
+      sCtx.font = 'bold 11px sans-serif';
+      sCtx.fillText(`${leftWeight}kg`, plankStartX + 15 + lwPx / 2, -14);
+
+      // Right Load Box (Resistance/Load)
+      const rwPx = 18 + rightWeight * 4;
+      sCtx.fillStyle = '#8b5cf6';
+      sCtx.fillRect(plankEndX - 15 - rwPx, -8 - rwPx, rwPx, rwPx);
+      sCtx.fillStyle = '#ffffff';
+      sCtx.fillText(`${rightWeight}kg`, plankEndX - 15 - rwPx / 2, -14);
+
+      sCtx.restore();
+
+      // Outside plank labels
+      sCtx.fillStyle = '#c2410c';
+      sCtx.fillText('② 施力點 (動力)', 160, 100);
+      sCtx.fillStyle = '#6d28d9';
+      sCtx.fillText('③ 抗力點 (負載)', sCanvas.width - 160, 100);
     }
 
-    function createExplosion(x, y, color) {
-      for (let i = 0; i < 20; i++) {
-        particles.push({
-          x: x,
-          y: y,
-          vx: (Math.random() - 0.5) * 8,
-          vy: (Math.random() - 0.7) * 8,
-          radius: Math.random() * 4 + 2,
-          color: color,
-          alpha: 1
-        });
-      }
+    function onFulcrumChange(val) {
+      fulcrumRatio = parseInt(val) / 100;
+      let desc = '正中 (1:1)';
+      if (fulcrumRatio < 0.45) desc = `偏左 (${(fulcrumRatio*10).toFixed(0)}:${((1-fulcrumRatio)*10).toFixed(0)})`;
+      else if (fulcrumRatio > 0.55) desc = `偏右 (${(fulcrumRatio*10).toFixed(0)}:${((1-fulcrumRatio)*10).toFixed(0)})`;
+
+      document.getElementById('fulcrumRatioText').innerText = desc;
+      document.getElementById('hudFulcrumPos').innerText = `${(fulcrumRatio * 100).toFixed(0)}%`;
+      drawSeesaw();
     }
 
-    // Drawing Everything
-    function drawScene() {
-      const w = canvas.width / window.devicePixelRatio;
-      const h = canvas.height / window.devicePixelRatio;
+    function setFulcrumPreset(ratio, label) {
+      document.getElementById('fulcrumSlider').value = ratio;
+      onFulcrumChange(ratio);
+      document.querySelectorAll('#seesawLab .preset-chips .chip-btn').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+
+    function onLeftWeightChange(val) {
+      leftWeight = parseFloat(val);
+      document.getElementById('leftWeightText').innerText = `${leftWeight.toFixed(1)} kg`;
+      drawSeesaw();
+    }
+
+    function onRightWeightChange(val) {
+      rightWeight = parseFloat(val);
+      document.getElementById('rightWeightText').innerText = `${rightWeight.toFixed(1)} kg`;
+      drawSeesaw();
+    }
+
+    // ============================================================
+    // LAB 3 & ACTIVITY 4: CHART RENDERING & DATA
+    // ============================================================
+    let chartRecords = [
+      { id: 'A', name: '單條細 (弱)', speed: 10, angle: 45, dist: 10.2 },
+      { id: 'B', name: '雙條細 (中)', speed: 15, angle: 45, dist: 22.9 },
+      { id: 'C', name: '單條粗 (強)', speed: 20, angle: 45, dist: 40.8 },
+      { id: 'D', name: '雙條粗 (特強)', speed: 25, angle: 45, dist: 63.8 }
+    ];
+
+    function renderChart() {
+      const c = document.getElementById("lineChartCanvas");
+      const ctx = c.getContext("2d");
+      const w = c.width;
+      const h = c.height;
+
       ctx.clearRect(0, 0, w, h);
 
-      // 1. Sky & Sun
-      ctx.fillStyle = '#fef08a';
-      ctx.beginPath();
-      ctx.arc(w - 70, 60, 35, 0, Math.PI * 2);
-      ctx.fill();
+      const padL = 60;
+      const padR = 40;
+      const padT = 30;
+      const padB = 50;
 
-      // Cloud
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.75)';
-      ctx.beginPath();
-      ctx.arc(180, 80, 25, 0, Math.PI * 2);
-      ctx.arc(210, 70, 35, 0, Math.PI * 2);
-      ctx.arc(245, 80, 28, 0, Math.PI * 2);
-      ctx.fill();
-
-      // 2. Ground & Distance Markers
-      ctx.fillStyle = '#22c55e';
-      ctx.fillRect(0, groundY, w, h - groundY);
-
-      ctx.fillStyle = '#15803d';
-      ctx.fillRect(0, groundY + 8, w, 4);
-
-      // Distance tick marks every 5 meters
-      ctx.font = '11px sans-serif';
-      ctx.textAlign = 'center';
-      for (let m = 5; m <= 55; m += 5) {
-        const markerX = catapultX + m * meterScale;
-        if (markerX > w) break;
-
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        ctx.moveTo(markerX, groundY);
-        ctx.lineTo(markerX, groundY + 12);
-        ctx.stroke();
-
-        ctx.fillStyle = '#ffffff';
-        ctx.fillText(`${m}m`, markerX, groundY + 26);
-      }
-
-      // 3. Target Castle
-      const targetPixelX = catapultX + targetX * meterScale;
-      // Castle base
-      ctx.fillStyle = '#64748b';
-      ctx.fillRect(targetPixelX - 18, groundY - 45, 36, 45);
-      // Castle Battlements
-      ctx.fillRect(targetPixelX - 22, groundY - 55, 12, 12);
-      ctx.fillRect(targetPixelX - 6, groundY - 55, 12, 12);
-      ctx.fillRect(targetPixelX + 10, groundY - 55, 12, 12);
-      // Target flag
+      // Axes
       ctx.strokeStyle = '#94a3b8';
-      ctx.lineWidth = 3;
+      ctx.lineWidth = 1.5;
       ctx.beginPath();
-      ctx.moveTo(targetPixelX, groundY - 55);
-      ctx.lineTo(targetPixelX, groundY - 80);
+      ctx.moveTo(padL, padT);
+      ctx.lineTo(padL, h - padB);
+      ctx.lineTo(w - padR, h - padB);
       ctx.stroke();
 
-      ctx.fillStyle = '#ef4444';
-      ctx.beginPath();
-      ctx.moveTo(targetPixelX, groundY - 80);
-      ctx.lineTo(targetPixelX + 20, groundY - 70);
-      ctx.lineTo(targetPixelX, groundY - 60);
-      ctx.fill();
-
-      // Target text indicator
-      ctx.fillStyle = '#1e293b';
+      // Axis labels
+      ctx.fillStyle = '#475569';
       ctx.font = 'bold 12px sans-serif';
-      ctx.fillText(`城堡 (${targetX}m)`, targetPixelX, groundY - 88);
+      ctx.textAlign = 'right';
+      ctx.fillText('距離 (m)', padL - 10, padT + 5);
+      ctx.textAlign = 'center';
+      ctx.fillText('橡皮筋初速度 (m/s)', (w - padL - padR) / 2 + padL, h - 12);
 
-      // 4. Past Trails
-      ctx.setLineDash([4, 4]);
-      trails.forEach((tr, idx) => {
-        ctx.strokeStyle = 'rgba(2, 132, 199, 0.4)';
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        tr.forEach((pt, pIdx) => {
-          if (pIdx === 0) ctx.moveTo(pt.x, pt.y);
-          else ctx.lineTo(pt.x, pt.y);
-        });
-        ctx.stroke();
-      });
-
-      // Current live trail
-      if (isFlying && currentTrail.length > 0) {
-        ctx.setLineDash([]);
-        ctx.strokeStyle = '#f97316';
-        ctx.lineWidth = 3;
-        ctx.beginPath();
-        currentTrail.forEach((pt, pIdx) => {
-          if (pIdx === 0) ctx.moveTo(pt.x, pt.y);
-          else ctx.lineTo(pt.x, pt.y);
-        });
-        ctx.stroke();
-      }
-      ctx.setLineDash([]);
-
-      // 5. Stylized Catapult
-      drawCatapult(catapultX, catapultY, currentAngle);
-
-      // 6. Flying Ball
-      if (isFlying) {
-        ctx.fillStyle = ammoType === 'wood' ? '#d97706' : '#475569';
-        ctx.beginPath();
-        ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.strokeStyle = '#ffffff';
-        ctx.lineWidth = 1.5;
-        ctx.stroke();
-      }
-
-      // 7. Particles
-      for (let i = particles.length - 1; i >= 0; i--) {
-        const p = particles[i];
-        p.x += p.vx;
-        p.y += p.vy;
-        p.vy += 0.2;
-        p.alpha -= 0.03;
-
-        if (p.alpha <= 0) {
-          particles.splice(i, 1);
-        } else {
-          ctx.save();
-          ctx.globalAlpha = p.alpha;
-          ctx.fillStyle = p.color;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-          ctx.fill();
-          ctx.restore();
-        }
-      }
-    }
-
-    function drawCatapult(cx, cy, angle) {
-      // Wooden base frame
-      ctx.fillStyle = '#78350f';
-      ctx.fillRect(cx - 30, cy + 5, 60, 10);
-
-      // Wheels
-      ctx.fillStyle = '#451a03';
-      ctx.beginPath();
-      ctx.arc(cx - 20, cy + 15, 8, 0, Math.PI * 2);
-      ctx.arc(cx + 20, cy + 15, 8, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Fulcrum triangular support (支點支架)
-      ctx.fillStyle = '#92400e';
-      ctx.beginPath();
-      ctx.moveTo(cx, cy - 20);
-      ctx.lineTo(cx - 15, cy + 5);
-      ctx.lineTo(cx + 15, cy + 5);
-      ctx.fill();
-
-      // Lever arm (投射槓桿臂)
-      const rad = (angle * Math.PI) / 180;
-      const armLength = 40;
-      const pivotX = cx;
-      const pivotY = cy - 18;
-
-      ctx.save();
-      ctx.translate(pivotX, pivotY);
-      ctx.rotate(-rad);
-
-      // Arm stick
-      ctx.fillStyle = '#b45309';
-      ctx.fillRect(-10, -4, armLength, 8);
-
-      // Basket / Cup (盛彈籃)
-      ctx.fillStyle = '#f59e0b';
-      ctx.beginPath();
-      ctx.arc(armLength - 5, -8, 8, 0, Math.PI);
-      ctx.fill();
-
-      ctx.restore();
-
-      // Fulcrum Pin (支點軸心)
-      ctx.fillStyle = '#facc15';
-      ctx.beginPath();
-      ctx.arc(pivotX, pivotY, 4, 0, Math.PI * 2);
-      ctx.fill();
-    }
-
-    // Record Data to Table & Mini Chart
-    function recordCurrentData() {
-      if (currentDistance <= 0 && !isFlying) {
-        alert("請先點擊「🚀 發射投石戰車！」進行一次發射，再記錄數據喔！");
+      if (chartRecords.length === 0) {
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = '14px sans-serif';
+        ctx.fillText('目前無數據，可點選右上角「載入課堂實測範例數據」或從彈道模擬器帶入', w / 2, h / 2);
         return;
       }
 
-      recordCounter++;
-      const dist = currentDistance > 0 ? currentDistance : parseFloat(document.getElementById("hudDistance").innerText);
-      const hMax = maxFlightHeight > 0 ? maxFlightHeight : parseFloat(document.getElementById("hudHeight").innerText);
-      const isHit = Math.abs(dist - targetX) <= 2.2;
+      // Sort by speed
+      const sorted = [...chartRecords].sort((a, b) => a.speed - b.speed);
+      const maxDist = Math.max(70, ...sorted.map(s => s.dist));
+      const minSpeed = Math.min(...sorted.map(s => s.speed));
+      const maxSpeed = Math.max(...sorted.map(s => s.speed));
 
-      let speedLabel = "中 (雙條細)";
-      if (currentSpeed <= 11) speedLabel = "弱 (單條細)";
-      else if (currentSpeed <= 17) speedLabel = "中 (雙條細)";
-      else if (currentSpeed <= 22) speedLabel = "強 (單條粗)";
-      else speedLabel = "特強 (雙條粗)";
+      // Draw Grid lines
+      ctx.strokeStyle = '#e2e8f0';
+      ctx.lineWidth = 1;
+      for (let d = 10; d <= maxDist; d += 10) {
+        const y = (h - padB) - (d / maxDist) * (h - padB - padT);
+        ctx.beginPath();
+        ctx.moveTo(padL, y);
+        ctx.lineTo(w - padR, y);
+        ctx.stroke();
 
-      const recordItem = {
-        id: recordCounter,
-        speed: currentSpeed,
-        speedLabel: speedLabel,
-        angle: currentAngle,
-        ammo: ammoType === 'wood' ? '輕木球' : '重石塊',
-        dist: parseFloat(dist.toFixed(1)),
-        height: parseFloat(hMax.toFixed(1)),
-        hit: isHit ? '🎯 命中城堡！' : `差 ${Math.abs(dist - targetX).toFixed(1)}m`
-      };
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = '10px sans-serif';
+        ctx.textAlign = 'right';
+        ctx.fillText(`${d}m`, padL - 8, y + 4);
+      }
 
-      records.push(recordItem);
-      renderTable();
-      drawChart();
+      // Draw Curve
+      ctx.strokeStyle = '#0284c7';
+      ctx.lineWidth = 3.5;
+      ctx.beginPath();
+      sorted.forEach((pt, i) => {
+        const x = padL + (i / Math.max(1, sorted.length - 1)) * (w - padL - padR);
+        const y = (h - padB) - (pt.dist / maxDist) * (h - padB - padT);
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      });
+      ctx.stroke();
+
+      // Draw Data Dots & Labels
+      sorted.forEach((pt, i) => {
+        const x = padL + (i / Math.max(1, sorted.length - 1)) * (w - padL - padR);
+        const y = (h - padB) - (pt.dist / maxDist) * (h - padB - padT);
+
+        ctx.fillStyle = '#f97316';
+        ctx.beginPath();
+        ctx.arc(x, y, 6, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        ctx.fillStyle = '#0f172a';
+        ctx.font = 'bold 11px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(`${pt.dist}m`, x, y - 10);
+        ctx.fillText(`${pt.name}`, x, h - padB + 18);
+        ctx.fillStyle = '#64748b';
+        ctx.fillText(`${pt.speed}m/s`, x, h - padB + 32);
+      });
+
+      renderChartTable();
     }
 
-    function renderTable() {
-      const tbody = document.getElementById("tableBody");
-      tbody.innerHTML = "";
-      records.forEach(r => {
-        const tr = document.createElement("tr");
+    function renderChartTable() {
+      const tbody = document.getElementById('chartTableBody');
+      tbody.innerHTML = '';
+      chartRecords.forEach((r, idx) => {
+        const tr = document.createElement('tr');
         tr.innerHTML = `
-          <td><strong>#${r.id}</strong></td>
-          <td>${r.speedLabel} (${r.speed} m/s)</td>
+          <td><strong>${r.id}</strong></td>
+          <td>${r.name}</td>
+          <td>${r.speed} m/s</td>
           <td>${r.angle}°</td>
-          <td>${r.ammo}</td>
-          <td style="color:var(--primary); font-weight:800;">${r.dist} m</td>
-          <td>${r.height} m</td>
-          <td><span style="font-weight:700; color:${r.hit.includes('命中') ? '#16a34a':'#dc2626'}">${r.hit}</span></td>
+          <td style="font-weight:700; color:#0284c7;">${r.dist} m</td>
+          <td><button class="chip-btn" style="color:#ef4444;" onclick="removeChartData(${idx})">刪除</button></td>
         `;
         tbody.appendChild(tr);
       });
     }
 
-    function clearRecordTable() {
-      records = [];
-      recordCounter = 0;
-      renderTable();
-      drawChart();
+    function removeChartData(idx) {
+      chartRecords.splice(idx, 1);
+      renderChart();
     }
 
-    // Mini Live Line Chart using HTML5 Canvas
-    function drawChart() {
-      const c = document.getElementById("chartCanvas");
-      const cBox = document.getElementById("chartBox");
-      c.width = cBox.clientWidth * window.devicePixelRatio;
-      c.height = cBox.clientHeight * window.devicePixelRatio;
-      const cCtx = c.getContext("2d");
-      cCtx.scale(window.devicePixelRatio, window.devicePixelRatio);
+    function clearChartData() {
+      chartRecords = [];
+      renderChart();
+    }
 
-      const w = cBox.clientWidth;
-      const h = cBox.clientHeight;
-      cCtx.clearRect(0, 0, w, h);
+    function loadDefaultExperimentData() {
+      chartRecords = [
+        { id: 'A', name: '單條細 (弱)', speed: 10, angle: 45, dist: 10.2 },
+        { id: 'B', name: '雙條細 (中)', speed: 15, angle: 45, dist: 22.9 },
+        { id: 'C', name: '單條粗 (強)', speed: 20, angle: 45, dist: 40.8 },
+        { id: 'D', name: '雙條粗 (特強)', speed: 25, angle: 45, dist: 63.8 }
+      ];
+      renderChart();
+    }
 
-      if (records.length === 0) {
-        cCtx.fillStyle = '#94a3b8';
-        cCtx.font = '13px sans-serif';
-        cCtx.textAlign = 'center';
-        cCtx.fillText('點擊「➕ 記錄到實驗表」後，將在此即時繪製發射速度與距離折線圖', w / 2, h / 2);
+    function addRecordFromSim() {
+      if (totalD <= 0) {
+        alert('請先點擊「立即發射投石」進行拋射實驗再帶入紀錄！');
         return;
       }
+      let nameDesc = '自訂強度';
+      if (simSpeed <= 11) nameDesc = '單條細 (弱)';
+      else if (simSpeed <= 16) nameDesc = '雙條細 (中)';
+      else if (simSpeed <= 21) nameDesc = '單條粗 (強)';
+      else nameDesc = '雙條粗 (特強)';
 
-      // Draw Grid Axes
-      const pad = 40;
-      cCtx.strokeStyle = '#cbd5e1';
-      cCtx.lineWidth = 1;
-      cCtx.beginPath();
-      cCtx.moveTo(pad, pad / 2);
-      cCtx.lineTo(pad, h - pad);
-      cCtx.lineTo(w - pad / 2, h - pad);
-      cCtx.stroke();
-
-      // Sort points by speed
-      const sorted = [...records].sort((a, b) => a.speed - b.speed);
-      const maxDist = Math.max(50, ...records.map(r => r.dist));
-
-      // Plot Points
-      cCtx.strokeStyle = '#0284c7';
-      cCtx.lineWidth = 3;
-      cCtx.beginPath();
-
-      sorted.forEach((r, idx) => {
-        const x = pad + (idx / Math.max(1, sorted.length - 1)) * (w - pad * 2);
-        const y = (h - pad) - (r.dist / maxDist) * (h - pad * 1.5);
-
-        if (idx === 0) cCtx.moveTo(x, y);
-        else cCtx.lineTo(x, y);
+      chartRecords.push({
+        id: String.fromCharCode(65 + chartRecords.length % 26),
+        name: nameDesc,
+        speed: simSpeed,
+        angle: simAngle,
+        dist: parseFloat(totalD.toFixed(1))
       });
-      cCtx.stroke();
 
-      // Draw dots & labels
-      sorted.forEach((r, idx) => {
-        const x = pad + (idx / Math.max(1, sorted.length - 1)) * (w - pad * 2);
-        const y = (h - pad) - (r.dist / maxDist) * (h - pad * 1.5);
-
-        cCtx.fillStyle = '#f97316';
-        cCtx.beginPath();
-        cCtx.arc(x, y, 5, 0, Math.PI * 2);
-        cCtx.fill();
-
-        cCtx.fillStyle = '#1e293b';
-        cCtx.font = 'bold 11px sans-serif';
-        cCtx.textAlign = 'center';
-        cCtx.fillText(`${r.dist}m`, x, y - 8);
-        cCtx.fillText(`${r.speed}m/s`, x, h - pad + 15);
-      });
+      alert(`✅ 已將【${nameDesc} - ${simSpeed}m/s】試射落點 ${totalD.toFixed(1)}m 成功帶入數據圖表！`);
+      renderChart();
     }
 
     // ============================================================
-    // TAB NAVIGATION & MARKDOWN LOADER
+    // MODULE 3: DRAWING CANVAS (APPENDIX 2 STUDIO)
     // ============================================================
-    function switchTab(tab) {
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active'));
+    const dCanvas = document.getElementById("designCanvas");
+    const dCtx = dCanvas.getContext("2d");
+    let isDrawing = false;
+    let currentColor = '#0284c7';
+    let currentLineWidth = 2;
+    let activeStamp = null;
 
-      if (tab === 'game') {
-        document.querySelectorAll('.tab-btn')[0].classList.add('active');
-        document.getElementById('gameSection').classList.add('active');
-        drawScene();
-      } else if (tab === 'lesson') {
-        document.querySelectorAll('.tab-btn')[1].classList.add('active');
-        document.getElementById('lessonSection').classList.add('active');
-        loadLessonPlan();
-      } else if (tab === 'worksheets') {
-        document.querySelectorAll('.tab-btn')[2].classList.add('active');
-        document.getElementById('worksheetsSection').classList.add('active');
-        loadWorksheets();
+    function initDesignCanvas() {
+      dCtx.fillStyle = '#ffffff';
+      dCtx.fillRect(0, 0, dCanvas.width, dCanvas.height);
+
+      // Light background grid
+      dCtx.strokeStyle = '#f1f5f9';
+      dCtx.lineWidth = 1;
+      for (let x = 0; x < dCanvas.width; x += 30) {
+        dCtx.beginPath(); dCtx.moveTo(x, 0); dCtx.lineTo(x, dCanvas.height); dCtx.stroke();
       }
+      for (let y = 0; y < dCanvas.height; y += 30) {
+        dCtx.beginPath(); dCtx.moveTo(0, y); dCtx.lineTo(dCanvas.width, y); dCtx.stroke();
+      }
+
+      // Draw faint baseline guide
+      dCtx.strokeStyle = '#e2e8f0';
+      dCtx.lineWidth = 2;
+      dCtx.setLineDash([5, 5]);
+      dCtx.beginPath();
+      dCtx.moveTo(100, 420);
+      dCtx.lineTo(900, 420);
+      dCtx.stroke();
+      dCtx.setLineDash([]);
+
+      dCtx.fillStyle = '#94a3b8';
+      dCtx.font = '12px sans-serif';
+      dCtx.fillText('【 投石機底座放置基準線 】', 120, 412);
     }
 
-    let fullPlanMarkdown = "";
+    dCanvas.addEventListener('mousedown', (e) => {
+      const rect = dCanvas.getBoundingClientRect();
+      const scaleX = dCanvas.width / rect.width;
+      const scaleY = dCanvas.height / rect.height;
+      const x = (e.clientX - rect.left) * scaleX;
+      const y = (e.clientY - rect.top) * scaleY;
 
-    async function fetchPlan() {
-      if (fullPlanMarkdown) return fullPlanMarkdown;
-      try {
-        const res = await fetch('./plans/投石戰車-國小科技資訊教育教案.md');
-        if (!res.ok) throw new Error();
-        fullPlanMarkdown = await res.text();
-        return fullPlanMarkdown;
-      } catch (e) {
-        return "";
-      }
-    }
+      if (activeStamp) {
+        // Stamp stamp on canvas
+        dCtx.fillStyle = '#dc2626';
+        dCtx.beginPath();
+        dCtx.arc(x, y, 6, 0, Math.PI * 2);
+        dCtx.fill();
 
-    async function loadLessonPlan() {
-      const container = document.getElementById("planContent");
-      const md = await fetchPlan();
-      if (!md) {
-        container.innerHTML = `<p style="color:#ef4444;">⚠️ 請以 Web 伺服器或於 GitHub Pages 瀏覽以載入教案全文。</p>`;
+        dCtx.fillStyle = '#1e293b';
+        dCtx.font = 'bold 14px sans-serif';
+        dCtx.fillText(activeStamp, x + 10, y + 5);
+        activeStamp = null;
         return;
       }
 
-      // Configure Mermaid renderer in Marked
-      mermaid.initialize({ startOnLoad: false, theme: 'default' });
-      const renderer = new marked.Renderer();
-      const origCode = renderer.code.bind(renderer);
-      renderer.code = function(code, lang) {
-        if (lang === 'mermaid') return `<div class="mermaid">${code}</div>`;
-        return origCode(code, lang);
+      isDrawing = true;
+      dCtx.strokeStyle = currentColor;
+      dCtx.lineWidth = currentLineWidth;
+      dCtx.lineCap = 'round';
+      dCtx.lineJoin = 'round';
+      dCtx.beginPath();
+      dCtx.moveTo(x, y);
+    });
+
+    dCanvas.addEventListener('mousemove', (e) => {
+      if (!isDrawing) return;
+      const rect = dCanvas.getBoundingClientRect();
+      const scaleX = dCanvas.width / rect.width;
+      const scaleY = dCanvas.height / rect.height;
+      dCtx.lineTo((e.clientX - rect.left) * scaleX, (e.clientY - rect.top) * scaleY);
+      dCtx.stroke();
+    });
+
+    window.addEventListener('mouseup', () => { isDrawing = false; });
+
+    function setDrawColor(col, el) {
+      currentColor = col;
+      activeStamp = null;
+      document.querySelectorAll('.color-dot').forEach(d => d.classList.remove('active'));
+      el.classList.add('active');
+    }
+
+    function setDrawLineWidth(w, el) {
+      currentLineWidth = w;
+      document.querySelectorAll('.tool-group:nth-child(2) .stamp-btn').forEach(b => b.classList.remove('active'));
+      el.classList.add('active');
+    }
+
+    function setStamp(stampText) {
+      activeStamp = stampText;
+      alert(`已選擇標記印章「${stampText}」，請在畫布上想標註的位置點一下滑鼠左鍵即可蓋上！`);
+    }
+
+    function setEraser() {
+      currentColor = '#ffffff';
+      currentLineWidth = 16;
+    }
+
+    function clearDrawCanvas() {
+      if (confirm('確定要清空繪圖板重新繪製嗎？')) {
+        initDesignCanvas();
+      }
+    }
+
+    function downloadDrawing() {
+      const link = document.createElement('a');
+      link.download = '投石戰車-結構設計圖.png';
+      link.href = dCanvas.toDataURL('image/png');
+      link.click();
+    }
+
+    function copyDrawingToWorksheet() {
+      const dataUrl = dCanvas.toDataURL('image/png');
+      const img = document.getElementById('wsCanvasImg');
+      img.src = dataUrl;
+      img.style.display = 'block';
+      document.getElementById('wsCanvasPlaceholder').style.display = 'none';
+      alert('🎉 恭喜！設計圖已成功同步貼入【附錄二：我們的設計圖！！！】中！');
+      switchMainTab('worksheets');
+      switchWsTab('ws2');
+    }
+
+    // ============================================================
+    // MODULE 4: WORKSHEET LOGIC & AUTO CALCULATIONS
+    // ============================================================
+    function calcWs1Avg(row) {
+      const v1 = parseFloat(document.getElementById(`ws1_r${row}_1`).value) || 0;
+      const v2 = parseFloat(document.getElementById(`ws1_r${row}_2`).value) || 0;
+      const v3 = parseFloat(document.getElementById(`ws1_r${row}_3`).value) || 0;
+      const valid = [v1, v2, v3].filter(v => v > 0);
+      if (valid.length > 0) {
+        const avg = (valid.reduce((a, b) => a + b, 0) / valid.length).toFixed(1);
+        document.getElementById(`ws1_avg_${row}`).innerText = `${avg} m`;
+      }
+    }
+
+    function calcWs3Avg(row) {
+      const v1 = parseFloat(document.getElementById(`ws3_r${row}_1`).value) || 0;
+      const v2 = parseFloat(document.getElementById(`ws3_r${row}_2`).value) || 0;
+      const v3 = parseFloat(document.getElementById(`ws3_r${row}_3`).value) || 0;
+      const valid = [v1, v2, v3].filter(v => v > 0);
+      if (valid.length > 0) {
+        const avg = (valid.reduce((a, b) => a + b, 0) / valid.length).toFixed(1);
+        document.getElementById(`ws3_avg_${row}`).innerText = `${avg} cm`;
+      }
+    }
+
+    let rubricScores = [5, 4, 5, 4];
+    function rateStar(aspectIdx, e) {
+      const star = e.target.closest('.star-item');
+      if (!star) return;
+      const val = parseInt(star.getAttribute('data-v'));
+      rubricScores[aspectIdx - 1] = val;
+      document.getElementById(`scoreText${aspectIdx}`).innerText = val;
+
+      const group = star.parentElement;
+      group.querySelectorAll('.star-item').forEach(s => {
+        const sv = parseInt(s.getAttribute('data-v'));
+        s.classList.toggle('active', sv <= val);
+      });
+
+      const total = rubricScores.reduce((a, b) => a + b, 0);
+      document.getElementById('totalRubricScore').innerText = total;
+    }
+
+    function fillExampleAnswers() {
+      // WS1
+      document.getElementById('ws1_class').value = '2';
+      document.getElementById('ws1_group').value = '4';
+      document.getElementById('ws1_leader').value = '何羽喬';
+      document.getElementById('ws1_members').value = '周昱芊、陳新宜、許睿芯';
+      document.getElementById('ws1_r1_1').value = '10.2';
+      document.getElementById('ws1_r1_2').value = '10.1';
+      document.getElementById('ws1_r1_3').value = '10.3';
+      calcWs1Avg(1);
+      document.getElementById('ws1_r2_1').value = '22.9';
+      document.getElementById('ws1_r2_2').value = '23.0';
+      document.getElementById('ws1_r2_3').value = '22.8';
+      calcWs1Avg(2);
+      document.getElementById('ws1_r3_1').value = '40.8';
+      document.getElementById('ws1_r3_2').value = '40.7';
+      document.getElementById('ws1_r3_3').value = '40.9';
+      calcWs1Avg(3);
+      document.getElementById('ws1_r4_1').value = '63.7';
+      document.getElementById('ws1_r4_2').value = '63.8';
+      document.getElementById('ws1_r4_3').value = '63.6';
+      calcWs1Avg(4);
+      document.getElementById('ws1_q2_ans').value = '更換彈性更強的粗橡皮筋、增加橡皮筋並聯條數，或將橡皮筋拉伸至更長的距離以蓄積更多位能。';
+      document.getElementById('ws1_q3_ans').value = '預計使用雙條粗橡皮筋並聯固定於前支架，獲得最大出速度。';
+
+      // WS2
+      document.getElementById('ws2_class').value = '2';
+      document.getElementById('ws2_group').value = '4';
+      document.getElementById('ws2_title').value = '破雲神威投石戰車';
+      document.getElementById('ws2_author').value = '何羽喬';
+
+      // WS3
+      document.getElementById('ws3_class').value = '2';
+      document.getElementById('ws3_group').value = '4';
+      document.getElementById('ws3_recorder').value = '陳新宜';
+      document.getElementById('ws3_shooter').value = '許睿芯';
+      document.getElementById('ws3_r1_1').value = '185';
+      document.getElementById('ws3_r1_2').value = '192';
+      document.getElementById('ws3_r1_3').value = '188';
+      calcWs3Avg(1);
+      document.getElementById('ws3_r2_1').value = '320';
+      document.getElementById('ws3_r2_2').value = '315';
+      document.getElementById('ws3_r2_3').value = '325';
+      calcWs3Avg(2);
+      document.getElementById('ws3_r3_1').value = '450';
+      document.getElementById('ws3_r3_2').value = '462';
+      document.getElementById('ws3_r3_3').value = '456';
+      calcWs3Avg(3);
+      document.getElementById('ws3_r4_1').value = '580';
+      document.getElementById('ws3_r4_2').value = '595';
+      document.getElementById('ws3_r4_3').value = '585';
+      calcWs3Avg(4);
+
+      // WS4
+      document.getElementById('ws4_rater_group').value = '4';
+      document.getElementById('ws4_target_group').value = '2';
+      document.getElementById('ws4_judge').value = '周昱芊';
+
+      alert('✨ 已填入國小六年級標準實作範例數據！');
+    }
+
+    function saveWorksheetData() {
+      const data = {
+        ws1_class: document.getElementById('ws1_class').value,
+        ws1_group: document.getElementById('ws1_group').value,
+        ws1_leader: document.getElementById('ws1_leader').value,
+        ws1_members: document.getElementById('ws1_members').value,
+        ws1_q2: document.getElementById('ws1_q2_ans').value,
+        ws1_q3: document.getElementById('ws1_q3_ans').value,
+        ws4_comments: document.getElementById('ws4_comments').value
       };
-
-      container.innerHTML = marked.parse(md, { renderer });
-      try {
-        await mermaid.run({ nodes: container.querySelectorAll('.mermaid') });
-      } catch (err) {}
+      localStorage.setItem('catapult_ws_data', JSON.stringify(data));
+      alert('💾 學習單作答資料已成功暫存於本機瀏覽器中！重新整理頁面也不會遺失。');
     }
 
-    async function loadWorksheets() {
-      const container = document.getElementById("worksheetsContent");
-      const md = await fetchPlan();
-      if (!md) return;
+    // ============================================================
+    // FLOATING TEACHING TIMER
+    // ============================================================
+    let timerSeconds = 480; // 8 mins default
+    let timerRunning = false;
+    let timerInterval = null;
 
-      // Extract Appendix section (## 7. 附錄)
-      const appendixIdx = md.indexOf("## 7. 附錄");
-      let appendixMd = appendixIdx !== -1 ? md.substring(appendixIdx) : md;
-
-      container.innerHTML = marked.parse(appendixMd);
+    function formatTime(s) {
+      const m = Math.floor(s / 60);
+      const sec = s % 60;
+      return `${String(m).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
     }
 
-    // Dark/Light Theme
+    function toggleTimer() {
+      const btn = document.getElementById('timerControlBtn');
+      if (timerRunning) {
+        clearInterval(timerInterval);
+        timerRunning = false;
+        btn.innerText = '繼續';
+      } else {
+        timerRunning = true;
+        btn.innerText = '暫停';
+        timerInterval = setInterval(() => {
+          if (timerSeconds > 0) {
+            timerSeconds--;
+            document.getElementById('timerDisplay').innerText = formatTime(timerSeconds);
+          } else {
+            clearInterval(timerInterval);
+            timerRunning = false;
+            btn.innerText = '結束';
+            playTone(880, 'sine', 0.6);
+            alert('⏰ 叮咚！課堂實作/討論時間到囉！');
+          }
+        }, 1000);
+      }
+    }
+
+    function resetTimer(mins) {
+      clearInterval(timerInterval);
+      timerRunning = false;
+      timerSeconds = mins * 60;
+      document.getElementById('timerDisplay').innerText = formatTime(timerSeconds);
+      document.getElementById('timerControlBtn').innerText = '開始';
+    }
+
+    // Theme Switcher
     function toggleTheme() {
-      const cur = document.body.getAttribute("data-theme");
-      const next = cur === "dark" ? "light" : "dark";
-      document.body.setAttribute("data-theme", next);
-      localStorage.setItem("theme", next);
+      const cur = document.body.getAttribute('data-theme');
+      const next = cur === 'dark' ? 'light' : 'dark';
+      document.body.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
     }
-    if (localStorage.getItem("theme") === "dark") {
-      document.body.setAttribute("data-theme", "dark");
+    if (localStorage.getItem('theme') === 'dark') {
+      document.body.setAttribute('data-theme', 'dark');
     }
 
-    // Initial setup
-    window.onload = () => {
-      resizeCanvas();
-      drawScene();
-      drawChart();
-    };
+    // Init on load
+    window.addEventListener('DOMContentLoaded', () => {
+      drawCatapult();
+      drawSeesaw();
+      renderChart();
+      initDesignCanvas();
+
+      // Restore saved data if any
+      const saved = localStorage.getItem('catapult_ws_data');
+      if (saved) {
+        try {
+          const d = JSON.parse(saved);
+          if (d.ws1_class) document.getElementById('ws1_class').value = d.ws1_class;
+          if (d.ws1_group) document.getElementById('ws1_group').value = d.ws1_group;
+          if (d.ws1_leader) document.getElementById('ws1_leader').value = d.ws1_leader;
+          if (d.ws1_members) document.getElementById('ws1_members').value = d.ws1_members;
+          if (d.ws1_q2) document.getElementById('ws1_q2_ans').value = d.ws1_q2;
+          if (d.ws1_q3) document.getElementById('ws1_q3_ans').value = d.ws1_q3;
+          if (d.ws4_comments) document.getElementById('ws4_comments').value = d.ws4_comments;
+        } catch (e) {}
+      }
+    });
   </script>
 </body>
 </html>
