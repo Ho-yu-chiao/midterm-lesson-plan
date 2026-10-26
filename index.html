@@ -839,18 +839,15 @@
          ======================================================== -->
     <section id="labsSection" class="view-section">
       
-      <!-- 互動實驗室三大核心活動依序全景導覽 (置頂快速定位列) -->
-      <div class="sub-tabs" style="position:sticky; top:65px; z-index:90; background:var(--bg-card); padding:0.65rem; border-radius:var(--radius-md); box-shadow:0 3px 12px rgba(0,0,0,0.08); margin-bottom:1.5rem; display:flex; gap:0.6rem; flex-wrap:wrap; border:1px solid var(--border-color); align-items:center;">
-        <span style="font-weight:800; font-size:0.9rem; color:var(--primary); display:flex; align-items:center; gap:0.3rem;">
-          🔬 核心實驗直達：
-        </span>
-        <button class="sub-tab-btn active" data-lab="seesaw" onclick="scrollToLab('seesaw')">
-          ⚖️ 活動一：槓桿原理與翹翹板平衡
+      <!-- 互動實驗室三大核心活動分頁（點一種出現一種） -->
+      <div class="sub-tabs">
+        <button class="sub-tab-btn active" data-lab="seesaw" onclick="switchLabTab('seesaw')">
+          ⚖️ 活動一：槓桿原理與翹翹板平衡模擬
         </button>
-        <button class="sub-tab-btn" data-lab="catapult" onclick="scrollToLab('catapult')">
-          🎯 活動二：投石車發射場與彈道模擬
+        <button class="sub-tab-btn" data-lab="catapult" onclick="switchLabTab('catapult')">
+          🎯 活動二：投石車彈道模擬與城堡挑戰
         </button>
-        <button class="sub-tab-btn" data-lab="chart" onclick="scrollToLab('chart')">
+        <button class="sub-tab-btn" data-lab="chart" onclick="switchLabTab('chart')">
           📊 活動四：數據統計折線圖分析
         </button>
       </div>
@@ -858,7 +855,7 @@
       <!-- ====================================================
            LAB 1: LEVER & SEESAW LAB (ACTIVITY 1)
            ==================================================== -->
-      <div id="seesawLab" class="lab-content active" style="display:block; margin-bottom:3rem; scroll-margin-top:130px;">
+      <div id="seesawLab" class="lab-content active" style="display:block;">
         <div class="lab-layout">
           <div class="canvas-wrap">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
@@ -999,10 +996,10 @@
           </div>
         </div>
 
-        <!-- 依序前往活動二導引按鈕 -->
+        <!-- 前往活動二切換按鈕 -->
         <div style="margin-top:1.5rem; text-align:center;">
-          <button class="pill-btn" style="background:linear-gradient(135deg, #0284c7 0%, #0369a1 100%); color:white; font-size:1.02rem; padding:0.65rem 1.6rem; box-shadow:0 4px 14px rgba(2,132,199,0.3); cursor:pointer;" onclick="scrollToLab('catapult')">
-            ⬇️ 接續學習：活動二「投石車數位發射場與彈道模擬」 🎯
+          <button class="pill-btn" style="background:linear-gradient(135deg, #0284c7 0%, #0369a1 100%); color:white; font-size:1rem; padding:0.6rem 1.5rem; box-shadow:0 4px 12px rgba(2,132,199,0.25); cursor:pointer;" onclick="switchLabTab('catapult'); window.scrollTo({top:0, behavior:'smooth'});">
+            👉 前往【活動二：投石車數位發射場】🎯
           </button>
         </div>
       </div>
@@ -1010,7 +1007,7 @@
       <!-- ====================================================
            LAB 2: CATAPULT TRAJECTORY SIMULATION (ACTIVITY 2)
            ==================================================== -->
-      <div id="catapultLab" class="lab-content" style="display:block; margin-bottom:3rem; scroll-margin-top:130px; border-top:3px dashed #bae6fd; padding-top:2rem;">
+      <div id="catapultLab" class="lab-content" style="display:none;">
         <div class="lab-layout">
           <!-- Canvas Area -->
           <div class="canvas-wrap">
@@ -1118,10 +1115,13 @@
           </div>
         </div>
 
-        <!-- 依序前往活動四導引按鈕 -->
-        <div style="margin-top:1.5rem; text-align:center;">
-          <button class="pill-btn" style="background:linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%); color:white; font-size:1.02rem; padding:0.65rem 1.6rem; box-shadow:0 4px 14px rgba(124,58,237,0.3); cursor:pointer;" onclick="scrollToLab('chart')">
-            ⬇️ 接續學習：活動四「數據統計折線圖分析」 📊
+        <!-- 活動切換導引按鈕 -->
+        <div style="margin-top:1.5rem; text-align:center; display:flex; justify-content:center; gap:1rem; flex-wrap:wrap;">
+          <button class="chip-btn" style="background:#64748b; color:white; font-size:0.92rem; padding:0.5rem 1.2rem;" onclick="switchLabTab('seesaw'); window.scrollTo({top:0, behavior:'smooth'});">
+            👈 返回【活動一：槓桿平衡】
+          </button>
+          <button class="pill-btn" style="background:linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%); color:white; font-size:1rem; padding:0.6rem 1.5rem; box-shadow:0 4px 12px rgba(124,58,237,0.25); cursor:pointer;" onclick="switchLabTab('chart'); window.scrollTo({top:0, behavior:'smooth'});">
+            👉 前往【活動四：數據統計折線圖分析】📊
           </button>
         </div>
       </div>
@@ -1129,7 +1129,7 @@
       <!-- ====================================================
            LAB 3: DATA VISUALIZATION CHART (ACTIVITY 4)
            ==================================================== -->
-      <div id="chartLab" class="lab-content" style="display:block; scroll-margin-top:130px; border-top:3px dashed #ddd6fe; padding-top:2rem;">
+      <div id="chartLab" class="lab-content" style="display:none;">
         <div class="card">
           <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
             <div>
@@ -2776,22 +2776,25 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
 
       if (tabId === 'labs') {
-        drawSeesaw();
-        drawCatapult();
-        renderChart();
+        const activeBtn = document.querySelector('#labsSection .sub-tab-btn.active');
+        const activeKey = activeBtn ? activeBtn.getAttribute('data-lab') : 'seesaw';
+        switchLabTab(activeKey);
       } else if (tabId === 'studio') {
         initDesignCanvas();
       }
     }
 
-    // 2. LAB SUB-TAB SWITCHER & SMOOTH SCROLL (三大核心活動依序全景呈現)
-    function scrollToLab(labKey) {
+    // 2. LAB SUB-TAB SWITCHER（點一種出現一種）
+    function switchLabTab(labKey) {
       document.querySelectorAll('#labsSection .sub-tab-btn').forEach(b => {
         b.classList.toggle('active', b.getAttribute('data-lab') === labKey);
       });
+      document.querySelectorAll('#labsSection .lab-content').forEach(c => {
+        c.style.display = 'none';
+      });
       const target = document.getElementById(labKey + 'Lab');
       if (target) {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        target.style.display = 'block';
       }
       if (labKey === 'seesaw') {
         drawSeesaw();
@@ -2802,8 +2805,8 @@
       }
     }
 
-    function switchLabTab(labKey) {
-      scrollToLab(labKey);
+    function scrollToLab(labKey) {
+      switchLabTab(labKey);
     }
 
     // 3. STEP ACCORDION TOGGLE
@@ -2831,26 +2834,21 @@
     const cCanvas = document.getElementById("catapultCanvas");
     const cCtx = cCanvas.getContext("2d");
 
-    let simAngle = 45;
     let simSpeed = 18;
-    let simAmmo = 'wood'; // 'wood' | 'stone'
-    let bandCount = 2; // 1, 2, 3
-    let targetDist = 36; // meters
+    let simAngle = 45;
+    let targetDist = 35.0; // meters
+    let simAmmo = 'wood';
+    let bandCount = 2; // 1, 2, 3 條橡皮筋
     let isFiring = false;
-
-    // 投石車桿子動態物理狀態 (預備、下壓蓄力、彈力揮擊、拋射飛行)
-    let catapultArmAngle = 145; // 預備狀態仰角 145° (桿子朝後上方自然翹起)
-    let armPhase = 'idle'; // 'idle' | 'pressing' | 'snapping' | 'launched'
-
+    let ballPos = { x: 70, y: 350, vx: 0, vy: 0 };
     let flightT = 0;
-    let ballPos = { x: 0, y: 0, vx: 0, vy: 0 };
-    let curTrail = [];
-    let ballTrails = [];
     let peakH = 0;
     let totalD = 0;
+    let ballTrails = [];
+    let curTrail = [];
 
-    const groundBaseY = 350;
-    const catOriginX = 90;
+    const groundBaseY = 360;
+    const catOriginX = 70;
     const catOriginY = 350;
     const pxPerMeter = 11.5;
 
@@ -2924,314 +2922,132 @@
         cCtx.stroke();
       }
 
-      // ==========================================================
-      // REALISTIC BENCHTOP CATAPULT (與實體教具完全一致：無輪底座、梯形立板、一體成型圓形置物環、黃色橡皮筋)
-      // ==========================================================
-      const pivotX = catOriginX;
-      const pivotY = groundBaseY - 58;
-
-      // 1. 平貼地面長條底盤 (Base Tray Frame - 無輪子，平貼地面)
-      const baseLeft = catOriginX - 44;
-      const baseRight = catOriginX + 44;
-      const baseH = 14;
-
-      // 底板本體 (淺色椴木夾板)
-      cCtx.fillStyle = '#ebd9c2';
-      cCtx.fillRect(baseLeft, groundBaseY - 6, 88, 6);
-      cCtx.strokeStyle = '#78350f';
-      cCtx.lineWidth = 1.5;
-      cCtx.strokeRect(baseLeft, groundBaseY - 6, 88, 6);
-
-      // 左端板 (後擋板，帶卡榫孔)
-      cCtx.fillStyle = '#ebd9c2';
-      cCtx.fillRect(baseLeft, groundBaseY - baseH, 7, baseH);
-      cCtx.strokeRect(baseLeft, groundBaseY - baseH, 7, baseH);
-      cCtx.fillStyle = '#5c3a1b';
-      cCtx.fillRect(baseLeft + 2, groundBaseY - baseH + 3, 3, 8); // 卡榫孔
-
-      // 右端板 (前擋板，帶橡皮筋固定插槽)
-      cCtx.fillStyle = '#ebd9c2';
-      cCtx.fillRect(baseRight - 7, groundBaseY - baseH, 7, baseH);
-      cCtx.strokeRect(baseRight - 7, groundBaseY - baseH, 7, baseH);
-      cCtx.fillStyle = '#5c3a1b';
-      cCtx.fillRect(baseRight - 5, groundBaseY - baseH + 3, 3, 8); // 卡榫孔
-
-      // 2. 梯形主塔立板 (A-Frame Tower Plate - 淺椴木色，上窄下寬等腰梯形)
-      cCtx.fillStyle = '#f5efe6';
-      cCtx.beginPath();
-      cCtx.moveTo(pivotX - 9, groundBaseY - 72);  // 頂端左
-      cCtx.lineTo(pivotX + 9, groundBaseY - 72);  // 頂端右
-      cCtx.lineTo(catOriginX + 22, groundBaseY - 6); // 底端右
-      cCtx.lineTo(catOriginX - 22, groundBaseY - 6); // 底端左
-      cCtx.closePath();
-      cCtx.fill();
-      cCtx.strokeStyle = '#78350f';
-      cCtx.lineWidth = 2;
-      cCtx.stroke();
-
-      // 梯形塔身上的兩個長方形雷切卡榫孔 (上下兩孔，如實物照片)
-      cCtx.fillStyle = '#5c3a1b';
-      cCtx.fillRect(pivotX - 4, groundBaseY - 66, 8, 4); // 上卡榫孔
-      cCtx.fillRect(pivotX - 5, groundBaseY - 45, 10, 4); // 下卡榫孔
-
-      // 頂部旋轉軸支點 (Pivot Pin)
+      // Draw Wooden Catapult Base (最初的經典投石車木座與輪軸)
       cCtx.fillStyle = '#78350f';
+      cCtx.fillRect(catOriginX - 28, groundBaseY - 18, 56, 12);
+      cCtx.fillStyle = '#451a03';
       cCtx.beginPath();
-      cCtx.arc(pivotX, pivotY, 3.5, 0, Math.PI * 2);
+      cCtx.arc(catOriginX - 18, groundBaseY - 6, 8, 0, Math.PI * 2);
+      cCtx.arc(catOriginX + 18, groundBaseY - 6, 8, 0, Math.PI * 2);
       cCtx.fill();
 
-      // 3. 投射長臂 (Throwing Arm - 斜貫穿頂部的木質長臂槓桿)
-      const currentRad = (catapultArmAngle * Math.PI) / 180;
-      const longArmLen = 54;  // 長臂長度 (末端為圓形置物環)
-      const shortArmLen = 28; // 短臂長度 (末端掛橡皮筋)
+      // Catapult Arm (發射桿臂)
+      const armRad = (simAngle * Math.PI) / 180;
+      const armLen = 38;
+      const armEndX = catOriginX + Math.cos(armRad) * armLen;
+      const armEndY = (groundBaseY - 16) - Math.sin(armRad) * armLen;
 
-      // 長臂末端 (圓形置物環) 座標
-      const armEndX = pivotX + Math.cos(currentRad) * longArmLen;
-      const armEndY = pivotY - Math.sin(currentRad) * longArmLen;
-
-      // 短臂末端 (掛橡皮筋處) 座標 (方向與長臂完全相反)
-      const hookX = pivotX - Math.cos(currentRad) * shortArmLen;
-      const hookY = pivotY + Math.sin(currentRad) * shortArmLen;
-
-      // 繪製木質槓桿桿身 (照片中的細長淺椴木直桿)
-      cCtx.strokeStyle = '#d6b88d';
-      cCtx.lineWidth = 4.5;
+      cCtx.strokeStyle = '#b45309';
+      cCtx.lineWidth = 6;
       cCtx.lineCap = 'round';
       cCtx.beginPath();
-      cCtx.moveTo(hookX, hookY);
+      cCtx.moveTo(catOriginX - 6, groundBaseY - 16);
       cCtx.lineTo(armEndX, armEndY);
       cCtx.stroke();
-      cCtx.strokeStyle = '#78350f';
-      cCtx.lineWidth = 1;
-      cCtx.stroke();
 
-      // 短臂末端橡皮筋孔卡榫
-      cCtx.fillStyle = '#5c3a1b';
-      cCtx.beginPath();
-      cCtx.arc(hookX, hookY, 2.5, 0, Math.PI * 2);
-      cCtx.fill();
-
-      // 4. 長臂頂端：木質圓形置物環 (Wooden Ring - 雷切一體成型置物環，如照片)
-      cCtx.save();
-      cCtx.translate(armEndX, armEndY);
-      cCtx.rotate(-currentRad);
-      // 外木環
-      cCtx.fillStyle = '#ebd9c2';
-      cCtx.beginPath();
-      cCtx.arc(0, 0, 9.5, 0, Math.PI * 2);
-      cCtx.fill();
-      cCtx.strokeStyle = '#78350f';
-      cCtx.lineWidth = 2;
-      cCtx.stroke();
-      // 內孔洞 (置球空間)
-      cCtx.fillStyle = '#f8fafc';
-      cCtx.beginPath();
-      cCtx.arc(0, 0, 5.5, 0, Math.PI * 2);
-      cCtx.fill();
-      cCtx.strokeStyle = '#78350f';
-      cCtx.lineWidth = 1;
-      cCtx.stroke();
-      cCtx.restore();
-
-      // 5. 黃色彈力橡皮筋 (Yellow Rubber Bands - 連接短臂末端 hook 與右前方端板)
-      const anchorX = baseRight - 4;
-      const anchorY = groundBaseY - 8;
+      // 橡皮筋彈力繩 (Yellow Rubber Bands - 依 1, 2, 3 條呈現)
       cCtx.strokeStyle = '#facc15';
-
       if (bandCount === 1) {
         cCtx.lineWidth = 2.5;
         cCtx.beginPath();
-        cCtx.moveTo(anchorX, anchorY);
-        cCtx.lineTo(hookX, hookY);
+        cCtx.moveTo(catOriginX - 22, groundBaseY - 16);
+        cCtx.lineTo(catOriginX + armLen * 0.4, groundBaseY - 16);
         cCtx.stroke();
       } else if (bandCount === 2) {
         cCtx.lineWidth = 2;
         [-2, 2].forEach(off => {
           cCtx.beginPath();
-          cCtx.moveTo(anchorX, anchorY + off);
-          cCtx.lineTo(hookX, hookY + off);
+          cCtx.moveTo(catOriginX - 22, groundBaseY - 16 + off);
+          cCtx.lineTo(catOriginX + armLen * 0.4, groundBaseY - 16 + off);
           cCtx.stroke();
         });
       } else {
         cCtx.lineWidth = 1.8;
         [-3, 0, 3].forEach(off => {
           cCtx.beginPath();
-          cCtx.moveTo(anchorX, anchorY + off);
-          cCtx.lineTo(hookX, hookY + off);
+          cCtx.moveTo(catOriginX - 22, groundBaseY - 16 + off);
+          cCtx.lineTo(catOriginX + armLen * 0.4, groundBaseY - 16 + off);
           cCtx.stroke();
         });
       }
 
-      // 6. 投射物 (Ammo / Ball)
-      // 若尚未正式發射離環（未發射、下壓中、或揮擊中），球始終嵌套在置物環內！
-      if (!isFiring || armPhase === 'pressing' || armPhase === 'snapping') {
+      // Draw Ball (木球 / 重石)
+      if (!isFiring) {
         ballPos.x = armEndX;
         ballPos.y = armEndY;
       }
-
-      if (simAmmo === 'wood') {
-        // 十字卡榫組裝木球 (如照片教具配件)
-        cCtx.fillStyle = '#d97706';
-        cCtx.beginPath();
-        cCtx.arc(ballPos.x, ballPos.y, 6.5, 0, Math.PI * 2);
-        cCtx.fill();
-        cCtx.strokeStyle = '#78350f';
-        cCtx.lineWidth = 1.2;
-        cCtx.stroke();
-        // 木球十字卡榫縫線
-        cCtx.beginPath();
-        cCtx.moveTo(ballPos.x - 5, ballPos.y); cCtx.lineTo(ballPos.x + 5, ballPos.y);
-        cCtx.moveTo(ballPos.x, ballPos.y - 5); cCtx.lineTo(ballPos.x, ballPos.y + 5);
-        cCtx.stroke();
-      } else {
-        // 重石球
-        cCtx.fillStyle = '#475569';
-        cCtx.beginPath();
-        cCtx.arc(ballPos.x, ballPos.y, 7.5, 0, Math.PI * 2);
-        cCtx.fill();
-        cCtx.strokeStyle = '#1e293b';
-        cCtx.lineWidth = 1.2;
-        cCtx.stroke();
-      }
-
-      // 下壓蓄力時的動態引導提示文字 (教育情境直觀呈現)
-      if (armPhase === 'pressing') {
-        cCtx.fillStyle = '#dc2626';
-        cCtx.font = 'bold 12px sans-serif';
-        cCtx.textAlign = 'center';
-        cCtx.fillText('⬇️ 手指下壓桿子蓄力中 (拉伸橡皮筋)', pivotX - 30, groundBaseY - 85);
-      } else if (armPhase === 'snapping') {
-        cCtx.fillStyle = '#eab308';
-        cCtx.font = 'bold 12px sans-serif';
-        cCtx.textAlign = 'center';
-        cCtx.fillText('⚡ 橡皮筋強力回彈釋放！', pivotX + 20, groundBaseY - 85);
-      }
+      cCtx.fillStyle = simAmmo === 'wood' ? '#d97706' : '#475569';
+      cCtx.beginPath();
+      cCtx.arc(ballPos.x, ballPos.y, simAmmo === 'wood' ? 7 : 8, 0, Math.PI * 2);
+      cCtx.fill();
+      cCtx.strokeStyle = '#78350f';
+      cCtx.lineWidth = 1;
+      cCtx.stroke();
     }
 
-    // 發射投石車：先下壓桿子蓄力（拉伸橡皮筋），再藉由橡皮筋彈力猛烈向前揮擊拋出木球！
+    // 最初的流暢即時拋體物理發射
     function fireCatapult() {
       if (isFiring) return;
       isFiring = true;
       document.getElementById('hitNotice').style.display = 'none';
 
-      // 階段 1：手指下壓桿子 (Press down arm to stretch rubber bands)
-      armPhase = 'pressing';
-      playTone(220, 'triangle', 0.28);
+      playTone(320, 'triangle', 0.2);
 
-      const pressStartAngle = 145;
-      const pressTargetAngle = 175; // 下壓靠近地面
-      const pressDuration = 320; // 320 毫秒下壓蓄力過程
-      const pressStartTime = performance.now();
+      const rad = (simAngle * Math.PI) / 180;
+      const massFactor = simAmmo === 'wood' ? 1.0 : 0.92;
+      const effectiveV = simSpeed * massFactor;
 
-      function animatePress(now) {
-        const elapsed = now - pressStartTime;
-        const progress = Math.min(1, elapsed / pressDuration);
-        const ease = progress < 0.5 ? 2 * progress * progress : -1 + (4 - 2 * progress) * progress;
-        catapultArmAngle = pressStartAngle + (pressTargetAngle - pressStartAngle) * ease;
+      ballPos.x = catOriginX + Math.cos(rad) * 38;
+      ballPos.y = (groundBaseY - 16) - Math.sin(rad) * 38;
+      ballPos.vx = effectiveV * Math.cos(rad);
+      ballPos.vy = -effectiveV * Math.sin(rad);
+
+      curTrail = [{ x: ballPos.x, y: ballPos.y }];
+      flightT = 0;
+      peakH = 0;
+
+      const g = 9.8;
+      const dt = 0.028;
+
+      const anim = setInterval(() => {
+        flightT += dt;
+        ballPos.x += ballPos.vx * pxPerMeter * dt;
+        ballPos.vy += g * dt;
+        ballPos.y += ballPos.vy * pxPerMeter * dt;
+
+        curTrail.push({ x: ballPos.x, y: ballPos.y });
+
+        const altM = Math.max(0, (groundBaseY - ballPos.y) / pxPerMeter);
+        if (altM > peakH) peakH = altM;
+        const curDistM = (ballPos.x - catOriginX) / pxPerMeter;
+
+        document.getElementById('hudHeight').innerHTML = `${peakH.toFixed(1)} <small style="font-size:0.75rem">m</small>`;
+        document.getElementById('hudDistance').innerHTML = `${Math.max(0, curDistM).toFixed(1)} <small style="font-size:0.75rem">m</small>`;
+
         drawCatapult();
 
-        if (progress < 1) {
-          requestAnimationFrame(animatePress);
-        } else {
-          // 下壓完成，短暫蓄力 40ms 後彈力猛烈爆發！
-          setTimeout(startSnapRelease, 40);
-        }
-      }
+        // Check if ball hits the ground or castle
+        if (ballPos.y >= groundBaseY - 4) {
+          clearInterval(anim);
+          isFiring = false;
+          ballPos.y = groundBaseY - 4;
+          totalD = curDistM;
+          ballTrails.push([...curTrail]);
 
-      requestAnimationFrame(animatePress);
-
-      // 階段 2：橡皮筋彈力瞬間回彈，帶動槓桿極速揮擊！
-      function startSnapRelease() {
-        armPhase = 'snapping';
-        playTone(520, 'sawtooth', 0.12);
-
-        const snapStartAngle = 175;
-        const snapTargetAngle = simAngle; // 揮到設定之發射仰角 (例如 45 度)
-        const snapDuration = 85; // 85 毫秒極速揮臂釋放！
-        const snapStartTime = performance.now();
-
-        function animateSnap(now) {
-          const elapsed = now - snapStartTime;
-          const progress = Math.min(1, elapsed / snapDuration);
-          // 極速向前揮擊
-          catapultArmAngle = snapStartAngle - (snapStartAngle - snapTargetAngle) * progress;
-          drawCatapult();
-
-          if (progress < 1) {
-            requestAnimationFrame(animateSnap);
+          // Check Castle Hit
+          if (Math.abs(totalD - targetDist) <= 2.2) {
+            const notice = document.getElementById('hitNotice');
+            notice.style.display = 'block';
+            notice.innerHTML = `🎯 <strong>正中目標城堡！</strong>（距離誤差僅 ${Math.abs(totalD - targetDist).toFixed(2)} 公尺，太神了！）`;
+            notice.className = 'alert-box alert-tip';
+            playTone(587.33, 'triangle', 0.15);
+            setTimeout(() => playTone(880, 'sine', 0.3), 160);
           } else {
-            catapultArmAngle = snapTargetAngle;
-            startBallFlight();
+            playTone(90, 'sine', 0.1);
           }
-        }
-
-        requestAnimationFrame(animateSnap);
-      }
-
-      // 階段 3：木球離環，依照出速度與發射仰角進行拋體飛行！
-      function startBallFlight() {
-        armPhase = 'launched';
-        playTone(380, 'sine', 0.16);
-
-        const rad = (simAngle * Math.PI) / 180;
-        const massFactor = simAmmo === 'wood' ? 1.0 : 0.92;
-        const effectiveV = simSpeed * massFactor;
-
-        // 木球從置物環當前位置飛出
-        ballPos.x = pivotX + Math.cos(rad) * 54;
-        ballPos.y = pivotY - Math.sin(rad) * 54;
-        ballPos.vx = effectiveV * Math.cos(rad);
-        ballPos.vy = -effectiveV * Math.sin(rad);
-
-        curTrail = [{ x: ballPos.x, y: ballPos.y }];
-        flightT = 0;
-        peakH = 0;
-
-        const g = 9.8;
-        const dt = 0.028;
-
-        const anim = setInterval(() => {
-          flightT += dt;
-          ballPos.x += ballPos.vx * pxPerMeter * dt;
-          ballPos.vy += g * dt;
-          ballPos.y += ballPos.vy * pxPerMeter * dt;
-
-          curTrail.push({ x: ballPos.x, y: ballPos.y });
-
-          const altM = Math.max(0, (groundBaseY - ballPos.y) / pxPerMeter);
-          if (altM > peakH) peakH = altM;
-          const curDistM = (ballPos.x - catOriginX) / pxPerMeter;
-
-          document.getElementById('hudHeight').innerHTML = `${peakH.toFixed(1)} <small style="font-size:0.75rem">m</small>`;
-          document.getElementById('hudDistance').innerHTML = `${Math.max(0, curDistM).toFixed(1)} <small style="font-size:0.75rem">m</small>`;
-
           drawCatapult();
-
-          // 判斷木球著地或擊中城堡
-          if (ballPos.y >= groundBaseY - 4) {
-            clearInterval(anim);
-            isFiring = false;
-            armPhase = 'idle';
-            catapultArmAngle = 145; // 桿子平緩平復回預備位置
-            ballPos.y = groundBaseY - 4;
-            totalD = curDistM;
-            ballTrails.push([...curTrail]);
-
-            // 判斷命中城堡
-            if (Math.abs(totalD - targetDist) <= 2.2) {
-              const notice = document.getElementById('hitNotice');
-              notice.style.display = 'block';
-              notice.innerHTML = `🎯 <strong>正中目標城堡！</strong>（距離誤差僅 ${Math.abs(totalD - targetDist).toFixed(2)} 公尺，太神了！）`;
-              notice.className = 'alert-box alert-tip';
-              playTone(587.33, 'triangle', 0.15);
-              setTimeout(() => playTone(880, 'sine', 0.3), 160);
-            } else {
-              playTone(90, 'sine', 0.1);
-            }
-            drawCatapult();
-          }
-        }, dt * 1000);
-      }
+        }
+      }, dt * 1000);
     }
 
     function onSpeedChange(val) {
@@ -3299,8 +3115,6 @@
       ballTrails = [];
       curTrail = [];
       isFiring = false;
-      armPhase = 'idle';
-      catapultArmAngle = 145;
       document.getElementById('hudDistance').innerHTML = `0.0 <small style="font-size:0.75rem">m</small>`;
       document.getElementById('hudHeight').innerHTML = `0.0 <small style="font-size:0.75rem">m</small>`;
       drawCatapult();
