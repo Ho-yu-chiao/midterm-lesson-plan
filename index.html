@@ -987,18 +987,17 @@
                 ⚙️ 拋射變因調節面板
               </h4>
 
-              <!-- Initial Speed / Rubber Band Strength -->
+              <!-- Rubber Band Quantity / Initial Speed -->
               <div class="control-group">
                 <div class="control-label">
-                  <span>橡皮筋彈性強度 (初速度)</span>
-                  <span id="speedValText" style="color:var(--secondary); font-family:'JetBrains Mono';">15 m/s (雙條細)</span>
+                  <span>橡皮筋數量 (拋射初速度)</span>
+                  <span id="speedValText" style="color:var(--secondary); font-family:'JetBrains Mono';">兩條橡皮筋 (18 m/s)</span>
                 </div>
-                <input type="range" id="speedSlider" class="control-slider" min="8" max="28" value="15" step="1" oninput="onSpeedChange(this.value)">
+                <input type="range" id="speedSlider" class="control-slider" min="8" max="28" value="18" step="1" oninput="onSpeedChange(this.value)">
                 <div class="preset-chips">
-                  <button class="chip-btn" onclick="setSpeedPreset(10, '單條細 (弱)')">單條細 10m/s</button>
-                  <button class="chip-btn active" onclick="setSpeedPreset(15, '雙條細 (中)')">雙條細 15m/s</button>
-                  <button class="chip-btn" onclick="setSpeedPreset(20, '單條粗 (強)')">單條粗 20m/s</button>
-                  <button class="chip-btn" onclick="setSpeedPreset(25, '雙條粗 (特強)')">雙條粗 25m/s</button>
+                  <button class="chip-btn" id="btnBand1" onclick="setBandPreset(1, 10)">一條橡皮筋 (10m/s)</button>
+                  <button class="chip-btn active" id="btnBand2" onclick="setBandPreset(2, 18)">兩條橡皮筋 (18m/s)</button>
+                  <button class="chip-btn" id="btnBand3" onclick="setBandPreset(3, 25)">三條橡皮筋 (25m/s)</button>
                 </div>
               </div>
 
@@ -1739,11 +1738,11 @@
           <div style="background:var(--bg-subtle); border:1px solid var(--border-color); border-radius:12px; padding:1.25rem;">
             <h4 style="color:#0369a1; margin-bottom:0.75rem; font-size:1.05rem;">📦 零件清單盤點表</h4>
             <ul style="padding-left:1.2rem; font-size:0.88rem; line-height:2; color:var(--text-main);">
-              <li><strong>三角側板主支架</strong> $\times 2$（左右對稱，含軸心孔與卡榫孔）</li>
-              <li><strong>投射長臂</strong> $\times 1$（長端為盛彈圓環，另一端具多重卡榫孔）</li>
-              <li><strong>底座橫向固定樑</strong> $\times 4$（連結左右側板，確保底盤水平與抗扭剛性）</li>
-              <li><strong>中央軸心固定板</strong> $\times 2$（具圓孔，支撐投射臂旋轉運作）</li>
-              <li><strong>底盤側輪 / 圓形固定盤</strong> $\times 4$（具卡口槽，增強側向穩定度）</li>
+              <li><strong>三角側板主支架</strong> 2 個（左右對稱，含軸心孔與定位卡榫孔）</li>
+              <li><strong>投射長臂</strong> 1 個（長端為盛彈杓槽，另一端具多重卡榫孔）</li>
+              <li><strong>底座橫向固定樑</strong> 4 個（連結左右側板，確保底盤水平與抗扭剛性）</li>
+              <li><strong>中央軸心固定板</strong> 2 個（圓形扣片，支撐投射臂旋轉運作）</li>
+              <li><strong>底盤側輪 / 圓形固定盤</strong> 4 個（卡榫輪片，提供車身著地穩定度）</li>
             </ul>
             <div class="alert-box alert-tip" style="margin-top:1rem; font-size:0.82rem; padding:0.65rem 0.85rem;">
               <div>💡</div>
@@ -1919,11 +1918,14 @@
           </div>
         </div>
 
-        <!-- HTML5 Drawing Canvas -->
-        <div style="background:white; border:2px dashed #93c5fd; border-radius:var(--radius-md); position:relative; overflow:hidden;">
-          <canvas id="designCanvas" width="1000" height="520" style="width:100%; height:auto; display:block; cursor:crosshair;"></canvas>
-          <div style="position:absolute; bottom:12px; right:15px; color:#94a3b8; font-size:0.8rem; pointer-events:none;">
-            投石戰車 結構設計畫布 ｜ 支援直尺、正方形、圓形、三角形幾何輔助 ｜ 點選上方標記印章可蓋印四要素 ｜ 支援 ↩️ 上一步
+        <!-- HTML5 Drawing Canvas (Dual Layers: Background Grid + Active Drawing) -->
+        <div id="canvasContainer" style="background:white; border:2px dashed #93c5fd; border-radius:var(--radius-md); position:relative; overflow:hidden; width:100%; aspect-ratio:1000/520;">
+          <!-- Layer 1: 底層網格方格（永不被橡皮擦破壞） -->
+          <canvas id="designGridCanvas" width="1000" height="520" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:1;"></canvas>
+          <!-- Layer 2: 頂層透明繪圖畫布（手繪、幾何形狀、印章、橡皮擦） -->
+          <canvas id="designCanvas" width="1000" height="520" style="position:absolute; top:0; left:0; width:100%; height:100%; display:block; cursor:crosshair; z-index:2;"></canvas>
+          <div style="position:absolute; bottom:12px; right:15px; color:#94a3b8; font-size:0.8rem; pointer-events:none; z-index:3;">
+            投石戰車 結構設計畫布 ｜ 橡皮擦不傷底層方格 ｜ 支援直尺、正方形、圓形、三角形 ｜ 支援 ↩️ 上一步
           </div>
         </div>
       </div>
@@ -2389,17 +2391,17 @@
             <tbody>
               <tr>
                 <td><strong>1</strong></td>
-                <td style="text-align:left; font-weight:700;">📖 完整教案本文</td>
-                <td>全五節教學設計與評量規準</td>
-                <td>Markdown (.md)</td>
+                <td style="text-align:left; font-weight:700;">📖 完整教案本文（最新 15 頁修訂版）</td>
+                <td>全五節教學設計、架構圖與學習單</td>
+                <td>PDF (15頁) / MD</td>
                 <td>
-                  <button class="chip-btn" style="background:#0284c7; color:white;" onclick="switchMainTab('plan')">
-                    開啟教案導覽
-                  </button>
+                  <a href="./assets/國小科技資訊教育教案-投石戰車.pdf" target="_blank" class="chip-btn" style="background:#0284c7; color:white; text-decoration:none; display:inline-block;">
+                    開啟教案 PDF ↗
+                  </a>
                 </td>
                 <td>
-                  <a href="./plans/投石戰車-國小科技資訊教育教案.md" download="投石戰車-國小科技資訊教育教案.md" class="chip-btn" style="background:#10b981; color:white; text-decoration:none; display:inline-block;">
-                    下載教案檔案
+                  <a href="./assets/國小科技資訊教育教案-投石戰車.pdf" download="國小科技資訊教育教案-投石戰車.pdf" class="chip-btn" style="background:#10b981; color:white; text-decoration:none; display:inline-block;">
+                    下載教案 PDF
                   </a>
                 </td>
               </tr>
@@ -2491,10 +2493,12 @@
       <!-- Detail Card 1: 完整教案 -->
       <div class="card">
         <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px dashed var(--border-fun); padding-bottom:0.75rem; margin-bottom:1rem; flex-wrap:wrap; gap:0.5rem;">
-          <h3 style="color:#0369a1; font-size:1.25rem;">📖 資源一：國小科技資訊教育教案《投石戰車》完整本文</h3>
-          <div style="display:flex; gap:0.4rem;">
-            <button class="chip-btn" style="background:#0284c7; color:white;" onclick="switchMainTab('plan')">👀 開啟教案全景導覽</button>
-            <a href="./plans/投石戰車-國小科技資訊教育教案.md" download="投石戰車-國小科技資訊教育教案.md" class="chip-btn" style="background:#10b981; color:white; text-decoration:none;">📥 下載教案 Markdown 原檔</a>
+          <h3 style="color:#0369a1; font-size:1.25rem;">📖 資源一：國小科技資訊教育教案《投石戰車》完整本文（15 頁修訂版）</h3>
+          <div style="display:flex; gap:0.4rem; flex-wrap:wrap;">
+            <a href="./assets/國小科技資訊教育教案-投石戰車.pdf" target="_blank" class="chip-btn" style="background:#0284c7; color:white; text-decoration:none;">👀 新分頁開啟完整 PDF ↗</a>
+            <a href="./assets/國小科技資訊教育教案-投石戰車.pdf" download="國小科技資訊教育教案-投石戰車.pdf" class="chip-btn" style="background:#10b981; color:white; text-decoration:none;">📥 下載教案 PDF 原檔</a>
+            <button class="chip-btn" style="background:#6366f1; color:white;" onclick="switchMainTab('plan')">📋 教案全景導覽</button>
+            <a href="./plans/投石戰車-國小科技資訊教育教案.md" download="投石戰車-國小科技資訊教育教案.md" class="chip-btn" style="background:#64748b; color:white; text-decoration:none;">📝 下載 Markdown 檔</a>
           </div>
         </div>
         <div style="background:#ffffff; border:1px solid var(--border-color); border-radius:10px; padding:1.25rem; font-size:0.9rem; line-height:1.8;">
@@ -2525,7 +2529,7 @@
           </div>
           <div style="font-size:0.9rem; line-height:1.8;">
             <p><strong>雷切規格說明</strong>：</p>
-            <p>採用 3mm 椴木合板切割，內含三角側板 $\times 2$、長臂 $\times 1$、橫樑 $\times 4$、軸心板 $\times 2$ 與側盤 $\times 4$。各接合卡榫具備防呆定位孔設計，能直接匯入各廠牌雷切機軟體排版輸出。</p>
+            <p>採用 3mm 椴木合板切割，內含三角側板 2 個、長臂 1 個、橫樑 4 個、軸心板 2 個與側盤 4 個。各接合卡榫具備防呆定位孔設計，能直接匯入各廠牌雷切機軟體排版輸出。</p>
           </div>
         </div>
       </div>
@@ -2753,7 +2757,8 @@
     const cCanvas = document.getElementById("catapultCanvas");
     const cCtx = cCanvas.getContext("2d");
 
-    let simSpeed = 15;
+    let simSpeed = 18;
+    let bandCount = 2; // 1: 一條, 2: 兩條, 3: 三條
     let simAngle = 45;
     let targetDist = 35.0; // meters
     let simAmmo = 'wood';
@@ -2766,7 +2771,7 @@
     let curTrail = [];
 
     const groundBaseY = 360;
-    const catOriginX = 70;
+    const catOriginX = 75;
     const catOriginY = 350;
     const pxPerMeter = 11.5;
 
@@ -2840,46 +2845,166 @@
         cCtx.stroke();
       }
 
-      // Draw Wooden Catapult Base
-      cCtx.fillStyle = '#78350f';
-      cCtx.fillRect(catOriginX - 28, groundBaseY - 18, 56, 12);
-      cCtx.fillStyle = '#451a03';
+      // ==========================================================
+      // REALISTIC LASER-CUT CATAPULT (與我們設計的實體模型完全一致)
+      // ==========================================================
+      
+      // 1. 車輪 (Wheels - 2 個前後木輪，外輪片與中心軸心)
+      const wheelRadius = 11;
+      const frontWheelX = catOriginX + 24;
+      const backWheelX = catOriginX - 24;
+      const wheelY = groundBaseY - wheelRadius;
+
+      [backWheelX, frontWheelX].forEach(wx => {
+        // 輪片本體 (椴木板黃褐色)
+        cCtx.fillStyle = '#d97706';
+        cCtx.beginPath();
+        cCtx.arc(wx, wheelY, wheelRadius, 0, Math.PI * 2);
+        cCtx.fill();
+        cCtx.strokeStyle = '#78350f';
+        cCtx.lineWidth = 2;
+        cCtx.stroke();
+
+        // 輪圈側盤卡榫裝飾孔 (四個定位點)
+        cCtx.fillStyle = '#92400e';
+        for (let a = 0; a < Math.PI * 2; a += Math.PI / 2) {
+          cCtx.beginPath();
+          cCtx.arc(wx + Math.cos(a) * 6, wheelY + Math.sin(a) * 6, 1.2, 0, Math.PI * 2);
+          cCtx.fill();
+        }
+
+        // 中心固定軸心
+        cCtx.fillStyle = '#451a03';
+        cCtx.beginPath();
+        cCtx.arc(wx, wheelY, 3, 0, Math.PI * 2);
+        cCtx.fill();
+      });
+
+      // 2. 底盤橫樑 (Chassis Base Beam)
+      cCtx.fillStyle = '#b45309';
+      cCtx.fillRect(catOriginX - 34, groundBaseY - 21, 68, 8);
+      cCtx.strokeStyle = '#78350f';
+      cCtx.lineWidth = 1.5;
+      cCtx.strokeRect(catOriginX - 34, groundBaseY - 21, 68, 8);
+
+      // 3. 前端立柱 (橡皮筋固定前柱)
+      const postX = catOriginX + 22;
+      const postTopY = groundBaseY - 40;
+      cCtx.fillStyle = '#92400e';
+      cCtx.fillRect(postX, postTopY, 6, 20);
+      cCtx.fillRect(postX - 2, postTopY - 2, 10, 4); // 頂部掛橫樑
+
+      // 4. 雷切 A 字型三角側板 (Triangular Side Frames)
+      const pivotX = catOriginX;
+      const pivotY = groundBaseY - 52;
+
+      // 側板外三角
+      cCtx.fillStyle = '#f59e0b';
       cCtx.beginPath();
-      cCtx.arc(catOriginX - 18, groundBaseY - 6, 8, 0, Math.PI * 2);
-      cCtx.arc(catOriginX + 18, groundBaseY - 6, 8, 0, Math.PI * 2);
+      cCtx.moveTo(pivotX, pivotY - 4);
+      cCtx.lineTo(catOriginX - 26, groundBaseY - 21);
+      cCtx.lineTo(catOriginX + 26, groundBaseY - 21);
+      cCtx.closePath();
+      cCtx.fill();
+      cCtx.strokeStyle = '#92400e';
+      cCtx.lineWidth = 2.5;
+      cCtx.stroke();
+
+      // 三角側板內部「輕量化三角鏤空」（完全比照雷切圖紙樣式）
+      cCtx.fillStyle = '#eff6ff'; // 透出背景天藍色
+      cCtx.beginPath();
+      cCtx.moveTo(pivotX, pivotY + 10);
+      cCtx.lineTo(catOriginX - 14, groundBaseY - 24);
+      cCtx.lineTo(catOriginX + 14, groundBaseY - 24);
+      cCtx.closePath();
+      cCtx.fill();
+      cCtx.strokeStyle = '#b45309';
+      cCtx.lineWidth = 1;
+      cCtx.stroke();
+
+      // 5. 支點金屬旋轉軸 (Pivot Pin)
+      cCtx.fillStyle = '#78350f';
+      cCtx.beginPath();
+      cCtx.arc(pivotX, pivotY, 5, 0, Math.PI * 2);
+      cCtx.fill();
+      cCtx.fillStyle = '#fef3c7';
+      cCtx.beginPath();
+      cCtx.arc(pivotX, pivotY, 2.5, 0, Math.PI * 2);
       cCtx.fill();
 
-      // Catapult Arm
+      // 6. 投射長臂 (Throwing Arm - 依據仰角旋轉的木質槓桿)
       const armRad = (simAngle * Math.PI) / 180;
-      const armLen = 38;
-      const armEndX = catOriginX + Math.cos(armRad) * armLen;
-      const armEndY = (groundBaseY - 16) - Math.sin(armRad) * armLen;
+      const longArmLen = 46;  // 長臂 (抗力臂)
+      const shortArmLen = 14; // 短臂 (施力臂)
 
+      // 長臂末端 (盛彈杓) 座標
+      const armEndX = pivotX - Math.cos(armRad) * longArmLen;
+      const armEndY = pivotY + Math.sin(armRad) * (isFiring ? -longArmLen : longArmLen * 0.45);
+      
+      // 短臂掛勾座標
+      const hookX = pivotX + Math.cos(armRad) * shortArmLen;
+      const hookY = pivotY + Math.sin(armRad) * 8;
+
+      // 繪製槓桿主木臂
       cCtx.strokeStyle = '#b45309';
       cCtx.lineWidth = 6;
       cCtx.lineCap = 'round';
       cCtx.beginPath();
-      cCtx.moveTo(catOriginX - 6, groundBaseY - 16);
+      cCtx.moveTo(hookX, hookY);
       cCtx.lineTo(armEndX, armEndY);
       cCtx.stroke();
 
-      // Rubber band string
-      cCtx.strokeStyle = '#dc2626';
-      cCtx.lineWidth = 2;
-      cCtx.beginPath();
-      cCtx.moveTo(catOriginX - 22, groundBaseY - 16);
-      cCtx.lineTo(catOriginX + armLen * 0.4, groundBaseY - 16);
-      cCtx.stroke();
+      // 繪製長臂末端「雷切盛彈杓盒 (Ammo Basket)」
+      cCtx.fillStyle = '#d97706';
+      cCtx.fillRect(armEndX - 6, armEndY - 8, 14, 10);
+      cCtx.strokeStyle = '#78350f';
+      cCtx.lineWidth = 1.5;
+      cCtx.strokeRect(armEndX - 6, armEndY - 8, 14, 10);
 
-      // Draw Ball
+      // 7. 動態橡皮筋 (Rubber Bands - 連接前柱與短臂掛勾，依 bandCount 數量繪製)
+      const bandStartY = postTopY + 2;
+      const bandStartX = postX + 3;
+      cCtx.strokeStyle = '#dc2626';
+
+      if (bandCount === 1) {
+        // 一條橡皮筋
+        cCtx.lineWidth = 2.5;
+        cCtx.beginPath();
+        cCtx.moveTo(bandStartX, bandStartY);
+        cCtx.lineTo(hookX, hookY);
+        cCtx.stroke();
+      } else if (bandCount === 2) {
+        // 兩條橡皮筋 (平行排列)
+        cCtx.lineWidth = 2;
+        [-2, 2].forEach(offset => {
+          cCtx.beginPath();
+          cCtx.moveTo(bandStartX, bandStartY + offset);
+          cCtx.lineTo(hookX, hookY + offset);
+          cCtx.stroke();
+        });
+      } else {
+        // 三條橡皮筋 (三線並聯)
+        cCtx.lineWidth = 1.8;
+        [-3, 0, 3].forEach(offset => {
+          cCtx.beginPath();
+          cCtx.moveTo(bandStartX, bandStartY + offset);
+          cCtx.lineTo(hookX, hookY + offset);
+          cCtx.stroke();
+        });
+      }
+
+      // 8. 投射物 (Ammo / Ball)
       if (!isFiring) {
-        ballPos.x = armEndX;
-        ballPos.y = armEndY;
+        ballPos.x = armEndX + 1;
+        ballPos.y = armEndY - 3;
       }
       cCtx.fillStyle = simAmmo === 'wood' ? '#d97706' : '#475569';
       cCtx.beginPath();
-      cCtx.arc(ballPos.x, ballPos.y, simAmmo === 'wood' ? 7 : 8, 0, Math.PI * 2);
+      cCtx.arc(ballPos.x, ballPos.y, simAmmo === 'wood' ? 6 : 7.5, 0, Math.PI * 2);
       cCtx.fill();
+      cCtx.strokeStyle = '#1e293b';
+      cCtx.lineWidth = 1;
+      cCtx.stroke();
     }
 
     function fireCatapult() {
@@ -2946,21 +3071,34 @@
 
     function onSpeedChange(val) {
       simSpeed = parseFloat(val);
-      let desc = '自訂強度';
-      if (simSpeed <= 11) desc = '單條細 (弱)';
-      else if (simSpeed <= 16) desc = '雙條細 (中)';
-      else if (simSpeed <= 21) desc = '單條粗 (強)';
-      else desc = '雙條粗 (特強)';
+      if (simSpeed <= 13) bandCount = 1;
+      else if (simSpeed <= 21) bandCount = 2;
+      else bandCount = 3;
 
-      document.getElementById('speedValText').innerText = `${simSpeed} m/s (${desc})`;
-      document.getElementById('hudSpeed').innerHTML = `${simSpeed.toFixed(1)} <small style="font-size:0.75rem">m/s</small>`;
+      let desc = `${bandCount === 1 ? '一條' : bandCount === 2 ? '兩條' : '三條'}橡皮筋`;
+      document.getElementById('speedValText').innerText = `${desc} (${simSpeed} m/s)`;
+      document.getElementById('hudSpeed').innerHTML = `${simSpeed.toFixed(1)} <small style="font-size:0.75rem">m/s (${desc})</small>`;
+
+      if (document.getElementById('btnBand1')) document.getElementById('btnBand1').classList.toggle('active', bandCount === 1);
+      if (document.getElementById('btnBand2')) document.getElementById('btnBand2').classList.toggle('active', bandCount === 2);
+      if (document.getElementById('btnBand3')) document.getElementById('btnBand3').classList.toggle('active', bandCount === 3);
+
+      drawCatapult();
     }
 
-    function setSpeedPreset(speed, desc) {
+    function setBandPreset(count, speed) {
+      bandCount = count;
+      simSpeed = speed;
       document.getElementById('speedSlider').value = speed;
-      onSpeedChange(speed);
-      document.querySelectorAll('#catapultLab .control-group:nth-child(2) .chip-btn').forEach(b => b.classList.remove('active'));
-      event.target.classList.add('active');
+
+      if (document.getElementById('btnBand1')) document.getElementById('btnBand1').classList.toggle('active', count === 1);
+      if (document.getElementById('btnBand2')) document.getElementById('btnBand2').classList.toggle('active', count === 2);
+      if (document.getElementById('btnBand3')) document.getElementById('btnBand3').classList.toggle('active', count === 3);
+
+      let desc = `${count === 1 ? '一條' : count === 2 ? '兩條' : '三條'}橡皮筋`;
+      document.getElementById('speedValText').innerText = `${desc} (${speed} m/s)`;
+      document.getElementById('hudSpeed').innerHTML = `${speed.toFixed(1)} <small style="font-size:0.75rem">m/s (${desc})</small>`;
+      drawCatapult();
     }
 
     function onAngleChange(val) {
@@ -3139,10 +3277,9 @@
     // LAB 3 & ACTIVITY 4: CHART RENDERING & DATA
     // ============================================================
     let chartRecords = [
-      { id: 'A', name: '單條細 (弱)', speed: 10, angle: 45, dist: 10.2 },
-      { id: 'B', name: '雙條細 (中)', speed: 15, angle: 45, dist: 22.9 },
-      { id: 'C', name: '單條粗 (強)', speed: 20, angle: 45, dist: 40.8 },
-      { id: 'D', name: '雙條粗 (特強)', speed: 25, angle: 45, dist: 63.8 }
+      { id: 'A', name: '一條橡皮筋', speed: 10, angle: 45, dist: 10.2 },
+      { id: 'B', name: '兩條橡皮筋', speed: 18, angle: 45, dist: 33.1 },
+      { id: 'C', name: '三條橡皮筋', speed: 25, angle: 45, dist: 63.8 }
     ];
 
     function renderChart() {
@@ -3270,10 +3407,9 @@
 
     function loadDefaultExperimentData() {
       chartRecords = [
-        { id: 'A', name: '單條細 (弱)', speed: 10, angle: 45, dist: 10.2 },
-        { id: 'B', name: '雙條細 (中)', speed: 15, angle: 45, dist: 22.9 },
-        { id: 'C', name: '單條粗 (強)', speed: 20, angle: 45, dist: 40.8 },
-        { id: 'D', name: '雙條粗 (特強)', speed: 25, angle: 45, dist: 63.8 }
+        { id: 'A', name: '一條橡皮筋', speed: 10, angle: 45, dist: 10.2 },
+        { id: 'B', name: '兩條橡皮筋', speed: 18, angle: 45, dist: 33.1 },
+        { id: 'C', name: '三條橡皮筋', speed: 25, angle: 45, dist: 63.8 }
       ];
       renderChart();
     }
@@ -3283,11 +3419,7 @@
         alert('請先點擊「立即發射投石」進行拋射實驗再帶入紀錄！');
         return;
       }
-      let nameDesc = '自訂強度';
-      if (simSpeed <= 11) nameDesc = '單條細 (弱)';
-      else if (simSpeed <= 16) nameDesc = '雙條細 (中)';
-      else if (simSpeed <= 21) nameDesc = '單條粗 (強)';
-      else nameDesc = '雙條粗 (特強)';
+      let nameDesc = `${bandCount === 1 ? '一條' : bandCount === 2 ? '兩條' : '三條'}橡皮筋`;
 
       chartRecords.push({
         id: String.fromCharCode(65 + chartRecords.length % 26),
@@ -3302,8 +3434,10 @@
     }
 
     // ============================================================
-    // MODULE 3: DRAWING CANVAS WITH GEOMETRIC TOOLS & RULER
+    // MODULE 3: DRAWING CANVAS (DUAL LAYERS: GRID + TRANSPARENT DRAWING)
     // ============================================================
+    const dGridCanvas = document.getElementById("designGridCanvas");
+    const dGridCtx = dGridCanvas ? dGridCanvas.getContext("2d") : null;
     const dCanvas = document.getElementById("designCanvas");
     const dCtx = dCanvas.getContext("2d");
     let isDrawing = false;
@@ -3329,37 +3463,44 @@
         const lastState = undoStack.pop();
         dCtx.putImageData(lastState, 0, 0);
       } else {
-        initDesignCanvas();
+        dCtx.clearRect(0, 0, dCanvas.width, dCanvas.height);
       }
     }
 
-    function initDesignCanvas() {
-      dCtx.fillStyle = '#ffffff';
-      dCtx.fillRect(0, 0, dCanvas.width, dCanvas.height);
+    function initGridCanvas() {
+      if (!dGridCanvas || !dGridCtx) return;
+      dGridCtx.fillStyle = '#ffffff';
+      dGridCtx.fillRect(0, 0, dGridCanvas.width, dGridCanvas.height);
 
-      // Light background grid
-      dCtx.strokeStyle = '#f1f5f9';
-      dCtx.lineWidth = 1;
-      for (let x = 0; x < dCanvas.width; x += 30) {
-        dCtx.beginPath(); dCtx.moveTo(x, 0); dCtx.lineTo(x, dCanvas.height); dCtx.stroke();
+      // Light background grid (每 30px 一格方格，底層永不被橡皮擦擦除)
+      dGridCtx.strokeStyle = '#f1f5f9';
+      dGridCtx.lineWidth = 1;
+      for (let x = 0; x < dGridCanvas.width; x += 30) {
+        dGridCtx.beginPath(); dGridCtx.moveTo(x, 0); dGridCtx.lineTo(x, dGridCanvas.height); dGridCtx.stroke();
       }
-      for (let y = 0; y < dCanvas.height; y += 30) {
-        dCtx.beginPath(); dCtx.moveTo(0, y); dCtx.lineTo(dCanvas.width, y); dCtx.stroke();
+      for (let y = 0; y < dGridCanvas.height; y += 30) {
+        dGridCtx.beginPath(); dGridCtx.moveTo(0, y); dGridCtx.lineTo(dGridCanvas.width, y); dGridCtx.stroke();
       }
 
       // Draw faint baseline guide
-      dCtx.strokeStyle = '#e2e8f0';
-      dCtx.lineWidth = 2;
-      dCtx.setLineDash([5, 5]);
-      dCtx.beginPath();
-      dCtx.moveTo(100, 420);
-      dCtx.lineTo(900, 420);
-      dCtx.stroke();
-      dCtx.setLineDash([]);
+      dGridCtx.strokeStyle = '#cbd5e1';
+      dGridCtx.lineWidth = 2;
+      dGridCtx.setLineDash([5, 5]);
+      dGridCtx.beginPath();
+      dGridCtx.moveTo(100, 420);
+      dGridCtx.lineTo(900, 420);
+      dGridCtx.stroke();
+      dGridCtx.setLineDash([]);
 
-      dCtx.fillStyle = '#94a3b8';
-      dCtx.font = '12px sans-serif';
-      dCtx.fillText('【 投石機底座放置基準線 】', 120, 412);
+      dGridCtx.fillStyle = '#94a3b8';
+      dGridCtx.font = '12px sans-serif';
+      dGridCtx.fillText('【 投石機底座放置基準線 】', 120, 412);
+    }
+
+    function initDesignCanvas() {
+      initGridCanvas();
+      dCtx.clearRect(0, 0, dCanvas.width, dCanvas.height);
+      undoStack = [];
     }
 
     function getCanvasCoords(e) {
@@ -3388,6 +3529,7 @@
       // Stamp mode
       if (activeStamp) {
         saveUndoState();
+        dCtx.globalCompositeOperation = 'source-over';
         dCtx.fillStyle = '#dc2626';
         dCtx.beginPath();
         dCtx.arc(x, y, 6, 0, Math.PI * 2);
@@ -3405,13 +3547,24 @@
       saveUndoState();
       canvasSnapshot = dCtx.getImageData(0, 0, dCanvas.width, dCanvas.height);
 
-      if (currentDrawTool === 'pencil' || currentDrawTool === 'eraser') {
-        dCtx.strokeStyle = (currentDrawTool === 'eraser' ? '#ffffff' : currentColor);
-        dCtx.lineWidth = (currentDrawTool === 'eraser' ? currentLineWidth * 6 : currentLineWidth);
+      if (currentDrawTool === 'eraser') {
+        // 橡皮擦使用 destination-out，只擦除繪圖層像素，底層方格網格不受影響！
+        dCtx.globalCompositeOperation = 'destination-out';
+        dCtx.lineWidth = currentLineWidth * 7;
         dCtx.lineCap = 'round';
         dCtx.lineJoin = 'round';
         dCtx.beginPath();
         dCtx.moveTo(x, y);
+      } else {
+        dCtx.globalCompositeOperation = 'source-over';
+        if (currentDrawTool === 'pencil') {
+          dCtx.strokeStyle = currentColor;
+          dCtx.lineWidth = currentLineWidth;
+          dCtx.lineCap = 'round';
+          dCtx.lineJoin = 'round';
+          dCtx.beginPath();
+          dCtx.moveTo(x, y);
+        }
       }
     }
 
@@ -3419,14 +3572,21 @@
       if (!isDrawing) return;
       const { x, y } = getCanvasCoords(e);
 
-      if (currentDrawTool === 'pencil' || currentDrawTool === 'eraser') {
-        dCtx.strokeStyle = (currentDrawTool === 'eraser' ? '#ffffff' : currentColor);
-        dCtx.lineWidth = (currentDrawTool === 'eraser' ? currentLineWidth * 6 : currentLineWidth);
+      if (currentDrawTool === 'eraser') {
+        dCtx.globalCompositeOperation = 'destination-out';
+        dCtx.lineWidth = currentLineWidth * 7;
+        dCtx.lineTo(x, y);
+        dCtx.stroke();
+      } else if (currentDrawTool === 'pencil') {
+        dCtx.globalCompositeOperation = 'source-over';
+        dCtx.strokeStyle = currentColor;
+        dCtx.lineWidth = currentLineWidth;
         dCtx.lineTo(x, y);
         dCtx.stroke();
       } else {
         // Geometric preview: restore snapshot first
         dCtx.putImageData(canvasSnapshot, 0, 0);
+        dCtx.globalCompositeOperation = 'source-over';
         dCtx.strokeStyle = currentColor;
         dCtx.lineWidth = currentLineWidth;
         dCtx.lineCap = 'round';
@@ -3487,6 +3647,7 @@
     function onPointerUp() {
       if (isDrawing) {
         isDrawing = false;
+        dCtx.globalCompositeOperation = 'source-over';
       }
     }
 
@@ -3545,15 +3706,30 @@
       }
     }
 
+    function getMergedDrawingDataUrl() {
+      const exportCanvas = document.createElement('canvas');
+      exportCanvas.width = dCanvas.width;
+      exportCanvas.height = dCanvas.height;
+      const expCtx = exportCanvas.getContext('2d');
+      if (dGridCanvas) {
+        expCtx.drawImage(dGridCanvas, 0, 0);
+      } else {
+        expCtx.fillStyle = '#ffffff';
+        expCtx.fillRect(0, 0, exportCanvas.width, exportCanvas.height);
+      }
+      expCtx.drawImage(dCanvas, 0, 0);
+      return exportCanvas.toDataURL('image/png');
+    }
+
     function downloadDrawing() {
       const link = document.createElement('a');
       link.download = '投石戰車-結構設計圖.png';
-      link.href = dCanvas.toDataURL('image/png');
+      link.href = getMergedDrawingDataUrl();
       link.click();
     }
 
     function copyDrawingToWorksheet() {
-      const dataUrl = dCanvas.toDataURL('image/png');
+      const dataUrl = getMergedDrawingDataUrl();
       const img = document.getElementById('wsCanvasImg');
       img.src = dataUrl;
       img.style.display = 'block';
