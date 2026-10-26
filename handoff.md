@@ -21,10 +21,14 @@
   - 目標城堡距離挑戰（隨機目標）、命中歡呼特效與 Web Audio API 實體物理音效。
   - 軌跡重疊與「➕ 一鍵帶入數據表」功能。
 - [x] **活動三：實作組裝教學中心 (Assembly Workshop)**
+  - 順序編排：雷切圖 ➔ 組裝教學影片 ➔ 成品正面/側面實拍圖 ➔ 4 步驟指引。
   - 放置 3mm 椴木板雷射切割圖檔（`assets/laser_cut_diagram.png`）與零件清單盤點表。
-  - 放置組裝完成實物對照圖（`assets/assembled_side.jpg` 側面立體圖、`assets/assembled_front.jpg` 正面俯視圖）與檢查重點。
-  - 內嵌手作組裝教學影片（Google Drive 預覽播放與雲端硬碟開啟連結）。
+  - 最新組裝教學影片（Google Drive 影片 ID：`1Qoat8eLi6Lc8l9Hahktykph2oFyToBeT`，支援內嵌與雲端硬碟連結）。
+  - 放置組裝完成實物對照圖（`assets/assembled_front.jpg` 正面俯視圖、`assets/assembled_side.jpg` 側面立體圖）與檢查重點。
   - 提供實作動手造 4 步驟指引卡片。
+- [x] **頂部導覽列優化排序**
+  - 導覽列依序配置：① 📖 教案全景導覽 ➔ ② 🎮 互動實驗室 ➔ ③ 🛠️ 實作組裝區 ➔ ④ 📐 設計圖繪圖板 ➔ ⑤ 📝 互動學習單 ➔ ⑥ 📎 附錄。
+  - 新增專屬「📎 附錄」視圖，完整收錄四份教案學習單與評估表原件規格。
 - [x] **活動三：線上設計圖繪圖板 (Design Canvas Studio)**
   - 內建 HTML5 Canvas 畫布，支援多種色彩、筆刷粗細、橡皮擦與投石機結構輔助底線。
   - 快捷標記印章（① 支點、② 橡皮筋、③ 投射臂、④ 盛彈處），支援 PNG 下載與「一鍵貼入學習單二」。

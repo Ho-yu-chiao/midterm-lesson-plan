@@ -778,7 +778,7 @@
        ============================================================ -->
   <header>
     <div class="header-inner">
-      <div class="brand-wrap" onclick="switchMainTab('labs')">
+      <div class="brand-wrap" onclick="switchMainTab('plan')">
         <span class="brand-icon">🏰</span>
         <div>
           <div class="brand-title">
@@ -790,11 +790,11 @@
 
       <!-- Navigation Tabs -->
       <nav class="nav-tabs">
-        <button class="tab-btn active" data-tab="labs" onclick="switchMainTab('labs')">
-          🎮 互動實驗室
-        </button>
-        <button class="tab-btn" data-tab="plan" onclick="switchMainTab('plan')">
+        <button class="tab-btn active" data-tab="plan" onclick="switchMainTab('plan')">
           📖 教案全景導覽
+        </button>
+        <button class="tab-btn" data-tab="labs" onclick="switchMainTab('labs')">
+          🎮 互動實驗室
         </button>
         <button class="tab-btn" data-tab="assembly" onclick="switchMainTab('assembly')">
           🛠️ 實作組裝區
@@ -804,6 +804,9 @@
         </button>
         <button class="tab-btn" data-tab="worksheets" onclick="switchMainTab('worksheets')">
           📝 互動學習單
+        </button>
+        <button class="tab-btn" data-tab="appendix" onclick="switchMainTab('appendix')">
+          📎 附錄
         </button>
       </nav>
 
@@ -827,7 +830,7 @@
     <!-- ========================================================
          VIEW 1: INTERACTIVE EXPERIMENTAL LABS
          ======================================================== -->
-    <section id="labsSection" class="view-section active">
+    <section id="labsSection" class="view-section">
       
       <!-- Sub Tabs for 3 Core Experiments -->
       <div class="sub-tabs">
@@ -1110,7 +1113,7 @@
     <!-- ========================================================
          VIEW 2: FULL CURRICULUM & LESSON PLAN (STEPPER & MATRIX)
          ======================================================== -->
-    <section id="planSection" class="view-section">
+    <section id="planSection" class="view-section active">
 
       <!-- Course Header Profile Card -->
       <div class="card" style="background:linear-gradient(135deg, #eff6ff 0%, #ffffff 100%);">
@@ -1498,55 +1501,32 @@
               🛠️ 投石戰車 實作組裝教學中心
             </h2>
             <p style="font-size:0.95rem; color:var(--text-muted); margin-top:0.35rem;">
-              對應活動三（動手造投石機，共 2 節 80 分鐘）：包含雷射切割零件圖樣、正側面實體組裝對照圖與手作教學示範影片。
+              對應活動三（動手造投石機，共 2 節 80 分鐘）：依序包含雷射切割零件圖樣、手作組裝教學示範影片與成品實體對照。
             </p>
           </div>
           <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
             <a href="./assets/laser_cut_diagram.png" download="投石戰車_雷切圖檔.png" class="pill-btn" style="background:#16a34a; color:white;">
               📥 下載雷切圖檔 (PNG)
             </a>
-            <a href="https://drive.google.com/file/d/19x3UpxztbLfTBe9eXXyu_rNHXJyfxQoP/view?usp=sharing" target="_blank" class="pill-btn" style="background:#0284c7; color:white;">
+            <a href="https://drive.google.com/file/d/1Qoat8eLi6Lc8l9Hahktykph2oFyToBeT/view?usp=sharing" target="_blank" class="pill-btn" style="background:#0284c7; color:white;">
               🎬 雲端硬碟開啟影片 ↗
             </a>
           </div>
         </div>
       </div>
 
-      <!-- Video Assembly Tutorial Section -->
-      <div class="card">
-        <h3 class="card-title" style="color:#0369a1;">
-          <span>🎬 投石機手作組裝教學示範影片</span>
-          <span style="font-size:0.85rem; font-weight:normal; color:var(--text-muted);">（建議全螢幕觀看，跟隨示範逐步組裝）</span>
-        </h3>
-        <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:14px; box-shadow:0 6px 20px rgba(0,0,0,0.12); background:#000;">
-          <iframe src="https://drive.google.com/file/d/19x3UpxztbLfTBe9eXXyu_rNHXJyfxQoP/preview"
-                  style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"
-                  allow="autoplay; fullscreen"
-                  title="投石機手作組裝教學示範影片">
-          </iframe>
-        </div>
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.85rem; flex-wrap:wrap; gap:0.5rem;">
-          <span style="font-size:0.85rem; color:var(--text-muted);">
-            💡 若學校網路或瀏覽器安全性限制無法內嵌播放，請直接點選右側連結前往 Google Drive：
-          </span>
-          <a href="https://drive.google.com/file/d/19x3UpxztbLfTBe9eXXyu_rNHXJyfxQoP/view?usp=sharing" target="_blank" style="color:#0284c7; font-weight:700; text-decoration:none; font-size:0.9rem;">
-            🔗 前往 Google Drive 觀看高畫質影片 ↗
-          </a>
-        </div>
-      </div>
-
-      <!-- Laser Cut Blueprint & Parts Inventory -->
+      <!-- 1. Laser Cut Blueprint & Parts Inventory (雷切圖) -->
       <div class="card">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; flex-wrap:wrap; gap:0.5rem;">
           <h3 class="card-title" style="margin-bottom:0; border:none; padding:0; color:#78350f;">
-            <span>📐 投石戰車 雷射切割零件圖檔 (Laser Cut Parts Blueprint)</span>
+            <span>📐 一、投石戰車 雷射切割零件圖檔 (Laser Cut Parts Blueprint)</span>
           </h3>
           <a href="./assets/laser_cut_diagram.png" download="投石戰車_雷切圖檔.png" class="chip-btn" style="background:#d97706; color:white;">
             💾 下載原始圖檔 (PNG)
           </a>
         </div>
         <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:1rem;">
-          本設計採用 3mm 椴木板雷射切割，精準配置卡榫扣合結構與防呆定位孔。動手前請各組先依圖盤點零件。
+          本設計採用 3mm 椴木板雷射切割，精準配置卡榫扣合結構與防呆定位孔。動手組裝前請各組先依圖盤點零件是否齊全。
         </p>
 
         <div style="display:grid; grid-template-columns:1fr 360px; gap:1.5rem; align-items:start;">
@@ -1576,35 +1556,39 @@
         </div>
       </div>
 
-      <!-- Real Assembled Catapult Photos (Side & Front Views) -->
+      <!-- 2. Video Assembly Tutorial Section (組裝影片) -->
+      <div class="card">
+        <h3 class="card-title" style="color:#0369a1;">
+          <span>🎬 二、投石機手作組裝教學示範影片</span>
+          <span style="font-size:0.85rem; font-weight:normal; color:var(--text-muted);">（建議全螢幕觀看，跟隨示範一步步組裝）</span>
+        </h3>
+        <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:14px; box-shadow:0 6px 20px rgba(0,0,0,0.12); background:#000;">
+          <iframe src="https://drive.google.com/file/d/1Qoat8eLi6Lc8l9Hahktykph2oFyToBeT/preview"
+                  style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"
+                  allow="autoplay; fullscreen"
+                  title="投石機手作組裝教學示範影片">
+          </iframe>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.85rem; flex-wrap:wrap; gap:0.5rem;">
+          <span style="font-size:0.85rem; color:var(--text-muted);">
+            💡 若學校網路或瀏覽器安全性限制無法內嵌播放，請直接點選右側連結前往 Google Drive：
+          </span>
+          <a href="https://drive.google.com/file/d/1Qoat8eLi6Lc8l9Hahktykph2oFyToBeT/view?usp=sharing" target="_blank" style="color:#0284c7; font-weight:700; text-decoration:none; font-size:0.9rem;">
+            🔗 前往 Google Drive 觀看完整影片 ↗
+          </a>
+        </div>
+      </div>
+
+      <!-- 3. Real Assembled Catapult Photos (Side & Front Views) (成品) -->
       <div class="card">
         <h3 class="card-title" style="color:#0284c7;">
-          <span>📸 組裝完成實體照片對照（正面與側面雙視角）</span>
+          <span>📸 三、組裝完成實體照片對照（正面與側面雙視角）</span>
         </h3>
         <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:1.25rem;">
-          組裝完成後請對照下列實物照片，詳細確認「支點位置」、「投射臂方向」與「橡皮筋安裝」是否完全正確。
+          組裝完成後請對照下列成品照片，詳細確認「支點位置」、「投射臂方向」與「橡皮筋安裝」是否完全正確。
         </p>
 
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:1.5rem;">
-          <!-- Side View -->
-          <div style="background:var(--bg-subtle); border:2px solid var(--border-fun); border-radius:14px; padding:1.2rem; display:flex; flex-direction:column;">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
-              <strong style="color:#0369a1; font-size:1.1rem;">🔍 側面視角（立體結構圖）</strong>
-              <span style="font-size:0.75rem; background:#e0f2fe; color:#0369a1; padding:0.2rem 0.6rem; border-radius:999px; font-weight:700;">槓桿與發射仰角</span>
-            </div>
-            <div style="flex:1; display:flex; align-items:center; justify-content:center; background:#ffffff; border-radius:10px; overflow:hidden; min-height:300px; padding:0.5rem;">
-              <img src="./assets/assembled_side.jpg" alt="投石機組裝完成側面視角" style="max-width:100%; max-height:450px; object-fit:contain; border-radius:8px;">
-            </div>
-            <div style="margin-top:0.85rem; font-size:0.85rem; color:var(--text-main); line-height:1.65; background:#ffffff; padding:0.75rem 0.9rem; border-radius:8px; border:1px solid #e2e8f0;">
-              <strong>側面檢查重點</strong>：
-              <ol style="padding-left:1.2rem; margin-top:0.3rem;">
-                <li>三角側板底邊平穩著地，前後橫樑卡榫完全卡入。</li>
-                <li>投射臂穿過上層轉動軸心，後端長臂自然翹起，呈最佳預備投射仰角。</li>
-                <li>橡皮筋套在投射臂下方孔位與底座前端支架之間，拉伸行程順暢無卡死。</li>
-              </ol>
-            </div>
-          </div>
-
           <!-- Front / Top View -->
           <div style="background:var(--bg-subtle); border:2px solid var(--border-fun); border-radius:14px; padding:1.2rem; display:flex; flex-direction:column;">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
@@ -1623,13 +1607,32 @@
               </ol>
             </div>
           </div>
+
+          <!-- Side View -->
+          <div style="background:var(--bg-subtle); border:2px solid var(--border-fun); border-radius:14px; padding:1.2rem; display:flex; flex-direction:column;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+              <strong style="color:#0369a1; font-size:1.1rem;">🔍 側面視角（立體結構圖）</strong>
+              <span style="font-size:0.75rem; background:#e0f2fe; color:#0369a1; padding:0.2rem 0.6rem; border-radius:999px; font-weight:700;">槓桿與發射仰角</span>
+            </div>
+            <div style="flex:1; display:flex; align-items:center; justify-content:center; background:#ffffff; border-radius:10px; overflow:hidden; min-height:300px; padding:0.5rem;">
+              <img src="./assets/assembled_side.jpg" alt="投石機組裝完成側面視角" style="max-width:100%; max-height:450px; object-fit:contain; border-radius:8px;">
+            </div>
+            <div style="margin-top:0.85rem; font-size:0.85rem; color:var(--text-main); line-height:1.65; background:#ffffff; padding:0.75rem 0.9rem; border-radius:8px; border:1px solid #e2e8f0;">
+              <strong>側面檢查重點</strong>：
+              <ol style="padding-left:1.2rem; margin-top:0.3rem;">
+                <li>三角側板底邊平穩著地，前後橫樑卡榫完全卡入。</li>
+                <li>投射臂穿過上層轉動軸心，後端長臂自然翹起，呈最佳預備投射仰角。</li>
+                <li>橡皮筋套在投射臂下方孔位與底座前端支架之間，拉伸行程順暢無卡死。</li>
+              </ol>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Step-by-Step Practical Assembly Instructions -->
+      <!-- 4. Step-by-Step Practical Assembly Instructions -->
       <div class="card">
         <h3 class="card-title" style="color:#166534;">
-          <span>📋 實作動手造 4 步驟指引</span>
+          <span>📋 四、實作動手造 4 步驟指引</span>
         </h3>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:1rem;">
           <div class="hud-box" style="text-align:left; background:#f0fdf4; border-color:#bbf7d0;">
@@ -1650,6 +1653,8 @@
           </div>
         </div>
       </div>
+
+    </section>
 
     </section>
 
@@ -2127,6 +2132,243 @@
 
     </section>
 
+    <!-- ========================================================
+         VIEW 6: APPENDIX (CURRICULUM APPENDIX 1 - 4 & RUBRICS)
+         ======================================================== -->
+    <section id="appendixSection" class="view-section">
+
+      <!-- Appendix Header Card -->
+      <div class="card" style="background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+          <div>
+            <h2 style="font-size:1.6rem; color:#0369a1; display:flex; align-items:center; gap:0.5rem;">
+              📎 7. 附錄：課堂學習單與評估表原件全覽
+            </h2>
+            <p style="font-size:0.95rem; color:var(--text-muted); margin-top:0.35rem;">
+              收錄本教案 4 份課堂專用教材與評量工具標準規格。亦可點選上方「📝 互動學習單」進行線上填答與自動計分。
+            </p>
+          </div>
+          <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+            <button class="pill-btn" style="background:var(--secondary); color:white;" onclick="switchMainTab('worksheets')">
+              📝 前往線上互動學習單
+            </button>
+            <button class="pill-btn" style="background:var(--primary); color:white;" onclick="window.print()">
+              🖨️ 列印全套附錄學習單
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Appendix 1 -->
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px dashed var(--border-fun); padding-bottom:0.75rem; margin-bottom:1rem; flex-wrap:wrap; gap:0.5rem;">
+          <h3 style="color:#0369a1; font-size:1.25rem;">📄 附錄一：實驗紀錄表 - 電腦模擬</h3>
+          <span class="time-badge">對應活動二（第 2 節課使用）</span>
+        </div>
+        <div style="background:#ffffff; border:1px solid var(--border-color); border-radius:10px; padding:1.25rem; font-family:'Noto Sans TC', sans-serif;">
+          <div style="text-align:center; font-weight:700; font-size:1.2rem; color:#0f172a; margin-bottom:0.8rem;">
+            實驗紀錄表 - 電腦模擬
+          </div>
+          <p style="font-size:0.9rem; color:#475569; margin-bottom:0.8rem;">
+            六年___班 &nbsp;&nbsp; 第___組 &nbsp;&nbsp; 組長：___________ &nbsp;&nbsp; 組員：__________________________
+          </p>
+          <div class="alert-box alert-important" style="font-size:0.85rem; padding:0.6rem 0.8rem; margin:0.6rem 0;">
+            <div>🎯</div>
+            <div>
+              <strong>模擬任務說明</strong>：<br>
+              1. 在模擬軟體中維持「固定發射方向（45°）」，分別測試不同出速度（模擬橡皮筋不同彈力強度）。<br>
+              2. 每次設定進行 3 次模擬發射，並計算平均拋射距離（公尺）。
+            </div>
+          </div>
+          <table class="data-table" style="margin-top:0.75rem;">
+            <thead>
+              <tr>
+                <th>模擬次序</th>
+                <th>模擬出速度 (m/s)</th>
+                <th>第 1 次距離</th>
+                <th>第 2 次距離</th>
+                <th>第 3 次距離</th>
+                <th>平均距離</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>測試 A</td><td>弱（例如 10 m/s）</td><td>_____ m</td><td>_____ m</td><td>_____ m</td><td>_____ m</td></tr>
+              <tr><td>測試 B</td><td>中（例如 15 m/s）</td><td>_____ m</td><td>_____ m</td><td>_____ m</td><td>_____ m</td></tr>
+              <tr><td>測試 C</td><td>強（例如 20 m/s）</td><td>_____ m</td><td>_____ m</td><td>_____ m</td><td>_____ m</td></tr>
+              <tr><td>測試 D</td><td>特強（自訂速度）</td><td>_____ m</td><td>_____ m</td><td>_____ m</td><td>_____ m</td></tr>
+            </tbody>
+          </table>
+          <div style="margin-top:1rem; font-size:0.88rem; line-height:1.9;">
+            <strong>💡 數據發現與思考</strong>：<br>
+            1. 觀察上方表格，當發射出速度越快時，物體的飛行距離有什麼變化？<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;答：出速度越快，拋射的距離越【 □ 遠 &nbsp; □ 近 】，這代表物體獲得的動能越【 □ 大 &nbsp; □ 小 】。<br>
+            2. 如果要把模擬實驗中的「出速度」應用到真實投石機上，我們可以如何增加發射力道？<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;答：__________________________________________________________________________。<br>
+            3. 小組結論：我們預計在下一節實作中，使用什麼樣的橡皮筋搭配？<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;語言下模塑（範例：使用粗橡皮筋、增加橡皮筋條數...）：______________________。
+          </div>
+        </div>
+      </div>
+
+      <!-- Appendix 2 -->
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px dashed var(--border-fun); padding-bottom:0.75rem; margin-bottom:1rem; flex-wrap:wrap; gap:0.5rem;">
+          <h3 style="color:#0369a1; font-size:1.25rem;">🎨 附錄二：我們的設計圖！！！</h3>
+          <span class="time-badge">對應活動二 / 活動三（第 2、3 節課使用）</span>
+        </div>
+        <div style="background:#ffffff; border:1px solid var(--border-color); border-radius:10px; padding:1.25rem;">
+          <div style="text-align:center; font-weight:700; font-size:1.2rem; color:#0f172a; margin-bottom:0.8rem;">
+            我們的設計圖！！！
+          </div>
+          <p style="font-size:0.9rem; color:#475569; margin-bottom:0.8rem;">
+            六年___班 &nbsp;&nbsp; 第___組 &nbsp;&nbsp; 作品名稱：___________________ &nbsp;&nbsp; 繪圖者：___________
+          </p>
+          <div style="font-size:0.88rem; margin-bottom:0.6rem;">
+            <strong>📐 投石機結構草圖</strong>（請清楚標示：① 支點 &nbsp; ② 橡皮筋固定處 &nbsp; ③ 投射臂 &nbsp; ④ 盛彈處）
+          </div>
+          <div style="border:2px dashed #94a3b8; border-radius:8px; height:180px; display:flex; align-items:center; justify-content:center; color:#94a3b8; font-size:0.95rem; background:#f8fafc; margin-bottom:1rem;">
+            【 請在此繪製投石機側視或立體圖稿（亦可於「📐 設計圖繪圖板」線上繪製並匯出） 】
+          </div>
+          <div style="font-size:0.88rem; line-height:1.9;">
+            <strong>🛠️ 機構特點與變因規劃</strong>：<br>
+            1. 彈力來源規劃（橡皮筋安裝方式）：預計使用【 □ 細橡皮筋 &nbsp; □ 粗橡皮筋 &nbsp; □ 多條併用 】，固定在裝置的什麼位置？<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;答：_________________________________________________________________。<br>
+            2. 槓桿結構設計（支點與力臂）：支點設置在投射臂的【 □ 中間 &nbsp; □ 偏前 &nbsp; □ 偏後 】，這樣設計的優點是？<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;答：_________________________________________________________________。<br>
+            3. 小組創意與結構加固巧思：<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;答：_________________________________________________________________。
+          </div>
+        </div>
+      </div>
+
+      <!-- Appendix 3 -->
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px dashed var(--border-fun); padding-bottom:0.75rem; margin-bottom:1rem; flex-wrap:wrap; gap:0.5rem;">
+          <h3 style="color:#0369a1; font-size:1.25rem;">🔬 附錄三：實驗紀錄表 - 投石機實測</h3>
+          <span class="time-badge">對應活動三（第 3、4 節課使用）</span>
+        </div>
+        <div style="background:#ffffff; border:1px solid var(--border-color); border-radius:10px; padding:1.25rem;">
+          <div style="text-align:center; font-weight:700; font-size:1.2rem; color:#0f172a; margin-bottom:0.8rem;">
+            實驗紀錄表 - 投石機實測
+          </div>
+          <p style="font-size:0.9rem; color:#475569; margin-bottom:0.8rem;">
+            六年___班 &nbsp;&nbsp; 第___組 &nbsp;&nbsp; 紀錄人員：___________ &nbsp;&nbsp; 發射手：___________
+          </p>
+          <div class="alert-box alert-tip" style="font-size:0.85rem; padding:0.6rem 0.8rem; margin:0.6rem 0;">
+            <div>🔬</div>
+            <div>
+              <strong>實驗變因控制原則</strong>：<br>
+              • 【<strong>控制變因</strong>】：維持相同的拉伸位置、投擲物重量，投石機底座保持穩固不滑動。<br>
+              • 【<strong>操縱變因</strong>】：更換「不同彈性強度」的橡皮筋（如單條細、雙條細、單條粗、雙條粗）。
+            </div>
+          </div>
+          <table class="data-table" style="margin-top:0.75rem;">
+            <thead>
+              <tr>
+                <th>組別次序</th>
+                <th>橡皮筋材質 / 規格</th>
+                <th>第 1 次 (cm)</th>
+                <th>第 2 次 (cm)</th>
+                <th>第 3 次 (cm)</th>
+                <th>平均距離 (cm)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>條件 1</td><td>單條細橡皮筋（弱）</td><td>_____ cm</td><td>_____ cm</td><td>_____ cm</td><td>_____ cm</td></tr>
+              <tr><td>條件 2</td><td>雙條細橡皮筋（中）</td><td>_____ cm</td><td>_____ cm</td><td>_____ cm</td><td>_____ cm</td></tr>
+              <tr><td>條件 3</td><td>單條粗橡皮筋（強）</td><td>_____ cm</td><td>_____ cm</td><td>_____ cm</td><td>_____ cm</td></tr>
+              <tr><td>條件 4</td><td>雙條粗橡皮筋（特強）</td><td>_____ cm</td><td>_____ cm</td><td>_____ cm</td><td>_____ cm</td></tr>
+            </tbody>
+          </table>
+          <div style="margin-top:1rem; font-size:0.88rem; line-height:1.9;">
+            <strong>🔍 實測觀察與結構調整</strong>：<br>
+            1. 實測結果符合電腦模擬的預期嗎？哪一種橡皮筋組合讓投石機射得最遠？<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;答：射得最遠的材料組合是【 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 】，平均距離為【 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 】公分。<br>
+            2. 在更換更強彈性的橡皮筋時，投石機結構是否出現晃動或不穩的狀況？你們如何加固？<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;答：_________________________________________________________________________。<br>
+            3. 根據這次的實測數據，下一節課我們要在圖表上呈現的關鍵結論是：<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;答：_________________________________________________________________________。
+          </div>
+        </div>
+      </div>
+
+      <!-- Appendix 4 -->
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px dashed var(--border-fun); padding-bottom:0.75rem; margin-bottom:1rem; flex-wrap:wrap; gap:0.5rem;">
+          <h3 style="color:#0369a1; font-size:1.25rem;">⭐ 附錄四：實驗結果評估表（自評與互評）</h3>
+          <span class="time-badge">對應活動四（第 5 節課使用）</span>
+        </div>
+        <div style="background:#ffffff; border:1px solid var(--border-color); border-radius:10px; padding:1.25rem;">
+          <div style="text-align:center; font-weight:700; font-size:1.2rem; color:#0f172a; margin-bottom:0.8rem;">
+            實驗結果評估表
+          </div>
+          <p style="font-size:0.9rem; color:#475569; margin-bottom:0.8rem;">
+            評分组別：第___組 &nbsp;&nbsp; 受評組別：第___組 &nbsp;&nbsp; 評審學生：___________
+          </p>
+          <div style="background:#fefce8; border:1px solid #fde047; padding:0.5rem 0.8rem; border-radius:8px; margin-bottom:0.8rem; font-size:0.85rem; color:#854d0e;">
+            ⭐ <strong>評分標準</strong>：⭐⭐⭐⭐⭐ 表現優異（5分） ｜ ⭐⭐⭐ 良好（3分） ｜ ⭐ 需加強（1分）
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width:16%;">面向</th>
+                <th style="width:60%;">評量指標與表現說明</th>
+                <th style="width:24%;">自評 / 互評得分</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>科學概念</strong></td>
+                <td style="text-align:left;">
+                  <strong>彈性位能與槓桿原理理解</strong><br>
+                  <small style="color:#64748b;">能清楚說明橡皮筋彈性強弱對拋射動能與飛行遠近的影響。</small>
+                </td>
+                <td>【 &nbsp;&nbsp;&nbsp; / 5 】分</td>
+              </tr>
+              <tr>
+                <td><strong>工程實作</strong></td>
+                <td style="text-align:left;">
+                  <strong>投石機結構組裝與穩固性</strong><br>
+                  <small style="color:#64748b;">能根據設計圖完成組裝，且發射時支架穩固，發射臂運動順暢。</small>
+                </td>
+                <td>【 &nbsp;&nbsp;&nbsp; / 5 】分</td>
+              </tr>
+              <tr>
+                <td><strong>數據分析</strong></td>
+                <td style="text-align:left;">
+                  <strong>圖表記錄與結果詮釋</strong><br>
+                  <small style="color:#64748b;">能將不同彈性數據正確繪製成折線圖，並精準解讀數據趨勢。</small>
+                </td>
+                <td>【 &nbsp;&nbsp;&nbsp; / 5 】分</td>
+              </tr>
+              <tr>
+                <td><strong>團隊合作</strong></td>
+                <td style="text-align:left;">
+                  <strong>分工溝通與解決問題</strong><br>
+                  <small style="color:#64748b;">小組分工明確，在實作遇故障或誤差時能共同討論修復。</small>
+                </td>
+                <td>【 &nbsp;&nbsp;&nbsp; / 5 】分</td>
+              </tr>
+              <tr style="background:#f0f9ff;">
+                <td colspan="2" style="text-align:right; font-weight:700; color:#0369a1;">總得分合計（滿分 20 分）：</td>
+                <td style="font-weight:900; color:#ea580c; font-size:1.1rem;">【 &nbsp;&nbsp;&nbsp; / 20 】分</td>
+              </tr>
+            </tbody>
+          </table>
+          <div style="margin-top:1rem; font-size:0.88rem;">
+            <strong>💬 最欣賞這組的地方 / 建議改進方向</strong>：<br>
+            _________________________________________________________________________________<br>
+            _________________________________________________________________________________
+          </div>
+          <div class="alert-box alert-tip" style="margin-top:1rem; font-size:0.82rem; padding:0.5rem 0.8rem;">
+            <div>🔔</div>
+            <div><strong>繳交檢查</strong>：回去檢查看看，是否每一項都有評分？如果都完成了，就可以繳交囉！🎉</div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
   </main>
 
   <!-- Footer -->
@@ -2174,6 +2416,7 @@
 
       const sec = document.getElementById(tabId + 'Section');
       if (sec) sec.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
 
       if (tabId === 'labs') {
         drawCatapult();
