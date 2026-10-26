@@ -1,6 +1,6 @@
-# 投石戰車 STEAM 科技探索館 (Catapult STEAM Lab)
+# 投石車 STEAM 科技探索館 (Catapult STEAM Lab)
 
-歡迎造訪 **投石戰車 STEAM 科技探索館**！本專案為國小六年級科技資訊教育之跨領域期中教案與互動式教材平台，結合**自然科學領域（1 節）**與**資訊科技領域（4 節）**，共 5 節（200 分鐘）之完整 STEAM 探究課程。
+歡迎造訪 **投石車 STEAM 科技探索館**！本專案為國小六年級科技資訊教育之跨領域期中教案與互動式教材平台，結合**自然科學領域（1 節）**與**資訊科技領域（4 節）**，共 5 節（200 分鐘）之完整 STEAM 探究課程。
 
 🌐 **線上公開網站與互動小遊戲**：[https://ho-yu-chiao.github.io/midterm-lesson-plan/](https://ho-yu-chiao.github.io/midterm-lesson-plan/)
 
@@ -38,7 +38,7 @@ midterm-lesson-plan/
 ├── .agents/skills/      # AntiGravity 2 專屬 AI 技能庫
 ├── assets/              # 雷切零件圖與組裝完成實體照片
 ├── plans/               # 完整期中教案 Markdown 檔
-│   └── 投石戰車-國小科技資訊教育教案.md   # (含雙向細目表、5節流程與 4 份學習單)
+│   └── 投石車-國小科技資訊教育教案.md   # (含雙向細目表、5節流程與 4 份學習單)
 ├── index.html           # 互動式模擬小遊戲與教案瀏覽單頁應用程式
 ├── AGENTS.md            # AI Agent 規範與工作指引
 ├── ANTIGRAVITY.md       # AntiGravity 快速指引入口
