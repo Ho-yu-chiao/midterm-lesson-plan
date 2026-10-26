@@ -832,23 +832,109 @@
          ======================================================== -->
     <section id="labsSection" class="view-section">
       
-      <!-- Sub Tabs for 3 Core Experiments -->
+      <!-- Sub Tabs for 3 Core Experiments (依活動一、二、四順序排列) -->
       <div class="sub-tabs">
-        <button class="sub-tab-btn active" onclick="switchLabTab('catapult')">
-          🎯 活動二：投石機彈道模擬與城堡挑戰
-        </button>
-        <button class="sub-tab-btn" onclick="switchLabTab('seesaw')">
+        <button class="sub-tab-btn active" data-lab="seesaw" onclick="switchLabTab('seesaw')">
           ⚖️ 活動一：槓桿原理與翹翹板平衡模擬
         </button>
-        <button class="sub-tab-btn" onclick="switchLabTab('chart')">
+        <button class="sub-tab-btn" data-lab="catapult" onclick="switchLabTab('catapult')">
+          🎯 活動二：投石機彈道模擬與城堡挑戰
+        </button>
+        <button class="sub-tab-btn" data-lab="chart" onclick="switchLabTab('chart')">
           📊 活動四：數據統計折線圖分析
         </button>
       </div>
 
       <!-- ====================================================
-           LAB 1: CATAPULT TRAJECTORY SIMULATION
+           LAB 1: LEVER & SEESAW LAB (ACTIVITY 1)
            ==================================================== -->
-      <div id="catapultLab" class="lab-content active">
+      <div id="seesawLab" class="lab-content active">
+        <div class="lab-layout">
+          <div class="canvas-wrap">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+              <h3 style="color:var(--secondary); font-size:1.25rem;">
+                ⚖️ 槓桿翹翹板平衡模擬器
+              </h3>
+              <span id="seesawStateBadge" style="background:#0284c7; color:white; padding:0.2rem 0.6rem; border-radius:999px; font-weight:700; font-size:0.85rem;">目前狀態：完美平衡！</span>
+            </div>
+
+            <!-- Seesaw Canvas -->
+            <canvas id="seesawCanvas" width="820" height="380" style="width:100%; height:auto; background:linear-gradient(to bottom, #f0fdf4 0%, #e0f2fe 100%); border-radius:var(--radius-md); border:1px solid #bae6fd;"></canvas>
+
+            <div class="hud-bar">
+              <div class="hud-box">
+                <div class="hud-label">左側力矩 (F₁ × d₁)</div>
+                <div class="hud-val" id="hudLeftTorque">30.0 <small style="font-size:0.75rem">N·m</small></div>
+              </div>
+              <div class="hud-box">
+                <div class="hud-label">支點位置比例</div>
+                <div class="hud-val" id="hudFulcrumPos">50% (正中)</div>
+              </div>
+              <div class="hud-box">
+                <div class="hud-label">右側力矩 (F₂ × d₂)</div>
+                <div class="hud-val" id="hudRightTorque">30.0 <small style="font-size:0.75rem">N·m</small></div>
+              </div>
+              <div class="hud-box">
+                <div class="hud-label">槓桿狀態</div>
+                <div class="hud-val" id="hudBalanceTxt" style="color:#22c55e;">平衡中</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Controls for Seesaw -->
+          <div class="panel-wrap">
+            <div class="control-box">
+              <h4 style="color:var(--secondary-dark); margin-bottom:1rem; font-size:1.1rem;">
+                🛠️ 槓桿三要素調控
+              </h4>
+
+              <!-- Fulcrum Position Slider -->
+              <div class="control-group">
+                <div class="control-label">
+                  <span>支點位置 (Fulcrum)</span>
+                  <span id="fulcrumRatioText" style="color:var(--secondary);">正中 (1 : 1)</span>
+                </div>
+                <input type="range" id="fulcrumSlider" class="control-slider" min="20" max="80" value="50" step="5" oninput="onFulcrumChange(this.value)">
+                <div class="preset-chips">
+                  <button class="chip-btn" onclick="setFulcrumPreset(30, '偏左 (力臂短/省力)')">偏左 (3:7)</button>
+                  <button class="chip-btn active" onclick="setFulcrumPreset(50, '正中 (平衡)')">正中 (1:1)</button>
+                  <button class="chip-btn" onclick="setFulcrumPreset(70, '偏右 (力臂長/速度快)')">偏右 (7:3)</button>
+                </div>
+              </div>
+
+              <!-- Left Weight & Position -->
+              <div class="control-group">
+                <div class="control-label">
+                  <span>左側重量 (施力物 F₁)</span>
+                  <span id="leftWeightText" style="color:var(--primary);">3.0 kg</span>
+                </div>
+                <input type="range" id="leftWeightSlider" class="control-slider" min="1" max="10" value="3" step="0.5" oninput="onLeftWeightChange(this.value)">
+              </div>
+
+              <!-- Right Weight & Position -->
+              <div class="control-group">
+                <div class="control-label">
+                  <span>右側重量 (抗力物 F₂)</span>
+                  <span id="rightWeightText" style="color:var(--accent-purple);">3.0 kg</span>
+                </div>
+                <input type="range" id="rightWeightSlider" class="control-slider" min="1" max="10" value="3" step="0.5" oninput="onRightWeightChange(this.value)">
+              </div>
+
+              <div class="alert-box alert-important" style="margin-top:1rem; font-size:0.85rem;">
+                <div>💡</div>
+                <div>
+                  <strong>投石機結構連結</strong>：當投石機的支點<strong>偏後</strong>時，投射臂末端長度增加（力臂長），雖然拉動需要更大的力氣（需更強橡皮筋），但末端的<strong>揮動線速度最高</strong>，能將砲彈射得極遠！
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ====================================================
+           LAB 2: CATAPULT TRAJECTORY SIMULATION (ACTIVITY 2)
+           ==================================================== -->
+      <div id="catapultLab" class="lab-content" style="display:none;">
         <div class="lab-layout">
           <!-- Canvas Area -->
           <div class="canvas-wrap">
@@ -952,92 +1038,6 @@
               <div>💡</div>
               <div style="font-size:0.85rem;">
                 <strong>物理小概念</strong>：在固定角度下，橡皮筋彈性強度越強，儲存的<strong>彈性位能</strong>越多，轉換成的<strong>動能初速</strong>越大，物體拋射得越遠！
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ====================================================
-           LAB 2: LEVER & SEESAW LAB (ACTIVITY 1)
-           ==================================================== -->
-      <div id="seesawLab" class="lab-content" style="display:none;">
-        <div class="lab-layout">
-          <div class="canvas-wrap">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
-              <h3 style="color:var(--secondary); font-size:1.25rem;">
-                ⚖️ 槓桿翹翹板平衡模擬器
-              </h3>
-              <span id="seesawStateBadge" style="background:#0284c7; color:white; padding:0.2rem 0.6rem; border-radius:999px; font-weight:700; font-size:0.85rem;">目前狀態：完美平衡！</span>
-            </div>
-
-            <!-- Seesaw Canvas -->
-            <canvas id="seesawCanvas" width="820" height="380" style="width:100%; height:auto; background:linear-gradient(to bottom, #f0fdf4 0%, #e0f2fe 100%); border-radius:var(--radius-md); border:1px solid #bae6fd;"></canvas>
-
-            <div class="hud-bar">
-              <div class="hud-box">
-                <div class="hud-label">左側力矩 (F₁ × d₁)</div>
-                <div class="hud-val" id="hudLeftTorque">30.0 <small style="font-size:0.75rem">N·m</small></div>
-              </div>
-              <div class="hud-box">
-                <div class="hud-label">支點位置比例</div>
-                <div class="hud-val" id="hudFulcrumPos">50% (正中)</div>
-              </div>
-              <div class="hud-box">
-                <div class="hud-label">右側力矩 (F₂ × d₂)</div>
-                <div class="hud-val" id="hudRightTorque">30.0 <small style="font-size:0.75rem">N·m</small></div>
-              </div>
-              <div class="hud-box">
-                <div class="hud-label">槓桿狀態</div>
-                <div class="hud-val" id="hudBalanceTxt" style="color:#22c55e;">平衡中</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Controls for Seesaw -->
-          <div class="panel-wrap">
-            <div class="control-box">
-              <h4 style="color:var(--secondary-dark); margin-bottom:1rem; font-size:1.1rem;">
-                🛠️ 槓桿三要素調控
-              </h4>
-
-              <!-- Fulcrum Position Slider -->
-              <div class="control-group">
-                <div class="control-label">
-                  <span>支點位置 (Fulcrum)</span>
-                  <span id="fulcrumRatioText" style="color:var(--secondary);">正中 (1 : 1)</span>
-                </div>
-                <input type="range" id="fulcrumSlider" class="control-slider" min="20" max="80" value="50" step="5" oninput="onFulcrumChange(this.value)">
-                <div class="preset-chips">
-                  <button class="chip-btn" onclick="setFulcrumPreset(30, '偏左 (力臂短/省力)')">偏左 (3:7)</button>
-                  <button class="chip-btn active" onclick="setFulcrumPreset(50, '正中 (平衡)')">正中 (1:1)</button>
-                  <button class="chip-btn" onclick="setFulcrumPreset(70, '偏右 (力臂長/速度快)')">偏右 (7:3)</button>
-                </div>
-              </div>
-
-              <!-- Left Weight & Position -->
-              <div class="control-group">
-                <div class="control-label">
-                  <span>左側重量 (施力物 F₁)</span>
-                  <span id="leftWeightText" style="color:var(--primary);">3.0 kg</span>
-                </div>
-                <input type="range" id="leftWeightSlider" class="control-slider" min="1" max="10" value="3" step="0.5" oninput="onLeftWeightChange(this.value)">
-              </div>
-
-              <!-- Right Weight & Position -->
-              <div class="control-group">
-                <div class="control-label">
-                  <span>右側重量 (抗力物 F₂)</span>
-                  <span id="rightWeightText" style="color:var(--accent-purple);">3.0 kg</span>
-                </div>
-                <input type="range" id="rightWeightSlider" class="control-slider" min="1" max="10" value="3" step="0.5" oninput="onRightWeightChange(this.value)">
-              </div>
-
-              <div class="alert-box alert-important" style="margin-top:1rem; font-size:0.85rem;">
-                <div>💡</div>
-                <div>
-                  <strong>投石機結構連結</strong>：當投石機的支點<strong>偏後</strong>時，投射臂末端長度增加（力臂長），雖然拉動需要更大的力氣（需更強橡皮筋），但末端的<strong>揮動線速度最高</strong>，能將砲彈射得極遠！
-                </div>
               </div>
             </div>
           </div>
@@ -2142,54 +2142,209 @@
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
           <div>
             <h2 style="font-size:1.6rem; color:#0369a1; display:flex; align-items:center; gap:0.5rem;">
-              📎 7. 附錄：課堂學習單與評估表原件全覽
+              📎 7. 附錄：教學資源、雷切圖與學習單下載中心
             </h2>
             <p style="font-size:0.95rem; color:var(--text-muted); margin-top:0.35rem;">
-              收錄本教案 4 份課堂專用教材與評量工具標準規格。亦可點選上方「📝 互動學習單」進行線上填答與自動計分。
+              收錄完整教案、雷射切割零件圖、以及學習單一至學習單四。各資源均提供<strong>【線上開啟檢視】</strong>與<strong>【檔案直接下載】</strong>功能。
             </p>
           </div>
           <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
-            <button class="pill-btn" style="background:var(--secondary); color:white;" onclick="switchMainTab('worksheets')">
-              📝 前往線上互動學習單
-            </button>
+            <a href="./plans/投石戰車-國小科技資訊教育教案.md" download="投石戰車-國小科技資訊教育教案.md" class="pill-btn" style="background:#0284c7; color:white;">
+              📥 下載完整教案
+            </a>
+            <a href="./assets/laser_cut_diagram.png" download="投石戰車_雷切圖檔.png" class="pill-btn" style="background:#16a34a; color:white;">
+              📥 下載雷切圖檔
+            </a>
             <button class="pill-btn" style="background:var(--primary); color:white;" onclick="window.print()">
-              🖨️ 列印全套附錄學習單
+              🖨️ A4 格式列印
             </button>
           </div>
         </div>
       </div>
 
-      <!-- Appendix 1 -->
+      <!-- 6 Major Resources Fast Access Table (六大資源快速索引表) -->
       <div class="card">
-        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px dashed var(--border-fun); padding-bottom:0.75rem; margin-bottom:1rem; flex-wrap:wrap; gap:0.5rem;">
-          <h3 style="color:#0369a1; font-size:1.25rem;">📄 附錄一：實驗紀錄表 - 電腦模擬</h3>
-          <span class="time-badge">對應活動二（第 2 節課使用）</span>
-        </div>
-        <div style="background:#ffffff; border:1px solid var(--border-color); border-radius:10px; padding:1.25rem; font-family:'Noto Sans TC', sans-serif;">
-          <div style="text-align:center; font-weight:700; font-size:1.2rem; color:#0f172a; margin-bottom:0.8rem;">
-            實驗紀錄表 - 電腦模擬
-          </div>
-          <p style="font-size:0.9rem; color:#475569; margin-bottom:0.8rem;">
-            六年___班 &nbsp;&nbsp; 第___組 &nbsp;&nbsp; 組長：___________ &nbsp;&nbsp; 組員：__________________________
-          </p>
-          <div class="alert-box alert-important" style="font-size:0.85rem; padding:0.6rem 0.8rem; margin:0.6rem 0;">
-            <div>🎯</div>
-            <div>
-              <strong>模擬任務說明</strong>：<br>
-              1. 在模擬軟體中維持「固定發射方向（45°）」，分別測試不同出速度（模擬橡皮筋不同彈力強度）。<br>
-              2. 每次設定進行 3 次模擬發射，並計算平均拋射距離（公尺）。
-            </div>
-          </div>
-          <table class="data-table" style="margin-top:0.75rem;">
+        <h3 class="card-title" style="color:#0369a1;">
+          <span>📋 附錄六大資源清單（支援線上開啟與檔案下載）</span>
+        </h3>
+        <div style="overflow-x:auto;">
+          <table class="data-table" style="font-size:0.92rem;">
             <thead>
               <tr>
-                <th>模擬次序</th>
-                <th>模擬出速度 (m/s)</th>
-                <th>第 1 次距離</th>
-                <th>第 2 次距離</th>
-                <th>第 3 次距離</th>
-                <th>平均距離</th>
+                <th style="width:6%;">編號</th>
+                <th style="width:28%; text-align:left;">資源項目名稱</th>
+                <th style="width:20%;">適用課程階段</th>
+                <th style="width:12%;">格式</th>
+                <th style="width:17%;">👀 線上開啟</th>
+                <th style="width:17%;">📥 檔案下載</th>
               </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1</strong></td>
+                <td style="text-align:left; font-weight:700;">📖 完整教案本文</td>
+                <td>全五節教學設計與評量規準</td>
+                <td>Markdown (.md)</td>
+                <td>
+                  <button class="chip-btn" style="background:#0284c7; color:white;" onclick="switchMainTab('plan')">
+                    開啟教案導覽
+                  </button>
+                </td>
+                <td>
+                  <a href="./plans/投石戰車-國小科技資訊教育教案.md" download="投石戰車-國小科技資訊教育教案.md" class="chip-btn" style="background:#10b981; color:white; text-decoration:none; display:inline-block;">
+                    下載教案檔案
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>2</strong></td>
+                <td style="text-align:left; font-weight:700;">📐 雷切零件圖檔</td>
+                <td>活動三：手作組裝投石機</td>
+                <td>高解析 PNG 圖檔</td>
+                <td>
+                  <button class="chip-btn" style="background:#0284c7; color:white;" onclick="switchMainTab('assembly')">
+                    前往組裝專區
+                  </button>
+                </td>
+                <td>
+                  <a href="./assets/laser_cut_diagram.png" download="投石戰車_雷切圖檔.png" class="chip-btn" style="background:#10b981; color:white; text-decoration:none; display:inline-block;">
+                    下載雷切圖
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>3</strong></td>
+                <td style="text-align:left; font-weight:700;">📄 學習單一：實驗紀錄表 (電腦模擬)</td>
+                <td>活動二：彈道數位拋射模擬</td>
+                <td>互動網頁 / 文本</td>
+                <td>
+                  <button class="chip-btn" style="background:#0284c7; color:white;" onclick="switchMainTab('worksheets'); switchWsTab('ws1');">
+                    開啟線上填答
+                  </button>
+                </td>
+                <td>
+                  <button class="chip-btn" style="background:#10b981; color:white;" onclick="downloadWorksheetText(1)">
+                    下載學習單一
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>4</strong></td>
+                <td style="text-align:left; font-weight:700;">🎨 學習單二：我們的設計圖！！！</td>
+                <td>活動二、三：機構構想與繪圖</td>
+                <td>手繪畫板 / 文本</td>
+                <td>
+                  <button class="chip-btn" style="background:#0284c7; color:white;" onclick="switchMainTab('worksheets'); switchWsTab('ws2');">
+                    開啟線上繪圖
+                  </button>
+                </td>
+                <td>
+                  <button class="chip-btn" style="background:#10b981; color:white;" onclick="downloadWorksheetText(2)">
+                    下載學習單二
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>5</strong></td>
+                <td style="text-align:left; font-weight:700;">🔬 學習單三：實驗紀錄表 (投石機實測)</td>
+                <td>活動三：動手實測與變因測試</td>
+                <td>互動網頁 / 文本</td>
+                <td>
+                  <button class="chip-btn" style="background:#0284c7; color:white;" onclick="switchMainTab('worksheets'); switchWsTab('ws3');">
+                    開啟線上填答
+                  </button>
+                </td>
+                <td>
+                  <button class="chip-btn" style="background:#10b981; color:white;" onclick="downloadWorksheetText(3)">
+                    下載學習單三
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>6</strong></td>
+                <td style="text-align:left; font-weight:700;">⭐ 學習單四：實驗結果評估表</td>
+                <td>活動四：成果發表與同儕互評</td>
+                <td>自評互評 / 文本</td>
+                <td>
+                  <button class="chip-btn" style="background:#0284c7; color:white;" onclick="switchMainTab('worksheets'); switchWsTab('ws4');">
+                    開啟線上打分
+                  </button>
+                </td>
+                <td>
+                  <button class="chip-btn" style="background:#10b981; color:white;" onclick="downloadWorksheetText(4)">
+                    下載學習單四
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Detail Card 1: 完整教案 -->
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px dashed var(--border-fun); padding-bottom:0.75rem; margin-bottom:1rem; flex-wrap:wrap; gap:0.5rem;">
+          <h3 style="color:#0369a1; font-size:1.25rem;">📖 資源一：國小科技資訊教育教案《投石戰車》完整本文</h3>
+          <div style="display:flex; gap:0.4rem;">
+            <button class="chip-btn" style="background:#0284c7; color:white;" onclick="switchMainTab('plan')">👀 開啟教案全景導覽</button>
+            <a href="./plans/投石戰車-國小科技資訊教育教案.md" download="投石戰車-國小科技資訊教育教案.md" class="chip-btn" style="background:#10b981; color:white; text-decoration:none;">📥 下載教案 Markdown 原檔</a>
+          </div>
+        </div>
+        <div style="background:#ffffff; border:1px solid var(--border-color); border-radius:10px; padding:1.25rem; font-size:0.9rem; line-height:1.8;">
+          <p><strong>教案核心架構包含</strong>：</p>
+          <ul style="padding-left:1.5rem; margin:0.4rem 0;">
+            <li><strong>雙向細目表</strong>：對應科技教育（N-Ⅲ-1, P-Ⅲ-1, P-Ⅲ-2）與資訊教育（D-Ⅲ-2）學習內容與表現指標。</li>
+            <li><strong>教案概述</strong>：STEAM 五大面向、先備知識、總綱核心素養（A2系統思考、B3藝術涵養、C2團隊合作）。</li>
+            <li><strong>評量規準</strong>：7 大具體評量項目與觀察評分標準。</li>
+            <li><strong>教學流程</strong>：活動一（40分）、活動二（40分）、活動三（80分）、活動四（40分）共五節 200 分鐘。</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Detail Card 2: 雷切圖 -->
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px dashed var(--border-fun); padding-bottom:0.75rem; margin-bottom:1rem; flex-wrap:wrap; gap:0.5rem;">
+          <h3 style="color:#78350f; font-size:1.25rem;">📐 資源二：投石戰車 3mm 椴木板雷射切割零件圖檔</h3>
+          <div style="display:flex; gap:0.4rem;">
+            <button class="chip-btn" style="background:#0284c7; color:white;" onclick="switchMainTab('assembly')">👀 前往組裝區檢視影片與成品</button>
+            <a href="./assets/laser_cut_diagram.png" target="_blank" class="chip-btn" style="background:#64748b; color:white; text-decoration:none;">🔍 新分頁放大原圖</a>
+            <a href="./assets/laser_cut_diagram.png" download="投石戰車_雷切圖檔.png" class="chip-btn" style="background:#10b981; color:white; text-decoration:none;">📥 下載雷切圖 (PNG)</a>
+          </div>
+        </div>
+        <div style="display:grid; grid-template-columns:260px 1fr; gap:1.25rem; align-items:center; background:#ffffff; border:1px solid var(--border-color); border-radius:10px; padding:1.25rem;">
+          <div style="text-align:center; background:#f8fafc; border:1px dashed #cbd5e1; border-radius:8px; padding:0.5rem;">
+            <img src="./assets/laser_cut_diagram.png" alt="雷切圖預覽" style="max-width:100%; height:auto; border-radius:6px;">
+          </div>
+          <div style="font-size:0.9rem; line-height:1.8;">
+            <p><strong>雷切規格說明</strong>：</p>
+            <p>採用 3mm 椴木合板切割，內含三角側板 $\times 2$、長臂 $\times 1$、橫樑 $\times 4$、軸心板 $\times 2$ 與側盤 $\times 4$。各接合卡榫具備防呆定位孔設計，能直接匯入各廠牌雷切機軟體排版輸出。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Detail Card 3: 學習單一 -->
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px dashed var(--border-fun); padding-bottom:0.75rem; margin-bottom:1rem; flex-wrap:wrap; gap:0.5rem;">
+          <h3 style="color:#0369a1; font-size:1.25rem;">📄 資源三：學習單一（實驗紀錄表 - 電腦模擬）</h3>
+          <div style="display:flex; gap:0.4rem;">
+            <button class="chip-btn" style="background:#0284c7; color:white;" onclick="switchMainTab('worksheets'); switchWsTab('ws1');">👀 開啟線上互動填答</button>
+            <button class="chip-btn" style="background:#10b981; color:white;" onclick="downloadWorksheetText(1)">📥 下載學習單一 (TXT)</button>
+          </div>
+        </div>
+        <div style="background:#ffffff; border:1px solid var(--border-color); border-radius:10px; padding:1.25rem;">
+          <div style="text-align:center; font-weight:700; font-size:1.15rem; color:#0f172a; margin-bottom:0.6rem;">
+            學習單一：實驗紀錄表 - 電腦模擬
+          </div>
+          <p style="font-size:0.88rem; color:#475569; margin-bottom:0.6rem;">
+            六年___班 &nbsp;&nbsp; 第___組 &nbsp;&nbsp; 組長：___________ &nbsp;&nbsp; 組員：__________________________
+          </p>
+          <div class="alert-box alert-important" style="font-size:0.83rem; padding:0.5rem 0.75rem; margin:0.5rem 0;">
+            <div>🎯</div>
+            <div><strong>模擬任務</strong>：維持固定發射仰角（45°），分別測試弱(10m/s)、中(15m/s)、強(20m/s)、特強各 3 次模擬發射，並計算平均距離。</div>
+          </div>
+          <table class="data-table" style="margin-top:0.6rem;">
+            <thead>
+              <tr><th>模擬次序</th><th>模擬出速度 (m/s)</th><th>第 1 次</th><th>第 2 次</th><th>第 3 次</th><th>平均距離</th></tr>
             </thead>
             <tbody>
               <tr><td>測試 A</td><td>弱（例如 10 m/s）</td><td>_____ m</td><td>_____ m</td><td>_____ m</td><td>_____ m</td></tr>
@@ -2198,172 +2353,93 @@
               <tr><td>測試 D</td><td>特強（自訂速度）</td><td>_____ m</td><td>_____ m</td><td>_____ m</td><td>_____ m</td></tr>
             </tbody>
           </table>
-          <div style="margin-top:1rem; font-size:0.88rem; line-height:1.9;">
-            <strong>💡 數據發現與思考</strong>：<br>
-            1. 觀察上方表格，當發射出速度越快時，物體的飛行距離有什麼變化？<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;答：出速度越快，拋射的距離越【 □ 遠 &nbsp; □ 近 】，這代表物體獲得的動能越【 □ 大 &nbsp; □ 小 】。<br>
-            2. 如果要把模擬實驗中的「出速度」應用到真實投石機上，我們可以如何增加發射力道？<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;答：__________________________________________________________________________。<br>
-            3. 小組結論：我們預計在下一節實作中，使用什麼樣的橡皮筋搭配？<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;語言下模塑（範例：使用粗橡皮筋、增加橡皮筋條數...）：______________________。
-          </div>
         </div>
       </div>
 
-      <!-- Appendix 2 -->
+      <!-- Detail Card 4: 學習單二 -->
       <div class="card">
         <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px dashed var(--border-fun); padding-bottom:0.75rem; margin-bottom:1rem; flex-wrap:wrap; gap:0.5rem;">
-          <h3 style="color:#0369a1; font-size:1.25rem;">🎨 附錄二：我們的設計圖！！！</h3>
-          <span class="time-badge">對應活動二 / 活動三（第 2、3 節課使用）</span>
+          <h3 style="color:#0369a1; font-size:1.25rem;">🎨 資源四：學習單二（我們的設計圖！！！）</h3>
+          <div style="display:flex; gap:0.4rem;">
+            <button class="chip-btn" style="background:#0284c7; color:white;" onclick="switchMainTab('worksheets'); switchWsTab('ws2');">👀 開啟線上設計圖</button>
+            <button class="chip-btn" style="background:#8b5cf6; color:white;" onclick="switchMainTab('studio');">📐 開啟繪圖板</button>
+            <button class="chip-btn" style="background:#10b981; color:white;" onclick="downloadWorksheetText(2)">📥 下載學習單二 (TXT)</button>
+          </div>
         </div>
         <div style="background:#ffffff; border:1px solid var(--border-color); border-radius:10px; padding:1.25rem;">
-          <div style="text-align:center; font-weight:700; font-size:1.2rem; color:#0f172a; margin-bottom:0.8rem;">
-            我們的設計圖！！！
+          <div style="text-align:center; font-weight:700; font-size:1.15rem; color:#0f172a; margin-bottom:0.6rem;">
+            學習單二：我們的設計圖！！！
           </div>
-          <p style="font-size:0.9rem; color:#475569; margin-bottom:0.8rem;">
+          <p style="font-size:0.88rem; color:#475569; margin-bottom:0.6rem;">
             六年___班 &nbsp;&nbsp; 第___組 &nbsp;&nbsp; 作品名稱：___________________ &nbsp;&nbsp; 繪圖者：___________
           </p>
-          <div style="font-size:0.88rem; margin-bottom:0.6rem;">
-            <strong>📐 投石機結構草圖</strong>（請清楚標示：① 支點 &nbsp; ② 橡皮筋固定處 &nbsp; ③ 投射臂 &nbsp; ④ 盛彈處）
-          </div>
-          <div style="border:2px dashed #94a3b8; border-radius:8px; height:180px; display:flex; align-items:center; justify-content:center; color:#94a3b8; font-size:0.95rem; background:#f8fafc; margin-bottom:1rem;">
-            【 請在此繪製投石機側視或立體圖稿（亦可於「📐 設計圖繪圖板」線上繪製並匯出） 】
-          </div>
-          <div style="font-size:0.88rem; line-height:1.9;">
-            <strong>🛠️ 機構特點與變因規劃</strong>：<br>
-            1. 彈力來源規劃（橡皮筋安裝方式）：預計使用【 □ 細橡皮筋 &nbsp; □ 粗橡皮筋 &nbsp; □ 多條併用 】，固定在裝置的什麼位置？<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;答：_________________________________________________________________。<br>
-            2. 槓桿結構設計（支點與力臂）：支點設置在投射臂的【 □ 中間 &nbsp; □ 偏前 &nbsp; □ 偏後 】，這樣設計的優點是？<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;答：_________________________________________________________________。<br>
-            3. 小組創意與結構加固巧思：<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;答：_________________________________________________________________。
+          <div style="border:1.5px dashed #94a3b8; border-radius:8px; height:120px; display:flex; align-items:center; justify-content:center; color:#94a3b8; font-size:0.9rem; background:#f8fafc; margin-bottom:0.75rem;">
+            【 繪製草圖並標示四要素：① 支點 &nbsp; ② 橡皮筋固定處 &nbsp; ③ 投射臂 &nbsp; ④ 盛彈處 】
           </div>
         </div>
       </div>
 
-      <!-- Appendix 3 -->
+      <!-- Detail Card 5: 學習單三 -->
       <div class="card">
         <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px dashed var(--border-fun); padding-bottom:0.75rem; margin-bottom:1rem; flex-wrap:wrap; gap:0.5rem;">
-          <h3 style="color:#0369a1; font-size:1.25rem;">🔬 附錄三：實驗紀錄表 - 投石機實測</h3>
-          <span class="time-badge">對應活動三（第 3、4 節課使用）</span>
+          <h3 style="color:#0369a1; font-size:1.25rem;">🔬 資源五：學習單三（實驗紀錄表 - 投石機實測）</h3>
+          <div style="display:flex; gap:0.4rem;">
+            <button class="chip-btn" style="background:#0284c7; color:white;" onclick="switchMainTab('worksheets'); switchWsTab('ws3');">👀 開啟線上實測紀錄</button>
+            <button class="chip-btn" style="background:#10b981; color:white;" onclick="downloadWorksheetText(3)">📥 下載學習單三 (TXT)</button>
+          </div>
         </div>
         <div style="background:#ffffff; border:1px solid var(--border-color); border-radius:10px; padding:1.25rem;">
-          <div style="text-align:center; font-weight:700; font-size:1.2rem; color:#0f172a; margin-bottom:0.8rem;">
-            實驗紀錄表 - 投石機實測
+          <div style="text-align:center; font-weight:700; font-size:1.15rem; color:#0f172a; margin-bottom:0.6rem;">
+            學習單三：實驗紀錄表 - 投石機實測
           </div>
-          <p style="font-size:0.9rem; color:#475569; margin-bottom:0.8rem;">
+          <p style="font-size:0.88rem; color:#475569; margin-bottom:0.6rem;">
             六年___班 &nbsp;&nbsp; 第___組 &nbsp;&nbsp; 紀錄人員：___________ &nbsp;&nbsp; 發射手：___________
           </p>
-          <div class="alert-box alert-tip" style="font-size:0.85rem; padding:0.6rem 0.8rem; margin:0.6rem 0;">
-            <div>🔬</div>
-            <div>
-              <strong>實驗變因控制原則</strong>：<br>
-              • 【<strong>控制變因</strong>】：維持相同的拉伸位置、投擲物重量，投石機底座保持穩固不滑動。<br>
-              • 【<strong>操縱變因</strong>】：更換「不同彈性強度」的橡皮筋（如單條細、雙條細、單條粗、雙條粗）。
-            </div>
-          </div>
-          <table class="data-table" style="margin-top:0.75rem;">
+          <table class="data-table">
             <thead>
-              <tr>
-                <th>組別次序</th>
-                <th>橡皮筋材質 / 規格</th>
-                <th>第 1 次 (cm)</th>
-                <th>第 2 次 (cm)</th>
-                <th>第 3 次 (cm)</th>
-                <th>平均距離 (cm)</th>
-              </tr>
+              <tr><th>組別次序</th><th>橡皮筋規格</th><th>第 1 次 (cm)</th><th>第 2 次 (cm)</th><th>第 3 次 (cm)</th><th>平均距離</th></tr>
             </thead>
             <tbody>
-              <tr><td>條件 1</td><td>單條細橡皮筋（弱）</td><td>_____ cm</td><td>_____ cm</td><td>_____ cm</td><td>_____ cm</td></tr>
-              <tr><td>條件 2</td><td>雙條細橡皮筋（中）</td><td>_____ cm</td><td>_____ cm</td><td>_____ cm</td><td>_____ cm</td></tr>
-              <tr><td>條件 3</td><td>單條粗橡皮筋（強）</td><td>_____ cm</td><td>_____ cm</td><td>_____ cm</td><td>_____ cm</td></tr>
-              <tr><td>條件 4</td><td>雙條粗橡皮筋（特強）</td><td>_____ cm</td><td>_____ cm</td><td>_____ cm</td><td>_____ cm</td></tr>
+              <tr><td>條件 1</td><td>單條細橡皮筋（弱）</td><td>_____</td><td>_____</td><td>_____</td><td>_____ cm</td></tr>
+              <tr><td>條件 2</td><td>雙條細橡皮筋（中）</td><td>_____</td><td>_____</td><td>_____</td><td>_____ cm</td></tr>
+              <tr><td>條件 3</td><td>單條粗橡皮筋（強）</td><td>_____</td><td>_____</td><td>_____</td><td>_____ cm</td></tr>
+              <tr><td>條件 4</td><td>雙條粗橡皮筋（特強）</td><td>_____</td><td>_____</td><td>_____</td><td>_____ cm</td></tr>
             </tbody>
           </table>
-          <div style="margin-top:1rem; font-size:0.88rem; line-height:1.9;">
-            <strong>🔍 實測觀察與結構調整</strong>：<br>
-            1. 實測結果符合電腦模擬的預期嗎？哪一種橡皮筋組合讓投石機射得最遠？<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;答：射得最遠的材料組合是【 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 】，平均距離為【 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 】公分。<br>
-            2. 在更換更強彈性的橡皮筋時，投石機結構是否出現晃動或不穩的狀況？你們如何加固？<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;答：_________________________________________________________________________。<br>
-            3. 根據這次的實測數據，下一節課我們要在圖表上呈現的關鍵結論是：<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;答：_________________________________________________________________________。
-          </div>
         </div>
       </div>
 
-      <!-- Appendix 4 -->
+      <!-- Detail Card 6: 學習單四 -->
       <div class="card">
         <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px dashed var(--border-fun); padding-bottom:0.75rem; margin-bottom:1rem; flex-wrap:wrap; gap:0.5rem;">
-          <h3 style="color:#0369a1; font-size:1.25rem;">⭐ 附錄四：實驗結果評估表（自評與互評）</h3>
-          <span class="time-badge">對應活動四（第 5 節課使用）</span>
+          <h3 style="color:#0369a1; font-size:1.25rem;">⭐ 資源六：學習單四（實驗結果評估表）</h3>
+          <div style="display:flex; gap:0.4rem;">
+            <button class="chip-btn" style="background:#0284c7; color:white;" onclick="switchMainTab('worksheets'); switchWsTab('ws4');">👀 開啟線上自評互評</button>
+            <button class="chip-btn" style="background:#10b981; color:white;" onclick="downloadWorksheetText(4)">📥 下載學習單四 (TXT)</button>
+          </div>
         </div>
         <div style="background:#ffffff; border:1px solid var(--border-color); border-radius:10px; padding:1.25rem;">
-          <div style="text-align:center; font-weight:700; font-size:1.2rem; color:#0f172a; margin-bottom:0.8rem;">
-            實驗結果評估表
+          <div style="text-align:center; font-weight:700; font-size:1.15rem; color:#0f172a; margin-bottom:0.6rem;">
+            學習單四：實驗結果評估表（自評與互評）
           </div>
-          <p style="font-size:0.9rem; color:#475569; margin-bottom:0.8rem;">
+          <p style="font-size:0.88rem; color:#475569; margin-bottom:0.6rem;">
             評分组別：第___組 &nbsp;&nbsp; 受評組別：第___組 &nbsp;&nbsp; 評審學生：___________
           </p>
-          <div style="background:#fefce8; border:1px solid #fde047; padding:0.5rem 0.8rem; border-radius:8px; margin-bottom:0.8rem; font-size:0.85rem; color:#854d0e;">
-            ⭐ <strong>評分標準</strong>：⭐⭐⭐⭐⭐ 表現優異（5分） ｜ ⭐⭐⭐ 良好（3分） ｜ ⭐ 需加強（1分）
+          <div style="background:#fefce8; border:1px solid #fde047; padding:0.4rem 0.75rem; border-radius:6px; margin-bottom:0.6rem; font-size:0.82rem; color:#854d0e;">
+            ⭐ 評分標準：⭐⭐⭐⭐⭐ 優異（5分） ｜ ⭐⭐⭐ 良好（3分） ｜ ⭐ 待加強（1分）
           </div>
           <table class="data-table">
             <thead>
-              <tr>
-                <th style="width:16%;">面向</th>
-                <th style="width:60%;">評量指標與表現說明</th>
-                <th style="width:24%;">自評 / 互評得分</th>
-              </tr>
+              <tr><th>面向</th><th>評量指標與表現說明</th><th>得分</th></tr>
             </thead>
             <tbody>
-              <tr>
-                <td><strong>科學概念</strong></td>
-                <td style="text-align:left;">
-                  <strong>彈性位能與槓桿原理理解</strong><br>
-                  <small style="color:#64748b;">能清楚說明橡皮筋彈性強弱對拋射動能與飛行遠近的影響。</small>
-                </td>
-                <td>【 &nbsp;&nbsp;&nbsp; / 5 】分</td>
-              </tr>
-              <tr>
-                <td><strong>工程實作</strong></td>
-                <td style="text-align:left;">
-                  <strong>投石機結構組裝與穩固性</strong><br>
-                  <small style="color:#64748b;">能根據設計圖完成組裝，且發射時支架穩固，發射臂運動順暢。</small>
-                </td>
-                <td>【 &nbsp;&nbsp;&nbsp; / 5 】分</td>
-              </tr>
-              <tr>
-                <td><strong>數據分析</strong></td>
-                <td style="text-align:left;">
-                  <strong>圖表記錄與結果詮釋</strong><br>
-                  <small style="color:#64748b;">能將不同彈性數據正確繪製成折線圖，並精準解讀數據趨勢。</small>
-                </td>
-                <td>【 &nbsp;&nbsp;&nbsp; / 5 】分</td>
-              </tr>
-              <tr>
-                <td><strong>團隊合作</strong></td>
-                <td style="text-align:left;">
-                  <strong>分工溝通與解決問題</strong><br>
-                  <small style="color:#64748b;">小組分工明確，在實作遇故障或誤差時能共同討論修復。</small>
-                </td>
-                <td>【 &nbsp;&nbsp;&nbsp; / 5 】分</td>
-              </tr>
-              <tr style="background:#f0f9ff;">
-                <td colspan="2" style="text-align:right; font-weight:700; color:#0369a1;">總得分合計（滿分 20 分）：</td>
-                <td style="font-weight:900; color:#ea580c; font-size:1.1rem;">【 &nbsp;&nbsp;&nbsp; / 20 】分</td>
-              </tr>
+              <tr><td><strong>科學概念</strong></td><td style="text-align:left;">彈性位能與槓桿原理理解</td><td>【 / 5 】分</td></tr>
+              <tr><td><strong>工程實作</strong></td><td style="text-align:left;">投石機結構組裝與穩固性</td><td>【 / 5 】分</td></tr>
+              <tr><td><strong>數據分析</strong></td><td style="text-align:left;">圖表記錄與結果詮釋</td><td>【 / 5 】分</td></tr>
+              <tr><td><strong>團隊合作</strong></td><td style="text-align:left;">分工溝通與解決問題</td><td>【 / 5 】分</td></tr>
+              <tr style="background:#f0f9ff;"><td colspan="2" style="text-align:right; font-weight:700;">總得分合計（滿分 20 分）：</td><td style="font-weight:900; color:#ea580c;">【 / 20 】分</td></tr>
             </tbody>
           </table>
-          <div style="margin-top:1rem; font-size:0.88rem;">
-            <strong>💬 最欣賞這組的地方 / 建議改進方向</strong>：<br>
-            _________________________________________________________________________________<br>
-            _________________________________________________________________________________
-          </div>
-          <div class="alert-box alert-tip" style="margin-top:1rem; font-size:0.82rem; padding:0.5rem 0.8rem;">
-            <div>🔔</div>
-            <div><strong>繳交檢查</strong>：回去檢查看看，是否每一項都有評分？如果都完成了，就可以繳交囉！🎉</div>
-          </div>
         </div>
       </div>
 
@@ -2427,20 +2503,19 @@
 
     // 2. LAB SUB-TAB SWITCHER
     function switchLabTab(labKey) {
-      document.querySelectorAll('#labsSection .sub-tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('#labsSection .sub-tab-btn').forEach(b => {
+        b.classList.toggle('active', b.getAttribute('data-lab') === labKey);
+      });
       document.querySelectorAll('.lab-content').forEach(c => c.style.display = 'none');
 
-      if (labKey === 'catapult') {
-        document.querySelectorAll('#labsSection .sub-tab-btn')[0].classList.add('active');
-        document.getElementById('catapultLab').style.display = 'block';
-        drawCatapult();
-      } else if (labKey === 'seesaw') {
-        document.querySelectorAll('#labsSection .sub-tab-btn')[1].classList.add('active');
-        document.getElementById('seesawLab').style.display = 'block';
+      const target = document.getElementById(labKey + 'Lab');
+      if (target) target.style.display = 'block';
+
+      if (labKey === 'seesaw') {
         drawSeesaw();
+      } else if (labKey === 'catapult') {
+        drawCatapult();
       } else if (labKey === 'chart') {
-        document.querySelectorAll('#labsSection .sub-tab-btn')[2].classList.add('active');
-        document.getElementById('chartLab').style.display = 'block';
         renderChart();
       }
     }
@@ -3261,6 +3336,33 @@
       };
       localStorage.setItem('catapult_ws_data', JSON.stringify(data));
       alert('💾 學習單作答資料已成功暫存於本機瀏覽器中！重新整理頁面也不會遺失。');
+    }
+
+    function downloadWorksheetText(num) {
+      let title = "";
+      let content = "";
+      if (num === 1) {
+        title = "學習單一_實驗紀錄表_電腦模擬.txt";
+        content = `國小科技資訊教育教案：投石戰車\n【學習單一：實驗紀錄表 - 電腦模擬】\n六年___班   第___組   組長：__________   組員：____________________\n\n🎯 模擬任務說明：\n1. 在模擬軟體中維持「固定發射方向（45°）」，分別測試不同出速度（模擬橡皮筋不同彈力強度）。\n2. 每次設定進行 3 次模擬發射，並計算平均拋射距離（公尺）。\n\n+----------+--------------------+-------------+-------------+-------------+------------+\n| 模擬次序 | 模擬出速度 (m/s)    | 第 1 次距離  | 第 2 次距離  | 第 3 次距離  | 平均距離   |\n+----------+--------------------+-------------+-------------+-------------+------------+\n| 測試 A   | 弱（例如 10 m/s）  | ______ m    | ______ m    | ______ m    | ______ m   |\n| 測試 B   | 中（例如 15 m/s）  | ______ m    | ______ m    | ______ m    | ______ m   |\n| 測試 C   | 強（例如 20 m/s）  | ______ m    | ______ m    | ______ m    | ______ m   |\n| 測試 D   | 特強（自訂速度）   | ______ m    | ______ m    | ______ m    | ______ m   |\n+----------+--------------------+-------------+-------------+-------------+------------+\n\n💡 數據發現與思考：\n1. 觀察上方表格，當發射出速度越快時，物體的飛行距離有什麼變化？\n   答：出速度越快，拋射的距離越【 □ 遠  □ 近 】，這代表物體獲得的動能越【 □ 大  □ 小 】。\n\n2. 如果要把模擬實驗中的「出速度」應用到真實投石機上，我們可以如何增加發射力道？\n   答：__________________________________________________________________________。\n\n3. 小組結論：我們預計在下一節實作中，使用什麼樣的橡皮筋搭配？\n   語言下模塑（範例：使用粗橡皮筋、增加橡皮筋條數...）：______________________。\n`;
+      } else if (num === 2) {
+        title = "學習單二_我們的設計圖.txt";
+        content = `國小科技資訊教育教案：投石戰車\n【學習單二：我們的設計圖！！！】\n六年___班   第___組   作品名稱：____________________   繪圖者：____________\n\n📐 投石機結構草圖（請標示：① 支點  ② 橡皮筋固定處  ③ 投射臂  ④ 盛彈處）\n\n+-----------------------------------------------------------------------+\n|                                                                       |\n|                  【 請在此繪製投石機側視或立體圖 】                   |\n|                                                                       |\n+-----------------------------------------------------------------------+\n\n🛠️ 機構特點與變因規劃：\n1. 彈力來源規劃（橡皮筋安裝方式）：\n   預計使用【 □ 細橡皮筋  □ 粗橡皮筋  □ 多條併用 】，固定在裝置的什麼位置？\n   答：_________________________________________________________________。\n\n2. 槓桿結構設計（支點與力臂）：\n   支點設置在投射臂的【 □ 中間  □ 偏前  □ 偏後 】，這樣設計的優點是？\n   答：_________________________________________________________________。\n\n3. 小組創意與結構加固巧思：\n   答：_________________________________________________________________。\n`;
+      } else if (num === 3) {
+        title = "學習單三_實驗紀錄表_投石機實測.txt";
+        content = `國小科技資訊教育教案：投石戰車\n【學習單三：實驗紀錄表 - 投石機實測】\n六年___班   第___組   紀錄人員：__________   發射手：__________\n\n🔬 實驗變因控制原則：\n- 【控制變因】：維持相同的拉伸位置、投擲物重量，投石機底座保持穩固不滑動。\n- 【操縱變因】：更換「不同彈性強度」的橡皮筋（如單條細、雙條細、單條粗、雙條粗）。\n\n+----------+---------------------+------------+------------+------------+------------+\n| 組別次序 | 橡皮筋材質 / 規格    | 第 1 次 (cm)| 第 2 次 (cm)| 第 3 次 (cm)| 平均距離   |\n+----------+---------------------+------------+------------+------------+------------+\n| 條件 1   | 單條細橡皮筋（弱）  | _____ cm   | _____ cm   | _____ cm   | _____ cm   |\n| 條件 2   | 雙條細橡皮筋（中）  | _____ cm   | _____ cm   | _____ cm   | _____ cm   |\n| 條件 3   | 單條粗橡皮筋（強）  | _____ cm   | _____ cm   | _____ cm   | _____ cm   |\n| 條件 4   | 雙條粗橡皮筋（特強）| _____ cm   | _____ cm   | _____ cm   | _____ cm   |\n+----------+---------------------+------------+------------+------------+------------+\n\n🔍 實測觀察與結構調整：\n1. 實測結果符合電腦模擬的預期嗎？哪一種橡皮筋組合讓投石機射得最遠？\n   答：射得最遠的材料組合是【                      】，平均距離為【      】公分。\n\n2. 在更換更強彈性的橡皮筋時，投石機結構是否出現晃動或不穩的狀況？你們如何加固？\n   答：_________________________________________________________________________。\n\n3. 根據這次的實測數據，下一節課我們要在圖表上呈現的關鍵結論是：\n   答：_________________________________________________________________________。\n`;
+      } else if (num === 4) {
+        title = "學習單四_實驗結果評估表.txt";
+        content = `國小科技資訊教育教案：投石戰車\n【學習單四：實驗結果評估表（自評與互評）】\n評分组別：第___組      受評組別：第___組      評審學生：__________\n\n評分標準：⭐⭐⭐⭐⭐ 表現優異（5分）| ⭐⭐⭐ 良好（3分）| ⭐ 需加強（1分）\n\n+----------+-------------------------------------------------------+-------------+\n| 面向     | 評量指標與表現                                         | 自評/互評得分|\n+----------+-------------------------------------------------------+-------------+\n| 科學概念 | 彈性位能與槓桿原理理解                                 | 【   / 5 】分|\n|          | 能清楚說明橡皮筋彈性強弱對拋射動能與飛行遠近的影響。  |             |\n+----------+-------------------------------------------------------+-------------+\n| 工程實作 | 投石機結構組裝與穩固性                                 | 【   / 5 】分|\n|          | 能根據設計圖完成組裝，且發射時支架穩固，發射臂運動順暢。|             |\n+----------+-------------------------------------------------------+-------------+\n| 數據分析 | 圖表記錄與結果詮釋                                     | 【   / 5 】分|\n|          | 能將不同彈性數據正確繪製成折線圖，並精準解讀數據趨勢。|             |\n+----------+-------------------------------------------------------+-------------+\n| 團隊合作 | 分工溝通與解決問題                                     | 【   / 5 】分|\n|          | 小組分工明確，在實作遇故障或誤差時能共同討論修復。    |             |\n+----------+-------------------------------------------------------+-------------+\n|          | 總得分合計（滿分 20 分）：                             | 【   / 20】分|\n+----------+-------------------------------------------------------+-------------+\n\n💬 最欣賞這組的地方 / 建議改進方向：\n_________________________________________________________________________________\n_________________________________________________________________________________\n\n⚠️ 回去檢查看看，是否每一項都有評分？如果都完成了，就可以繳交囉！🎉\n`;
+      }
+
+      const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = title;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(a.href);
     }
 
     // Theme Switcher
