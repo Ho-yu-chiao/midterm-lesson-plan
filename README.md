@@ -36,6 +36,7 @@
 ```text
 midterm-lesson-plan/
 ├── .agents/skills/      # AntiGravity 2 專屬 AI 技能庫
+├── assets/              # 雷切零件圖與組裝完成實體照片
 ├── plans/               # 完整期中教案 Markdown 檔
 │   └── 投石戰車-國小科技資訊教育教案.md   # (含雙向細目表、5節流程與 4 份學習單)
 ├── index.html           # 互動式模擬小遊戲與教案瀏覽單頁應用程式

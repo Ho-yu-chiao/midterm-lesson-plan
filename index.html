@@ -753,38 +753,9 @@
       transform: scale(1.1);
     }
 
-    /* Floating Timer Pill */
-    .timer-float {
-      position: fixed;
-      bottom: 25px;
-      right: 25px;
-      background: #1e293b;
-      color: white;
-      padding: 0.6rem 1.1rem;
-      border-radius: 999px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      z-index: 999;
-      font-family: 'JetBrains Mono', monospace;
-      font-weight: 700;
-      border: 2px solid #38bdf8;
-    }
-
-    .timer-btn {
-      background: #0284c7;
-      color: white;
-      border: none;
-      padding: 0.2rem 0.5rem;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 0.75rem;
-    }
-
     /* Print View Adjustments */
     @media print {
-      header, .top-actions, .timer-float, .sub-tabs, .drawing-toolbar, .no-print {
+      header, .top-actions, .sub-tabs, .drawing-toolbar, .no-print {
         display: none !important;
       }
       body {
@@ -819,16 +790,19 @@
 
       <!-- Navigation Tabs -->
       <nav class="nav-tabs">
-        <button class="tab-btn active" onclick="switchMainTab('labs')">
+        <button class="tab-btn active" data-tab="labs" onclick="switchMainTab('labs')">
           🎮 互動實驗室
         </button>
-        <button class="tab-btn" onclick="switchMainTab('plan')">
+        <button class="tab-btn" data-tab="plan" onclick="switchMainTab('plan')">
           📖 教案全景導覽
         </button>
-        <button class="tab-btn" onclick="switchMainTab('studio')">
+        <button class="tab-btn" data-tab="assembly" onclick="switchMainTab('assembly')">
+          🛠️ 實作組裝區
+        </button>
+        <button class="tab-btn" data-tab="studio" onclick="switchMainTab('studio')">
           📐 設計圖繪圖板
         </button>
-        <button class="tab-btn" onclick="switchMainTab('worksheets')">
+        <button class="tab-btn" data-tab="worksheets" onclick="switchMainTab('worksheets')">
           📝 互動學習單
         </button>
       </nav>
@@ -1380,8 +1354,9 @@
                 </div>
               </div>
             </div>
-            <div style="display:flex; align-items:center; gap:0.5rem;">
+            <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
               <span class="time-badge">共 2 節，80 分鐘</span>
+              <button class="chip-btn" onclick="event.stopPropagation(); switchMainTab('assembly');" style="background:#16a34a; color:white;">🛠️ 進入組裝區教學</button>
               <button class="chip-btn" onclick="event.stopPropagation(); switchMainTab('studio');">📐 開啟設計圖畫板</button>
             </div>
           </div>
@@ -1511,7 +1486,175 @@
     </section>
 
     <!-- ========================================================
-         VIEW 3: ONLINE DESIGN CANVAS STUDIO (APPENDIX 2)
+         VIEW 3: LASER CUT & ASSEMBLY WORKSHOP (ACTIVITY 3)
+         ======================================================== -->
+    <section id="assemblySection" class="view-section">
+
+      <!-- Assembly Header Profile Card -->
+      <div class="card" style="background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+          <div>
+            <h2 style="font-size:1.6rem; color:#166534; display:flex; align-items:center; gap:0.5rem;">
+              🛠️ 投石戰車 實作組裝教學中心
+            </h2>
+            <p style="font-size:0.95rem; color:var(--text-muted); margin-top:0.35rem;">
+              對應活動三（動手造投石機，共 2 節 80 分鐘）：包含雷射切割零件圖樣、正側面實體組裝對照圖與手作教學示範影片。
+            </p>
+          </div>
+          <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+            <a href="./assets/laser_cut_diagram.png" download="投石戰車_雷切圖檔.png" class="pill-btn" style="background:#16a34a; color:white;">
+              📥 下載雷切圖檔 (PNG)
+            </a>
+            <a href="https://drive.google.com/file/d/19x3UpxztbLfTBe9eXXyu_rNHXJyfxQoP/view?usp=sharing" target="_blank" class="pill-btn" style="background:#0284c7; color:white;">
+              🎬 雲端硬碟開啟影片 ↗
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Video Assembly Tutorial Section -->
+      <div class="card">
+        <h3 class="card-title" style="color:#0369a1;">
+          <span>🎬 投石機手作組裝教學示範影片</span>
+          <span style="font-size:0.85rem; font-weight:normal; color:var(--text-muted);">（建議全螢幕觀看，跟隨示範逐步組裝）</span>
+        </h3>
+        <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:14px; box-shadow:0 6px 20px rgba(0,0,0,0.12); background:#000;">
+          <iframe src="https://drive.google.com/file/d/19x3UpxztbLfTBe9eXXyu_rNHXJyfxQoP/preview"
+                  style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"
+                  allow="autoplay; fullscreen"
+                  title="投石機手作組裝教學示範影片">
+          </iframe>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.85rem; flex-wrap:wrap; gap:0.5rem;">
+          <span style="font-size:0.85rem; color:var(--text-muted);">
+            💡 若學校網路或瀏覽器安全性限制無法內嵌播放，請直接點選右側連結前往 Google Drive：
+          </span>
+          <a href="https://drive.google.com/file/d/19x3UpxztbLfTBe9eXXyu_rNHXJyfxQoP/view?usp=sharing" target="_blank" style="color:#0284c7; font-weight:700; text-decoration:none; font-size:0.9rem;">
+            🔗 前往 Google Drive 觀看高畫質影片 ↗
+          </a>
+        </div>
+      </div>
+
+      <!-- Laser Cut Blueprint & Parts Inventory -->
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; flex-wrap:wrap; gap:0.5rem;">
+          <h3 class="card-title" style="margin-bottom:0; border:none; padding:0; color:#78350f;">
+            <span>📐 投石戰車 雷射切割零件圖檔 (Laser Cut Parts Blueprint)</span>
+          </h3>
+          <a href="./assets/laser_cut_diagram.png" download="投石戰車_雷切圖檔.png" class="chip-btn" style="background:#d97706; color:white;">
+            💾 下載原始圖檔 (PNG)
+          </a>
+        </div>
+        <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:1rem;">
+          本設計採用 3mm 椴木板雷射切割，精準配置卡榫扣合結構與防呆定位孔。動手前請各組先依圖盤點零件。
+        </p>
+
+        <div style="display:grid; grid-template-columns:1fr 360px; gap:1.5rem; align-items:start;">
+          <!-- Laser Diagram Image Preview -->
+          <div style="background:#ffffff; border:2px dashed #93c5fd; border-radius:12px; padding:1.2rem; text-align:center;">
+            <img src="./assets/laser_cut_diagram.png" alt="投石機雷切零件圖" style="max-width:100%; height:auto; border-radius:8px; display:inline-block;">
+            <div style="font-size:0.82rem; color:#64748b; margin-top:0.6rem;">
+              雷切路徑示意圖（紫色線條為切割刀路，可直接匯入雷切軟體進行排版製作）
+            </div>
+          </div>
+
+          <!-- Parts Inventory Checklist -->
+          <div style="background:var(--bg-subtle); border:1px solid var(--border-color); border-radius:12px; padding:1.25rem;">
+            <h4 style="color:#0369a1; margin-bottom:0.75rem; font-size:1.05rem;">📦 零件清單盤點表</h4>
+            <ul style="padding-left:1.2rem; font-size:0.88rem; line-height:2; color:var(--text-main);">
+              <li><strong>三角側板主支架</strong> $\times 2$（左右對稱，含軸心孔與卡榫孔）</li>
+              <li><strong>投射長臂</strong> $\times 1$（長端為盛彈圓環，另一端具多重卡榫孔）</li>
+              <li><strong>底座橫向固定樑</strong> $\times 4$（連結左右側板，確保底盤水平與抗扭剛性）</li>
+              <li><strong>中央軸心固定板</strong> $\times 2$（具圓孔，支撐投射臂旋轉運作）</li>
+              <li><strong>底盤側輪 / 圓形固定盤</strong> $\times 4$（具卡口槽，增強側向穩定度）</li>
+            </ul>
+            <div class="alert-box alert-tip" style="margin-top:1rem; font-size:0.82rem; padding:0.65rem 0.85rem;">
+              <div>💡</div>
+              <div><strong>組裝小技巧</strong>：若卡榫過緊，可用砂紙輕輕打磨邊緣；若略有鬆動，可點少許白膠固定，確保發射時不晃動。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Real Assembled Catapult Photos (Side & Front Views) -->
+      <div class="card">
+        <h3 class="card-title" style="color:#0284c7;">
+          <span>📸 組裝完成實體照片對照（正面與側面雙視角）</span>
+        </h3>
+        <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:1.25rem;">
+          組裝完成後請對照下列實物照片，詳細確認「支點位置」、「投射臂方向」與「橡皮筋安裝」是否完全正確。
+        </p>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:1.5rem;">
+          <!-- Side View -->
+          <div style="background:var(--bg-subtle); border:2px solid var(--border-fun); border-radius:14px; padding:1.2rem; display:flex; flex-direction:column;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+              <strong style="color:#0369a1; font-size:1.1rem;">🔍 側面視角（立體結構圖）</strong>
+              <span style="font-size:0.75rem; background:#e0f2fe; color:#0369a1; padding:0.2rem 0.6rem; border-radius:999px; font-weight:700;">槓桿與發射仰角</span>
+            </div>
+            <div style="flex:1; display:flex; align-items:center; justify-content:center; background:#ffffff; border-radius:10px; overflow:hidden; min-height:300px; padding:0.5rem;">
+              <img src="./assets/assembled_side.jpg" alt="投石機組裝完成側面視角" style="max-width:100%; max-height:450px; object-fit:contain; border-radius:8px;">
+            </div>
+            <div style="margin-top:0.85rem; font-size:0.85rem; color:var(--text-main); line-height:1.65; background:#ffffff; padding:0.75rem 0.9rem; border-radius:8px; border:1px solid #e2e8f0;">
+              <strong>側面檢查重點</strong>：
+              <ol style="padding-left:1.2rem; margin-top:0.3rem;">
+                <li>三角側板底邊平穩著地，前後橫樑卡榫完全卡入。</li>
+                <li>投射臂穿過上層轉動軸心，後端長臂自然翹起，呈最佳預備投射仰角。</li>
+                <li>橡皮筋套在投射臂下方孔位與底座前端支架之間，拉伸行程順暢無卡死。</li>
+              </ol>
+            </div>
+          </div>
+
+          <!-- Front / Top View -->
+          <div style="background:var(--bg-subtle); border:2px solid var(--border-fun); border-radius:14px; padding:1.2rem; display:flex; flex-direction:column;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+              <strong style="color:#0369a1; font-size:1.1rem;">🔍 正面視角（俯視對稱圖）</strong>
+              <span style="font-size:0.75rem; background:#fef3c7; color:#92400e; padding:0.2rem 0.6rem; border-radius:999px; font-weight:700;">左右對稱與受力</span>
+            </div>
+            <div style="flex:1; display:flex; align-items:center; justify-content:center; background:#ffffff; border-radius:10px; overflow:hidden; min-height:300px; padding:0.5rem;">
+              <img src="./assets/assembled_front.jpg" alt="投石機組裝完成正面俯視視角" style="max-width:100%; max-height:450px; object-fit:contain; border-radius:8px;">
+            </div>
+            <div style="margin-top:0.85rem; font-size:0.85rem; color:var(--text-main); line-height:1.65; background:#ffffff; padding:0.75rem 0.9rem; border-radius:8px; border:1px solid #e2e8f0;">
+              <strong>正面檢查重點</strong>：
+              <ol style="padding-left:1.2rem; margin-top:0.3rem;">
+                <li>投射臂置中穿過兩側三角板，左右保留適當轉動公差間隙。</li>
+                <li>橡皮筋對稱穿套在左右固定卡榫，保證擊發時兩端拉力均勻不偏斜。</li>
+                <li>盛彈圓杓水平朝上，放上木球或重石時不傾翻，拋射時能自然離杓。</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step-by-Step Practical Assembly Instructions -->
+      <div class="card">
+        <h3 class="card-title" style="color:#166534;">
+          <span>📋 實作動手造 4 步驟指引</span>
+        </h3>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:1rem;">
+          <div class="hud-box" style="text-align:left; background:#f0fdf4; border-color:#bbf7d0;">
+            <div style="font-weight:900; color:#16a34a; font-size:1.1rem; margin-bottom:0.3rem;">第 1 步：清點材料</div>
+            <p style="font-size:0.85rem; color:#166534;">核對兩片三角側板、投射臂、橫樑固定片與橡皮筋規格（單條細、雙條細、單條粗、雙條粗）。</p>
+          </div>
+          <div class="hud-box" style="text-align:left; background:#eff6ff; border-color:#bfdbfe;">
+            <div style="font-weight:900; color:#2563eb; font-size:1.1rem; margin-bottom:0.3rem;">第 2 步：組裝支架</div>
+            <p style="font-size:0.85rem; color:#1e40af;">將前後橫樑卡榫嵌入三角側板中，確認底盤平整不翹起，必要時加塗少許白膠加固。</p>
+          </div>
+          <div class="hud-box" style="text-align:left; background:#fffbeb; border-color:#fde68a;">
+            <div style="font-weight:900; color:#d97706; font-size:1.1rem; margin-bottom:0.3rem;">第 3 步：安裝投射臂</div>
+            <p style="font-size:0.85rem; color:#92400e;">將投射臂的轉軸卡入軸孔，測試輕輕撥動長臂時是否能順暢自由擺動，無摩擦卡滯。</p>
+          </div>
+          <div class="hud-box" style="text-align:left; background:#faf5ff; border-color:#e9d5ff;">
+            <div style="font-weight:900; color:#7c3aed; font-size:1.1rem; margin-bottom:0.3rem;">第 4 步：套入橡皮筋</div>
+            <p style="font-size:0.85rem; color:#5b21b6;">先從「單條細橡皮筋」開始測試，扣於前端孔位，輕拉釋放進行第一次功能驗證！</p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ========================================================
+         VIEW 4: ONLINE DESIGN CANVAS STUDIO (APPENDIX 2)
          ======================================================== -->
     <section id="studioSection" class="view-section">
       <div class="card">
@@ -1986,18 +2129,6 @@
 
   </main>
 
-  <!-- ============================================================
-       FLOATING CLASSROOM COUNTDOWN TIMER
-       ============================================================ -->
-  <div class="timer-float no-print">
-    <span>⏱️ 課堂計時</span>
-    <span id="timerDisplay" style="color:#38bdf8; font-size:1.15rem;">08:00</span>
-    <button class="timer-btn" onclick="toggleTimer()" id="timerControlBtn">開始</button>
-    <button class="timer-btn" onclick="resetTimer(8)">8分</button>
-    <button class="timer-btn" onclick="resetTimer(10)">10分</button>
-    <button class="timer-btn" onclick="resetTimer(30)">30分</button>
-  </div>
-
   <!-- Footer -->
   <footer class="no-print" style="background:#1e293b; color:#94a3b8; padding:2rem 1.5rem; text-align:center; font-size:0.85rem; border-top:1px solid #334155;">
     <p style="font-weight:700; color:#f8fafc; font-size:1rem; margin-bottom:0.5rem;">
@@ -2036,23 +2167,18 @@
 
     // 1. MAIN TAB SWITCHER
     function switchMainTab(tabId) {
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => {
+        b.classList.toggle('active', b.getAttribute('data-tab') === tabId);
+      });
       document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active'));
 
+      const sec = document.getElementById(tabId + 'Section');
+      if (sec) sec.classList.add('active');
+
       if (tabId === 'labs') {
-        document.querySelectorAll('.tab-btn')[0].classList.add('active');
-        document.getElementById('labsSection').classList.add('active');
         drawCatapult();
-      } else if (tabId === 'plan') {
-        document.querySelectorAll('.tab-btn')[1].classList.add('active');
-        document.getElementById('planSection').classList.add('active');
       } else if (tabId === 'studio') {
-        document.querySelectorAll('.tab-btn')[2].classList.add('active');
-        document.getElementById('studioSection').classList.add('active');
         initDesignCanvas();
-      } else if (tabId === 'worksheets') {
-        document.querySelectorAll('.tab-btn')[3].classList.add('active');
-        document.getElementById('worksheetsSection').classList.add('active');
       }
     }
 
@@ -2892,51 +3018,6 @@
       };
       localStorage.setItem('catapult_ws_data', JSON.stringify(data));
       alert('💾 學習單作答資料已成功暫存於本機瀏覽器中！重新整理頁面也不會遺失。');
-    }
-
-    // ============================================================
-    // FLOATING TEACHING TIMER
-    // ============================================================
-    let timerSeconds = 480; // 8 mins default
-    let timerRunning = false;
-    let timerInterval = null;
-
-    function formatTime(s) {
-      const m = Math.floor(s / 60);
-      const sec = s % 60;
-      return `${String(m).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
-    }
-
-    function toggleTimer() {
-      const btn = document.getElementById('timerControlBtn');
-      if (timerRunning) {
-        clearInterval(timerInterval);
-        timerRunning = false;
-        btn.innerText = '繼續';
-      } else {
-        timerRunning = true;
-        btn.innerText = '暫停';
-        timerInterval = setInterval(() => {
-          if (timerSeconds > 0) {
-            timerSeconds--;
-            document.getElementById('timerDisplay').innerText = formatTime(timerSeconds);
-          } else {
-            clearInterval(timerInterval);
-            timerRunning = false;
-            btn.innerText = '結束';
-            playTone(880, 'sine', 0.6);
-            alert('⏰ 叮咚！課堂實作/討論時間到囉！');
-          }
-        }, 1000);
-      }
-    }
-
-    function resetTimer(mins) {
-      clearInterval(timerInterval);
-      timerRunning = false;
-      timerSeconds = mins * 60;
-      document.getElementById('timerDisplay').innerText = formatTime(timerSeconds);
-      document.getElementById('timerControlBtn').innerText = '開始';
     }
 
     // Theme Switcher
