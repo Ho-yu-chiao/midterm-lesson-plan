@@ -1296,7 +1296,7 @@
         <!-- Objectives Card -->
         <div class="card" style="margin-bottom:0;">
           <h3 class="card-title" style="color:#0369a1;">
-            <span>🎯 2. 學習目標與專題摘要</span>
+            <span>🎯 2. 學習目標</span>
           </h3>
           <p style="font-size:0.9rem; color:var(--text-muted); line-height:1.7; margin-bottom:0.75rem;">
             本專題以歷史上的攻城武器<strong>「投石機」</strong>為核心情境，帶領國小六年級學生整合<strong>槓桿原理與彈性位能</strong>，經歷「科學探究 ➔ 數位模擬 ➔ 工程實作 ➔ 數據分析」的完整 STEAM 歷程。
@@ -1798,11 +1798,10 @@
             <h4 style="color:#0369a1; margin-bottom:0.75rem; font-size:1.05rem;">📦 零件清單盤點表</h4>
             <ul style="padding-left:1.2rem; font-size:0.88rem; line-height:2; color:var(--text-main);">
               <li><strong>梯形側板主支架</strong> 2 個（左右對稱立板，含軸心孔與卡榫孔）</li>
-              <li><strong>投射長臂</strong> 1 個（長端安裝黑色盛彈杯，短端具橡皮筋穿孔）</li>
+              <li><strong>投射長臂</strong> 1 個（長端為一體成型圓形置物環，短端具橡皮筋穿孔）</li>
               <li><strong>底座橫向固定樑板</strong> 4 個（前後及兩側卡榫連接，組裝成平整穩固的底座框架）</li>
               <li><strong>中央軸心固定板</strong> 2 個（圓形扣片，支撐並穩定投射臂旋轉軸）</li>
               <li><strong>投射木球組裝片</strong> 4 個（帶有十字插槽之圓片，每兩片相互插接組裝成一顆立體球，共可組裝 2 顆球）</li>
-              <li><strong>黑色盛彈杯</strong> 1 個（安裝於長臂頂端，供放置木球發射）</li>
             </ul>
             <div class="alert-box alert-tip" style="margin-top:1rem; font-size:0.82rem; padding:0.65rem 0.85rem;">
               <div>💡</div>
@@ -1877,7 +1876,7 @@
               <strong>側面檢查重點</strong>：
               <ol style="padding-left:1.2rem; margin-top:0.3rem;">
                 <li>梯形立體側板平穩著地，前後底座擋板卡榫完全卡合不歪斜。</li>
-                <li>投射臂穿過頂部轉動軸心，後端長臂黑色盛彈杯自然翹起，呈最佳預備仰角。</li>
+                <li>投射臂穿過頂部轉動軸心，後端長臂圓形置物環自然翹起，呈最佳預備仰角。</li>
                 <li>黃色橡皮筋套在短臂末端孔位與底座前端插槽之間，拉伸行程順暢蓄力充足。</li>
               </ol>
             </div>
@@ -1893,7 +1892,7 @@
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:1rem;">
           <div class="hud-box" style="text-align:left; background:#f0fdf4; border-color:#bbf7d0;">
             <div style="font-weight:900; color:#16a34a; font-size:1.1rem; margin-bottom:0.3rem;">第 1 步：清點材料</div>
-            <p style="font-size:0.85rem; color:#166534;">核對兩片三角側板、投射臂、橫樑固定片與橡皮筋規格（單條細、雙條細、單條粗、雙條粗）。</p>
+            <p style="font-size:0.85rem; color:#166534;">核對兩片梯形側板、投射臂、底座橫樑固定板，並拿三到五條橡皮筋備用。</p>
           </div>
           <div class="hud-box" style="text-align:left; background:#eff6ff; border-color:#bfdbfe;">
             <div style="font-weight:900; color:#2563eb; font-size:1.1rem; margin-bottom:0.3rem;">第 2 步：組裝支架</div>
@@ -1905,12 +1904,10 @@
           </div>
           <div class="hud-box" style="text-align:left; background:#faf5ff; border-color:#e9d5ff;">
             <div style="font-weight:900; color:#7c3aed; font-size:1.1rem; margin-bottom:0.3rem;">第 4 步：套入橡皮筋</div>
-            <p style="font-size:0.85rem; color:#5b21b6;">先從「單條細橡皮筋」開始測試，扣於前端孔位，輕拉釋放進行第一次功能驗證！</p>
+            <p style="font-size:0.85rem; color:#5b21b6;">先套入 1 條橡皮筋進行初次擊發測試，後續可依實驗需求增加為 2 條、3 條進行變因比較！</p>
           </div>
         </div>
       </div>
-
-    </section>
 
     </section>
 
@@ -2812,26 +2809,31 @@
     }
 
     // ============================================================
-    // PHYSICS SIMULATION 1: CATAPULT LAUNCH
+    // PHYSICS SIMULATION 1: CATAPULT LAUNCHER
     // ============================================================
     const cCanvas = document.getElementById("catapultCanvas");
     const cCtx = cCanvas.getContext("2d");
 
-    let simSpeed = 18;
-    let bandCount = 2; // 1: 一條, 2: 兩條, 3: 三條
     let simAngle = 45;
-    let targetDist = 35.0; // meters
-    let simAmmo = 'wood';
+    let simSpeed = 18;
+    let simAmmo = 'wood'; // 'wood' | 'stone'
+    let bandCount = 2; // 1, 2, 3
+    let targetDist = 36; // meters
     let isFiring = false;
-    let ballPos = { x: 70, y: 350, vx: 0, vy: 0 };
+
+    // 投石車桿子動態物理狀態 (預備、下壓蓄力、彈力揮擊、拋射飛行)
+    let catapultArmAngle = 145; // 預備狀態仰角 145° (桿子朝後上方自然翹起)
+    let armPhase = 'idle'; // 'idle' | 'pressing' | 'snapping' | 'launched'
+
     let flightT = 0;
+    let ballPos = { x: 0, y: 0, vx: 0, vy: 0 };
+    let curTrail = [];
+    let ballTrails = [];
     let peakH = 0;
     let totalD = 0;
-    let ballTrails = [];
-    let curTrail = [];
 
-    const groundBaseY = 360;
-    const catOriginX = 75;
+    const groundBaseY = 350;
+    const catOriginX = 90;
     const catOriginY = 350;
     const pxPerMeter = 11.5;
 
@@ -2906,7 +2908,7 @@
       }
 
       // ==========================================================
-      // REALISTIC BENCHTOP CATAPULT (與實體教具照片完全一致：貼地底座、梯形塔台、黑色瓶蓋杓、黃色橡皮筋)
+      // REALISTIC BENCHTOP CATAPULT (與實體教具完全一致：無輪底座、梯形立板、一體成型圓形置物環、黃色橡皮筋)
       // ==========================================================
       const pivotX = catOriginX;
       const pivotY = groundBaseY - 58;
@@ -2962,63 +2964,70 @@
       cCtx.fill();
 
       // 3. 投射長臂 (Throwing Arm - 斜貫穿頂部的木質長臂槓桿)
-      const armRad = (simAngle * Math.PI) / 180;
-      const longArmLen = 52;  // 抗力長臂 (向左上方)
-      const shortArmLen = 28; // 施力短臂 (向右下方)
+      const currentRad = (catapultArmAngle * Math.PI) / 180;
+      const longArmLen = 54;  // 長臂長度 (末端為圓形置物環)
+      const shortArmLen = 28; // 短臂長度 (末端掛橡皮筋)
 
-      // 長臂末端 (黑色盛彈杯) 座標
-      const armEndX = pivotX - Math.cos(armRad) * longArmLen;
-      const armEndY = pivotY - Math.sin(armRad) * (isFiring ? -longArmLen * 0.9 : longArmLen * 0.85);
+      // 長臂末端 (圓形置物環) 座標
+      const armEndX = pivotX + Math.cos(currentRad) * longArmLen;
+      const armEndY = pivotY - Math.sin(currentRad) * longArmLen;
 
-      // 短臂末端 (掛橡皮筋處) 座標
-      const hookX = pivotX + Math.cos(armRad) * shortArmLen;
-      const hookY = pivotY + Math.sin(armRad) * (isFiring ? shortArmLen * 0.9 : shortArmLen * 0.8);
+      // 短臂末端 (掛橡皮筋處) 座標 (方向與長臂完全相反)
+      const hookX = pivotX - Math.cos(currentRad) * shortArmLen;
+      const hookY = pivotY + Math.sin(currentRad) * shortArmLen;
 
-      // 繪製木質槓桿桿身 (照片中的細長深木色直桿)
-      cCtx.strokeStyle = '#8c5a2b';
-      cCtx.lineWidth = 4;
+      // 繪製木質槓桿桿身 (照片中的細長淺椴木直桿)
+      cCtx.strokeStyle = '#d6b88d';
+      cCtx.lineWidth = 4.5;
       cCtx.lineCap = 'round';
       cCtx.beginPath();
       cCtx.moveTo(hookX, hookY);
       cCtx.lineTo(armEndX, armEndY);
       cCtx.stroke();
+      cCtx.strokeStyle = '#78350f';
+      cCtx.lineWidth = 1;
+      cCtx.stroke();
 
-      // 短臂末端橡皮筋孔
+      // 短臂末端橡皮筋孔卡榫
       cCtx.fillStyle = '#5c3a1b';
       cCtx.beginPath();
-      cCtx.arc(hookX, hookY, 2, 0, Math.PI * 2);
+      cCtx.arc(hookX, hookY, 2.5, 0, Math.PI * 2);
       cCtx.fill();
 
-      // 4. 長臂頂端：黑色圓形盛彈杯 / 瓶蓋 (Black Ammo Cap - 照片核心特徵)
+      // 4. 長臂頂端：木質圓形置物環 (Wooden Ring - 雷切一體成型置物環，如照片)
       cCtx.save();
       cCtx.translate(armEndX, armEndY);
-      cCtx.rotate(-armRad * 0.3); // 隨仰角微調杯口角度
-      // 杯身本體 (黑色圓柱瓶蓋)
-      cCtx.fillStyle = '#1e293b';
-      cCtx.fillRect(-9, -13, 18, 12);
-      cCtx.strokeStyle = '#0f172a';
-      cCtx.lineWidth = 1.5;
-      cCtx.strokeRect(-9, -13, 18, 12);
-      // 杯口邊緣高光
-      cCtx.fillStyle = '#475569';
-      cCtx.fillRect(-8, -13, 16, 2.5);
+      cCtx.rotate(-currentRad);
+      // 外木環
+      cCtx.fillStyle = '#ebd9c2';
+      cCtx.beginPath();
+      cCtx.arc(0, 0, 9.5, 0, Math.PI * 2);
+      cCtx.fill();
+      cCtx.strokeStyle = '#78350f';
+      cCtx.lineWidth = 2;
+      cCtx.stroke();
+      // 內孔洞 (置球空間)
+      cCtx.fillStyle = '#f8fafc';
+      cCtx.beginPath();
+      cCtx.arc(0, 0, 5.5, 0, Math.PI * 2);
+      cCtx.fill();
+      cCtx.strokeStyle = '#78350f';
+      cCtx.lineWidth = 1;
+      cCtx.stroke();
       cCtx.restore();
 
-      // 5. 黃色彈力橡皮筋 (Yellow Rubber Bands - 照片中的鮮黃色彈力繩)
-      // 連接短臂末端 (hookX, hookY) 與右端板 (baseRight - 4, groundBaseY - 8)
+      // 5. 黃色彈力橡皮筋 (Yellow Rubber Bands - 連接短臂末端 hook 與右前方端板)
       const anchorX = baseRight - 4;
       const anchorY = groundBaseY - 8;
       cCtx.strokeStyle = '#facc15';
 
       if (bandCount === 1) {
-        // 一條橡皮筋
         cCtx.lineWidth = 2.5;
         cCtx.beginPath();
         cCtx.moveTo(anchorX, anchorY);
         cCtx.lineTo(hookX, hookY);
         cCtx.stroke();
       } else if (bandCount === 2) {
-        // 兩條橡皮筋 (平行排列)
         cCtx.lineWidth = 2;
         [-2, 2].forEach(off => {
           cCtx.beginPath();
@@ -3027,7 +3036,6 @@
           cCtx.stroke();
         });
       } else {
-        // 三條橡皮筋 (三線並聯)
         cCtx.lineWidth = 1.8;
         [-3, 0, 3].forEach(off => {
           cCtx.beginPath();
@@ -3038,10 +3046,12 @@
       }
 
       // 6. 投射物 (Ammo / Ball)
-      if (!isFiring) {
+      // 若尚未正式發射離環（未發射、下壓中、或揮擊中），球始終嵌套在置物環內！
+      if (!isFiring || armPhase === 'pressing' || armPhase === 'snapping') {
         ballPos.x = armEndX;
-        ballPos.y = armEndY - 16;
+        ballPos.y = armEndY;
       }
+
       if (simAmmo === 'wood') {
         // 十字卡榫組裝木球 (如照片教具配件)
         cCtx.fillStyle = '#d97706';
@@ -3066,68 +3076,145 @@
         cCtx.lineWidth = 1.2;
         cCtx.stroke();
       }
+
+      // 下壓蓄力時的動態引導提示文字 (教育情境直觀呈現)
+      if (armPhase === 'pressing') {
+        cCtx.fillStyle = '#dc2626';
+        cCtx.font = 'bold 12px sans-serif';
+        cCtx.textAlign = 'center';
+        cCtx.fillText('⬇️ 手指下壓桿子蓄力中 (拉伸橡皮筋)', pivotX - 30, groundBaseY - 85);
+      } else if (armPhase === 'snapping') {
+        cCtx.fillStyle = '#eab308';
+        cCtx.font = 'bold 12px sans-serif';
+        cCtx.textAlign = 'center';
+        cCtx.fillText('⚡ 橡皮筋強力回彈釋放！', pivotX + 20, groundBaseY - 85);
+      }
     }
 
+    // 發射投石車：先下壓桿子蓄力（拉伸橡皮筋），再藉由橡皮筋彈力猛烈向前揮擊拋出木球！
     function fireCatapult() {
       if (isFiring) return;
       isFiring = true;
       document.getElementById('hitNotice').style.display = 'none';
 
-      playTone(320, 'triangle', 0.2);
+      // 階段 1：手指下壓桿子 (Press down arm to stretch rubber bands)
+      armPhase = 'pressing';
+      playTone(220, 'triangle', 0.28);
 
-      const rad = (simAngle * Math.PI) / 180;
-      const massFactor = simAmmo === 'wood' ? 1.0 : 0.92;
-      const effectiveV = simSpeed * massFactor;
+      const pressStartAngle = 145;
+      const pressTargetAngle = 175; // 下壓靠近地面
+      const pressDuration = 320; // 320 毫秒下壓蓄力過程
+      const pressStartTime = performance.now();
 
-      ballPos.x = catOriginX + Math.cos(rad) * 38;
-      ballPos.y = (groundBaseY - 16) - Math.sin(rad) * 38;
-      ballPos.vx = effectiveV * Math.cos(rad);
-      ballPos.vy = -effectiveV * Math.sin(rad);
-
-      curTrail = [{ x: ballPos.x, y: ballPos.y }];
-      flightT = 0;
-      peakH = 0;
-
-      const g = 9.8;
-      const dt = 0.028;
-
-      const anim = setInterval(() => {
-        flightT += dt;
-        ballPos.x += ballPos.vx * pxPerMeter * dt;
-        ballPos.vy += g * dt;
-        ballPos.y += ballPos.vy * pxPerMeter * dt;
-
-        curTrail.push({ x: ballPos.x, y: ballPos.y });
-
-        const altM = Math.max(0, (groundBaseY - ballPos.y) / pxPerMeter);
-        if (altM > peakH) peakH = altM;
-        const curDistM = (ballPos.x - catOriginX) / pxPerMeter;
-
-        document.getElementById('hudHeight').innerHTML = `${peakH.toFixed(1)} <small style="font-size:0.75rem">m</small>`;
-        document.getElementById('hudDistance').innerHTML = `${Math.max(0, curDistM).toFixed(1)} <small style="font-size:0.75rem">m</small>`;
-
+      function animatePress(now) {
+        const elapsed = now - pressStartTime;
+        const progress = Math.min(1, elapsed / pressDuration);
+        const ease = progress < 0.5 ? 2 * progress * progress : -1 + (4 - 2 * progress) * progress;
+        catapultArmAngle = pressStartAngle + (pressTargetAngle - pressStartAngle) * ease;
         drawCatapult();
 
-        // Check if ball hits the ground or castle
-        if (ballPos.y >= groundBaseY - 4) {
-          clearInterval(anim);
-          isFiring = false;
-          ballPos.y = groundBaseY - 4;
-          totalD = curDistM;
-          ballTrails.push([...curTrail]);
-
-          // Check Castle Hit
-          if (Math.abs(totalD - targetDist) <= 2.2) {
-            document.getElementById('hitNotice').style.display = 'inline-block';
-            playTone(523.25, 'triangle', 0.15);
-            setTimeout(() => playTone(659.25, 'triangle', 0.25), 150);
-            setTimeout(() => playTone(783.99, 'triangle', 0.35), 300);
-          } else {
-            playTone(90, 'sine', 0.1);
-          }
-          drawCatapult();
+        if (progress < 1) {
+          requestAnimationFrame(animatePress);
+        } else {
+          // 下壓完成，短暫蓄力 40ms 後彈力猛烈爆發！
+          setTimeout(startSnapRelease, 40);
         }
-      }, 25);
+      }
+
+      requestAnimationFrame(animatePress);
+
+      // 階段 2：橡皮筋彈力瞬間回彈，帶動槓桿極速揮擊！
+      function startSnapRelease() {
+        armPhase = 'snapping';
+        playTone(520, 'sawtooth', 0.12);
+
+        const snapStartAngle = 175;
+        const snapTargetAngle = simAngle; // 揮到設定之發射仰角 (例如 45 度)
+        const snapDuration = 85; // 85 毫秒極速揮臂釋放！
+        const snapStartTime = performance.now();
+
+        function animateSnap(now) {
+          const elapsed = now - snapStartTime;
+          const progress = Math.min(1, elapsed / snapDuration);
+          // 極速向前揮擊
+          catapultArmAngle = snapStartAngle - (snapStartAngle - snapTargetAngle) * progress;
+          drawCatapult();
+
+          if (progress < 1) {
+            requestAnimationFrame(animateSnap);
+          } else {
+            catapultArmAngle = snapTargetAngle;
+            startBallFlight();
+          }
+        }
+
+        requestAnimationFrame(animateSnap);
+      }
+
+      // 階段 3：木球離環，依照出速度與發射仰角進行拋體飛行！
+      function startBallFlight() {
+        armPhase = 'launched';
+        playTone(380, 'sine', 0.16);
+
+        const rad = (simAngle * Math.PI) / 180;
+        const massFactor = simAmmo === 'wood' ? 1.0 : 0.92;
+        const effectiveV = simSpeed * massFactor;
+
+        // 木球從置物環當前位置飛出
+        ballPos.x = pivotX + Math.cos(rad) * 54;
+        ballPos.y = pivotY - Math.sin(rad) * 54;
+        ballPos.vx = effectiveV * Math.cos(rad);
+        ballPos.vy = -effectiveV * Math.sin(rad);
+
+        curTrail = [{ x: ballPos.x, y: ballPos.y }];
+        flightT = 0;
+        peakH = 0;
+
+        const g = 9.8;
+        const dt = 0.028;
+
+        const anim = setInterval(() => {
+          flightT += dt;
+          ballPos.x += ballPos.vx * pxPerMeter * dt;
+          ballPos.vy += g * dt;
+          ballPos.y += ballPos.vy * pxPerMeter * dt;
+
+          curTrail.push({ x: ballPos.x, y: ballPos.y });
+
+          const altM = Math.max(0, (groundBaseY - ballPos.y) / pxPerMeter);
+          if (altM > peakH) peakH = altM;
+          const curDistM = (ballPos.x - catOriginX) / pxPerMeter;
+
+          document.getElementById('hudHeight').innerHTML = `${peakH.toFixed(1)} <small style="font-size:0.75rem">m</small>`;
+          document.getElementById('hudDistance').innerHTML = `${Math.max(0, curDistM).toFixed(1)} <small style="font-size:0.75rem">m</small>`;
+
+          drawCatapult();
+
+          // 判斷木球著地或擊中城堡
+          if (ballPos.y >= groundBaseY - 4) {
+            clearInterval(anim);
+            isFiring = false;
+            armPhase = 'idle';
+            catapultArmAngle = 145; // 桿子平緩平復回預備位置
+            ballPos.y = groundBaseY - 4;
+            totalD = curDistM;
+            ballTrails.push([...curTrail]);
+
+            // 判斷命中城堡
+            if (Math.abs(totalD - targetDist) <= 2.2) {
+              const notice = document.getElementById('hitNotice');
+              notice.style.display = 'block';
+              notice.innerHTML = `🎯 <strong>正中目標城堡！</strong>（距離誤差僅 ${Math.abs(totalD - targetDist).toFixed(2)} 公尺，太神了！）`;
+              notice.className = 'alert-box alert-tip';
+              playTone(587.33, 'triangle', 0.15);
+              setTimeout(() => playTone(880, 'sine', 0.3), 160);
+            } else {
+              playTone(90, 'sine', 0.1);
+            }
+            drawCatapult();
+          }
+        }, dt * 1000);
+      }
     }
 
     function onSpeedChange(val) {
@@ -3194,6 +3281,9 @@
     function clearTrails() {
       ballTrails = [];
       curTrail = [];
+      isFiring = false;
+      armPhase = 'idle';
+      catapultArmAngle = 145;
       document.getElementById('hudDistance').innerHTML = `0.0 <small style="font-size:0.75rem">m</small>`;
       document.getElementById('hudHeight').innerHTML = `0.0 <small style="font-size:0.75rem">m</small>`;
       drawCatapult();
