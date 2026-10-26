@@ -839,15 +839,18 @@
          ======================================================== -->
     <section id="labsSection" class="view-section">
       
-      <!-- Sub Tabs for 3 Core Experiments (依活動一、二、四順序排列) -->
-      <div class="sub-tabs">
-        <button class="sub-tab-btn active" data-lab="seesaw" onclick="switchLabTab('seesaw')">
-          ⚖️ 活動一：槓桿原理與翹翹板平衡模擬
+      <!-- 互動實驗室三大核心活動依序全景導覽 (置頂快速定位列) -->
+      <div class="sub-tabs" style="position:sticky; top:65px; z-index:90; background:var(--bg-card); padding:0.65rem; border-radius:var(--radius-md); box-shadow:0 3px 12px rgba(0,0,0,0.08); margin-bottom:1.5rem; display:flex; gap:0.6rem; flex-wrap:wrap; border:1px solid var(--border-color); align-items:center;">
+        <span style="font-weight:800; font-size:0.9rem; color:var(--primary); display:flex; align-items:center; gap:0.3rem;">
+          🔬 核心實驗直達：
+        </span>
+        <button class="sub-tab-btn active" data-lab="seesaw" onclick="scrollToLab('seesaw')">
+          ⚖️ 活動一：槓桿原理與翹翹板平衡
         </button>
-        <button class="sub-tab-btn" data-lab="catapult" onclick="switchLabTab('catapult')">
-          🎯 活動二：投石機彈道模擬與城堡挑戰
+        <button class="sub-tab-btn" data-lab="catapult" onclick="scrollToLab('catapult')">
+          🎯 活動二：投石車發射場與彈道模擬
         </button>
-        <button class="sub-tab-btn" data-lab="chart" onclick="switchLabTab('chart')">
+        <button class="sub-tab-btn" data-lab="chart" onclick="scrollToLab('chart')">
           📊 活動四：數據統計折線圖分析
         </button>
       </div>
@@ -855,7 +858,7 @@
       <!-- ====================================================
            LAB 1: LEVER & SEESAW LAB (ACTIVITY 1)
            ==================================================== -->
-      <div id="seesawLab" class="lab-content active">
+      <div id="seesawLab" class="lab-content active" style="display:block; margin-bottom:3rem; scroll-margin-top:130px;">
         <div class="lab-layout">
           <div class="canvas-wrap">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
@@ -995,12 +998,19 @@
             </div>
           </div>
         </div>
+
+        <!-- 依序前往活動二導引按鈕 -->
+        <div style="margin-top:1.5rem; text-align:center;">
+          <button class="pill-btn" style="background:linear-gradient(135deg, #0284c7 0%, #0369a1 100%); color:white; font-size:1.02rem; padding:0.65rem 1.6rem; box-shadow:0 4px 14px rgba(2,132,199,0.3); cursor:pointer;" onclick="scrollToLab('catapult')">
+            ⬇️ 接續學習：活動二「投石車數位發射場與彈道模擬」 🎯
+          </button>
+        </div>
       </div>
 
       <!-- ====================================================
            LAB 2: CATAPULT TRAJECTORY SIMULATION (ACTIVITY 2)
            ==================================================== -->
-      <div id="catapultLab" class="lab-content" style="display:none;">
+      <div id="catapultLab" class="lab-content" style="display:block; margin-bottom:3rem; scroll-margin-top:130px; border-top:3px dashed #bae6fd; padding-top:2rem;">
         <div class="lab-layout">
           <!-- Canvas Area -->
           <div class="canvas-wrap">
@@ -1107,12 +1117,19 @@
             </div>
           </div>
         </div>
+
+        <!-- 依序前往活動四導引按鈕 -->
+        <div style="margin-top:1.5rem; text-align:center;">
+          <button class="pill-btn" style="background:linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%); color:white; font-size:1.02rem; padding:0.65rem 1.6rem; box-shadow:0 4px 14px rgba(124,58,237,0.3); cursor:pointer;" onclick="scrollToLab('chart')">
+            ⬇️ 接續學習：活動四「數據統計折線圖分析」 📊
+          </button>
+        </div>
       </div>
 
       <!-- ====================================================
            LAB 3: DATA VISUALIZATION CHART (ACTIVITY 4)
            ==================================================== -->
-      <div id="chartLab" class="lab-content" style="display:none;">
+      <div id="chartLab" class="lab-content" style="display:block; scroll-margin-top:130px; border-top:3px dashed #ddd6fe; padding-top:2rem;">
         <div class="card">
           <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
             <div>
@@ -1858,7 +1875,7 @@
               <ol style="padding-left:1.2rem; margin-top:0.3rem;">
                 <li>投射臂置中穿過兩側三角板，左右保留適當轉動公差間隙。</li>
                 <li>橡皮筋對稱穿套在左右固定卡榫，保證擊發時兩端拉力均勻不偏斜。</li>
-                <li>盛彈圓杓水平朝上，放上木球或重石時不傾翻，拋射時能自然離杓。</li>
+                <li>置物處水平朝上，放上木球時不傾翻，拋射時能自然離環飛出。</li>
               </ol>
             </div>
           </div>
@@ -1877,33 +1894,28 @@
               <ol style="padding-left:1.2rem; margin-top:0.3rem;">
                 <li>梯形立體側板平穩著地，前後底座擋板卡榫完全卡合不歪斜。</li>
                 <li>投射臂穿過頂部轉動軸心，後端長臂圓形置物環自然翹起，呈最佳預備仰角。</li>
-                <li>黃色橡皮筋套在短臂末端孔位與底座前端插槽之間，拉伸行程順暢蓄力充足。</li>
               </ol>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- 4. Step-by-Step Practical Assembly Instructions -->
+      <!-- 4. Practical Hands-on Assembly Instructions -->
       <div class="card">
         <h3 class="card-title" style="color:#166534;">
-          <span>📋 四、實作動手造 4 步驟指引</span>
+          <span>📋 四、實際動手做</span>
         </h3>
-        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:1rem;">
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:1rem;">
           <div class="hud-box" style="text-align:left; background:#f0fdf4; border-color:#bbf7d0;">
             <div style="font-weight:900; color:#16a34a; font-size:1.1rem; margin-bottom:0.3rem;">第 1 步：清點材料</div>
             <p style="font-size:0.85rem; color:#166534;">核對兩片梯形側板、投射臂、底座橫樑固定板，並拿三到五條橡皮筋備用。</p>
           </div>
           <div class="hud-box" style="text-align:left; background:#eff6ff; border-color:#bfdbfe;">
             <div style="font-weight:900; color:#2563eb; font-size:1.1rem; margin-bottom:0.3rem;">第 2 步：組裝支架</div>
-            <p style="font-size:0.85rem; color:#1e40af;">將前後橫樑卡榫嵌入三角側板中，確認底盤平整不翹起，必要時加塗少許白膠加固。</p>
-          </div>
-          <div class="hud-box" style="text-align:left; background:#fffbeb; border-color:#fde68a;">
-            <div style="font-weight:900; color:#d97706; font-size:1.1rem; margin-bottom:0.3rem;">第 3 步：安裝投射臂</div>
-            <p style="font-size:0.85rem; color:#92400e;">將投射臂的轉軸卡入軸孔，測試輕輕撥動長臂時是否能順暢自由擺動，無摩擦卡滯。</p>
+            <p style="font-size:0.85rem; color:#1e40af;">將前後橫樑卡榫嵌入梯形側板中，確認底盤平整不翹起，必要時加塗少許白膠加固。</p>
           </div>
           <div class="hud-box" style="text-align:left; background:#faf5ff; border-color:#e9d5ff;">
-            <div style="font-weight:900; color:#7c3aed; font-size:1.1rem; margin-bottom:0.3rem;">第 4 步：套入橡皮筋</div>
+            <div style="font-weight:900; color:#7c3aed; font-size:1.1rem; margin-bottom:0.3rem;">第 3 步：套入橡皮筋</div>
             <p style="font-size:0.85rem; color:#5b21b6;">先套入 1 條橡皮筋進行初次擊發測試，後續可依實驗需求增加為 2 條、3 條進行變因比較！</p>
           </div>
         </div>
@@ -2764,22 +2776,23 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
 
       if (tabId === 'labs') {
+        drawSeesaw();
         drawCatapult();
+        renderChart();
       } else if (tabId === 'studio') {
         initDesignCanvas();
       }
     }
 
-    // 2. LAB SUB-TAB SWITCHER
-    function switchLabTab(labKey) {
+    // 2. LAB SUB-TAB SWITCHER & SMOOTH SCROLL (三大核心活動依序全景呈現)
+    function scrollToLab(labKey) {
       document.querySelectorAll('#labsSection .sub-tab-btn').forEach(b => {
         b.classList.toggle('active', b.getAttribute('data-lab') === labKey);
       });
-      document.querySelectorAll('.lab-content').forEach(c => c.style.display = 'none');
-
       const target = document.getElementById(labKey + 'Lab');
-      if (target) target.style.display = 'block';
-
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
       if (labKey === 'seesaw') {
         drawSeesaw();
       } else if (labKey === 'catapult') {
@@ -2787,6 +2800,10 @@
       } else if (labKey === 'chart') {
         renderChart();
       }
+    }
+
+    function switchLabTab(labKey) {
+      scrollToLab(labKey);
     }
 
     // 3. STEP ACCORDION TOGGLE
